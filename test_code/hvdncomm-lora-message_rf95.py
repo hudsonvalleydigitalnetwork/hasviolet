@@ -1,29 +1,25 @@
 #!/usr/bin/python3
 #
-# HVDN LORA TX 
+# HVDN LORA MESSAGE 
 #
-# hvdncomm-lora-tx.py
+# hvdncomm-lora-message_rf95.py
 #
-# Usage: hvdncomm-lora-tx.py destination-node "message"
+# Usage: hvdncomm-lora-message_rf95.py destination-node "message"
 #
 # Dependencies:
 #
-#     Note libraries referenced below. This used the raspi-lora library
-#     available via pip and NOT the Adafruit RFM9x library. 
+#     This uses the rf95 library
 #
-#     https://pypi.org/project/raspi-lora/
+#     https://github.com/ladecadence/pyRF95
 #
 # Revisions:
 #
-#     Alpha  - 20180828: Initial Success using raspi-lora librarys
-#
 #
 # To-do:
-#            - Add ModemConfig option to ini file
-#            - More complete args support overide of INI file
 #            - Clean up OLED
 #            - Canned test msg toggled via button
 #
+
 
 #
 # Import Libraries
@@ -33,11 +29,13 @@ import argparse
 import configparser
 import sys
 import time
+from signal import signal, SIGINT
 import busio
 from digitalio import DigitalInOut, Direction, Pull
 import board
 import adafruit_ssd1306
-from raspi_lora import LoRa, ModemConfig
+from rf95 import RF95, Bw31_25Cr48Sf512
+
 
 #
 # Import Settings
@@ -47,6 +45,7 @@ config = configparser.ConfigParser()
 config.sections()
 config.read('hvdn-comm.ini')
 try:
+   gpio_rfm_cs = int(config["DEFAULT"]["gpio_rfm_cs"])
    gpio_rfm_irq = int(config["DEFAULT"]["gpio_rfm_irq"])
    node_address = int(config["DEFAULT"]["node_address"])
    freqmhz = float(config["DEFAULT"]["freqmhz"])
@@ -54,6 +53,16 @@ try:
 except KeyError as e:
    raise LookupError("Error hvdn-comm.ini[DEFAULT] : {} missing.".format(str(e)))
    exit (1)
+
+
+#
+# Import args
+#
+
+recipient = int(sys.argv[1])
+message = sys.argv[2]
+
+
 #
 # Variables
 #
@@ -64,13 +73,6 @@ except KeyError as e:
 # recipient - Address of receiving LoRa node, 255 = broadcast
 # message - message to be sent. Must be in quotes or only will send one word
 
-
-#
-# Import args
-#
-
-recipient = int(sys.argv[1])
-message = sys.argv[2]
 
 #
 # Setup
@@ -92,23 +94,50 @@ height = display.height
 
 display.fill(0)
 display.text('HVDN Communicator', 35, 0, 2)
+display.show()
 
 
 #
-# Functions
+# FUNCTIONS
+#
+def handler(signal_received, frame):
+    # Handle any cleanup here
+    print('SIGINT or CTRL-C detected. Exiting gracefully')
+    rf95.set_mode_idle()
+    rf95.cleanup()
+    display.fill(0)
+    display.show()
+    exit(0)
+
+
+#
+# MAIN
 #
 
 #
 # MAIN
 #
 
-lora = LoRa(1,gpio_rfm_irq, node_address, freq=freqmhz, modem_config=ModemConfig.Bw125Cr45Sf128, tx_power=txpwr, acks=False)
+# Setup Radio
 
-#
-# Send a message to dest_address
-#
+#rf95 = RF95(cs=1, int_pin=22, reset_pin=None)
+rf95 = RF95(cs=gpio_rfm_cs, int_pin=gpio_rfm_irq, reset_pin=None)
+rf95.set_frequency(freqmhz)
+rf95.set_tx_power(txpwr)
+# Custom predefined mode
+#rf95.set_modem_config(Bw31_25Cr48Sf512)
+rf95.init()
 
-lora.send_to_wait(message, recipient, header_flags=0)
+# Send message
+
+if __name__ == '__main__':
+    # Tell Python to run the handler() function when SIGINT is recieved
+    signal(SIGINT, handler)
+    print('HVDN Communicator Message is running...')
+    print('Press CTRL-C to exit.')
+
+rf95.send(rf95.str_to_data(message))
+rf95.wait_packet_sent()
 print("Sending to", recipient)
 display.fill(0)
 display.text('Sending to', 0, 0, 1)
@@ -124,6 +153,11 @@ display.fill(0)
 display.text('HVDN Communicator', 5, 10, 1)
 display.show()
 
-# And remember to call this as your program exits...
+print ("Closing ...")
 
-lora.close()
+display.fill(0)
+display.show()
+
+rf95.set_mode_idle()
+rf95.cleanup()
+

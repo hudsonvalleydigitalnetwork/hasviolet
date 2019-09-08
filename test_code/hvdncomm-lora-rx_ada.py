@@ -130,7 +130,7 @@ while True:
     # If no packet was received during the timeout then None is returned.
     if packet is None:
         # Packet has not been receive.d for some reason noop necessary to avoide format fail of if-else
-        noop
+        pass
     else:
         print('  ')
         # Print out the raw bytes of the packet:
