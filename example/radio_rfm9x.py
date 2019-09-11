@@ -1,9 +1,8 @@
-"""
-Example for using the RFM9x Radio with Raspberry Pi.
+#!/usr/bin/python3
+# Example for using the RFM9x Radio with Raspberry Pi.
+# Learn Guide: https://learn.adafruit.com/lora-and-lorawan-for-raspberry-pi
+# Author: Brent Rubell for Adafruit Industries
 
-Learn Guide: https://learn.adafruit.com/lora-and-lorawan-for-raspberry-pi
-Author: Brent Rubell for Adafruit Industries
-"""
 # Import Python System Libraries
 import time
 # Import Blinka Libraries
