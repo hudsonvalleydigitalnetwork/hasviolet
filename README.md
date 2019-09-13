@@ -33,7 +33,8 @@ Three different components make up the entirety of the HAS Violet Project. They 
        HVDN promotes the adoption of field strength measuring equipment and use of the appropriate antenna dependent on the user’s 
        frequency of 911.250 MHz with or without an amateur radio license.
        
-       The HAS Violet project includes an HVDN designed directional broadband multi-frequency (433/900) ISM and amateur radio antenna to        help create awareness of the benefits of gaining an amateur radio license for longer range communication. Unlicensed users may  
+       The HAS Violet project includes an HVDN designed directional broadband multi-frequency (433/900) ISM and amateur radio antenna to
+       help create awareness of the benefits of gaining an amateur radio license for longer range communication. Unlicensed users may  
        appreciate the antenna’s ability to receive signals from further away and to show immediate value in gaining an amateur radio 
        license.
        
