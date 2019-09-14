@@ -8,7 +8,7 @@ hvdn_hasviolet_install.sh
 
    The HVDN Communicator hardware requirments include
 
-          Raspberry Pi Zero Wireles
+          Raspberry Pi Zero Wireless
           Adafruit LoRa Radio Bonnet with OLED RFM95W @ 9145 MHz 
 
           https://www.adafruit.com/product/4074
