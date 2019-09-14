@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 
 ###
 ### HVDN_HASVIOLET_INSTALL
@@ -8,21 +8,20 @@
 ##
 ## This script is part of the HASviolet project.
 ##
-## Given a Raspbian Lite image, this script will install all the required packages, libraries, and github repos
+## Given a Raspbian Lite image, this script will install all the packegs, libraries, and github repo
 ## required to implement the HVDN Communicator.
 ##
-## The HVDN Communicator hardware requirments include
+## The HVDN Communicator hardware required includes Raspberry Pi Zero Wireles plus the
+## Adafruit LoRa Radio Bonnet with OLED RFM95W @ 9145 MHz
 ##
-##        Raspberry Pi Zero Wireles
-##        Adafruit LoRa Radio Bonnet with OLED RFM95W @ 9145 MHz
-##
-##        https://www.adafruit.com/product/4074
+## https://www.adafruit.com/product/4074
 ##
 
 ##
 ## VERSION
 ##
 ## 2019-09-13	Genesis of script
+## 2019-09-14	Includes pyRF95 repo
 ##
 
 ##
@@ -43,6 +42,12 @@ hvdn_hasviolet_ini=$hvdn_hasviolet_install/hvdn-comm.ini
 
 # HVDN HASviolet GitHub Repo
 hvdn_hasviolet_repo="https://github.com/hudsonvalleydigitalnetwork/hasviolet.git"
+
+# pyRF95 Library repo
+pyrf95_repo="https://github.com/ladecadence/pyRF95"
+
+# pyRF95 LocalRepo (GitHub clone)
+pyrf95_localrepo=$hvdn_localrepo/pyRF95
 
 ##
 ##  START 
@@ -79,11 +84,17 @@ mkdir $hvdn_hasviolet_localrepo
 mkdir $hvdn_hasviolet_install
 
 echo " "
-echo "- Clone HVDN Repos"
+echo "- Clone HVDN Repo"
 echo " "
 
 cd $hvdn_localrepo
 git clone $hvdn_hasviolet_repo
+
+echo " "
+echo "- Clone pyRF95 Repo"
+echo " "
+
+git clone $pyrf95_repo
 
 echo " "
 echo "- Install HVDN-Comm"
