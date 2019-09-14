@@ -1,4 +1,5 @@
-#hasviolet
+# hasviolet
+Project HAS Violet, brought to you by HVDN, the letter Q and numbers 8, 4 and 5. 
 
 hvdn_hasviolet_install.sh
 
