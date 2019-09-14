@@ -8,13 +8,15 @@
 ##
 ## This script is part of the HASviolet project.
 ##
-## Given a Raspbian Lite image, this script will install all the packegs, libraries, and github repo
+## Given a Raspbian Lite image, this script will install all the required packages, libraries, and github repos
 ## required to implement the HVDN Communicator.
 ##
-## The HVDN Communicator hardware required includes Raspberry Pi Zero Wireles plus the
-## Adafruit LoRa Radio Bonnet with OLED RFM95W @ 9145 MHz
+## The HVDN Communicator hardware requirments include
 ##
-## https://www.adafruit.com/product/4074
+##        Raspberry Pi Zero Wireles
+##        Adafruit LoRa Radio Bonnet with OLED RFM95W @ 9145 MHz
+##
+##        https://www.adafruit.com/product/4074
 ##
 
 ##
@@ -37,10 +39,7 @@ hvdn_hasviolet_localrepo=$HOME/hvdn/hasviolet
 hvdn_hasviolet_install=$HOME/hvdn-comm
 
 # HVDN Communicator INI file
-hvdn_hasviolet_ini=$hvdn_hasviolet_install/"hvdn-comm.ini"
-
-# HVDN Install Flag - Null file created when this script has completed successfuly.
-hvdn_hasviolet_flag=$hvdn_hasviolet_install/"hvdn_flag_prep.txt";
+hvdn_hasviolet_ini=$hvdn_hasviolet_install/hvdn-comm.ini
 
 # HVDN HASviolet GitHub Repo
 hvdn_hasviolet_repo="https://github.com/hudsonvalleydigitalnetwork/hasviolet.git"
@@ -49,14 +48,18 @@ hvdn_hasviolet_repo="https://github.com/hudsonvalleydigitalnetwork/hasviolet.git
 ##  START 
 ##
 
-echo "# Install Raspbian Packages"
+echo " "
+echo "HVDN HASviolet Install"
+echo " "
+echo "- Install Raspbian Packages"
 echo " "
 
 sudo apt-get install python3-pip
 sudo apt-get install git
 sudo apt-get install nginx
 
-echo "# Install Python Libraries"
+echo " "
+echo "- Install Python Libraries"
 echo " "
 
 #sudo pip3 install adafruit-circuitpython-rfm69
@@ -66,7 +69,8 @@ sudo pip3 install adafruit-circuitpython-framebuf
 sudo pip3 install aprs
 sudo pip3 install aprslib
 
-echo "# Create HVDN LocalRepo and HVDN-Comm directories"
+echo " "
+echo "- Create HVDN LocalRepo and HVDN-Comm directories"
 echo " "
 
 cd $HOME
@@ -74,29 +78,18 @@ mkdir $hvdn_localrepo
 mkdir $hvdn_hasviolet_localrepo
 mkdir $hvdn_hasviolet_install
 
-echo "# Clone HVDN Repos"
+echo " "
+echo "- Clone HVDN Repos"
 echo " "
 
 cd $hvdn_localrepo
-github clone $hvdn_hasviolet_repo
+git clone $hvdn_hasviolet_repo
 
-echo "# Install HVDN-Comm"
+echo " "
+echo "- Install HVDN-Comm"
 echo " "
 
-if [ -f $hvdn_hasviolet_ini ]; then
-    echo "#Moving (Move any existing install to .old directory and copy INI to new install)"
-    echo " "
-
-
-    mv $hvdn_hasviolet_install $hvdn_hasviolet_install/old
-    cp $hvdn_hasviolet_localrepo/stable $hvdn_hasviolet_install
-    cp $hvdn_hasviolet_install/old/hvdn-comm.ini $hvdn_hasviolet_install
-    echo "# HVDN-Comm is installed using your existing hvdn-comm.ini file."
-    echo " "
-    exit 1
-fi
-
-cp $hvdn_hasviolet_localrepo/* $hvdn_hasviolet_install
+cp -R $hvdn_hasviolet_localrepo/stable/* $hvdn_hasviolet_install
 
 # Generate hvdn-comm.ini file
 
@@ -106,7 +99,8 @@ node_address=1
 freqmhz=911.25
 txpwr=5
 
-echo "# Create hvdn-comm.ini file"
+echo " "
+echo "- Create hvdn-comm.ini file"
 echo " "
 
 echo " "
@@ -119,7 +113,7 @@ read txpwr
 
 cat >$hvdn_hasviolet_ini <<EOL
 [DEFAULT]
-gpio_rfm_cs=$1
+gpio_rfm_cs=${gpio_rfm_cs}
 gpio_rfm_irq=${gpio_rfm_irq}
 node_address=${node_address}
 freqmhz=${freqmhz}
@@ -127,12 +121,7 @@ txpwr=${txpwr}
 EOL
 
 echo " "
-echo "Following hvdn-comm.ini has been generated:"
-echo " "
-
-cat $hvdn_hasviolet_ini
-
-echo "# HVDN-Comm is installed."
+echo "HVDN-Comm is installed in $hvdn_hasviolet_install"
 echo " "
 
 exit 0
