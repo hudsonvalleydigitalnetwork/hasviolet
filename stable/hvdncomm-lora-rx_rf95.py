@@ -133,6 +133,7 @@ if __name__ == '__main__':
        for i in data:
             data_ascii=data_ascii+chr(i)
        print ('ASCII:  ',data_ascii)     
+       print (' RSSI:  ',rf95.last_rssi)
        print ()
 #       display.fill(0)
 #       display.text(data, 1, 10, 1)
