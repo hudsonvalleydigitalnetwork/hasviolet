@@ -27,11 +27,8 @@
 ## INIT VARIABLES 
 ##
 
-# Current date time for unique archive name
-timestamped='date +"%Y-%m-%d" + ${CURRENTEPOCTIME}'
-
 # HVDN Archive Filename
-hvdn_hasviolet_archive="hvdn-comm_"+$timestamped
+hvdn_hasviolet_archive="hvdn-comm_"+ ${CURRENTEPOCTIME}
 
 # HVDN LocalRepo Home Directory
 hvdn_localrepo=$HOME/hvdn
@@ -80,15 +77,15 @@ echo " "
 #sudo pip3 install aprslib
 
 #Customize Environment
-sudo cat >/etc/motd <<EOL
- _          _
-| |___ ____| |_ _
-| ' \ V / _` | ' \
-|_||_\_/\__,_|_||_|
--------------------
-Alpha version 20190915
-
-EOL
+#sudo cat >/etc/motd <<EOL
+# _          _
+#| |___ ____| |_ _
+#| ' \ V / _` | ' \
+#|_||_\_/\__,_|_||_|
+#-------------------
+#Alpha version 20190915
+#
+#EOL
 
 echo " "
 echo "- Archive current HVDN-Comm directory"
@@ -157,4 +154,3 @@ echo " "
 echo "HVDN-Comm is installed in $hvdn_hasviolet_install"
 echo " "
 
-exit 0:
