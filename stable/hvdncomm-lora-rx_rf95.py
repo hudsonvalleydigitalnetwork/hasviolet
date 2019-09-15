@@ -121,20 +121,23 @@ rf95.init()
 if __name__ == '__main__':
     # Tell Python to run the handler() function when SIGINT is recieved
     signal(SIGINT, handler)
-
-    print('HVDN Communicator RX Running...')
-    print('Press CTRL-C to exit.')
-
+    print()
+    print('HVDN Communicator RX Running . . . Press CTRL-C to exit.')
+    print ()
     while True:
        while not rf95.available():
           pass
        data = rf95.recv()
-       print (data)
+       print ('  RAW:   ',data)
+       data_ascii=""
        for i in data:
-#           print(chr(i))
-           print(chr(i), end="")
-#           print()
-
+            data_ascii=data_ascii+chr(i)
+       print ('ASCII:  ',data_ascii)     
+       print ()
+#       display.fill(0)
+#       display.text(data, 1, 10, 1)
+#       display.text(data_ascii, 1, 15, 1)
+#       display.show()
 display.fill(0)
 display.show()
 
