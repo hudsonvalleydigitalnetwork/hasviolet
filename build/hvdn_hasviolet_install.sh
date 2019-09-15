@@ -74,6 +74,19 @@ sudo pip3 install adafruit-circuitpython-framebuf
 sudo pip3 install aprs
 sudo pip3 install aprslib
 
+#Customize Environment
+sudo cat >/etc/motd <<EOL
+ _          _
+| |___ ____| |_ _
+| ' \ V / _` | ' \
+|_||_\_/\__,_|_||_|
+-------------------
+Alpha version 20190914
+
+EOL
+
+
+
 echo " "
 echo "- Create HVDN LocalRepo and HVDN-Comm directories"
 echo " "

@@ -131,8 +131,9 @@ if __name__ == '__main__':
        data = rf95.recv()
        print (data)
        for i in data:
+#           print(chr(i))
            print(chr(i), end="")
-           print()
+#           print()
 
 display.fill(0)
 display.show()

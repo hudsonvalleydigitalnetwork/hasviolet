@@ -13,26 +13,26 @@ hvdn-comm.ini
 
 hvdncomm-lora-broadcast_ada.py
 - Sends message to LoRa broadcast address (255)
-- Usage: ./hvdncomm-lora-broadcast_ada.py %1 %2
-- %1 is number of times to repeat, %2 is message in double quotes
+- Usage: ./hvdncomm-lora-broadcast_ada.py -c COUNT -m MESSAGE
+- COUNT is number of times to repeat, MESSAGE is message to send in double quotes
 - Uses Adafruit CircuitPython Library (adafruit_rfm9X)
 
 hvdncomm-lora-broadcast_rf95.py
 - Sends message to LoRa broadcast address (255)
-- Usage: ./hvdncomm-lora-broadcast_ada.py %1 %2
-- %1 is number of times to repeat, %2 is message in double quotes
+- Usage: ./hvdncomm-lora-broadcast_ada.py  -c COUNT -m MESSAGE
+- COUNT is number of times to repeat, MESSAGE is message to send in double quotes
 - Uses pyRF95 library (rf95.py)
 
 hvdncomm-lora-message_ada.py
 - Sends message to another LoRa station
-- Usage: ./hvdncomm-lora-message_ada.py %1 %2
-- %1 is node address of destination (1-255), %2 is message in double quotes
+- Usage: ./hvdncomm-lora-message_ada.py -d DESTINATION -m MESSAGE
+- DESTINATION is node address of destination (1-255), MESSAGE is message to send in double quotes
 - Uses Adafruit CircuitPython Library (adafruit_rfm9X)
 
 hvdncomm-lora-message_rf95.py
 - Sends message to another LoRa station
-- Usage: ./hvdncomm-lora-message_rf95.py %1 %2
-- %1 is node address of destination (1-255), %2 is message in double quotes
+- Usage: ./hvdncomm-lora-message_ada.py -d DESTINATION -m MESSAGE
+- DESTINATION is node address of destination (1-255), MESSAGE is message to send in double quotes
 - Uses pyRF95 library (rf95.py)
 
 hvdncomm-lora-rx_ada.py

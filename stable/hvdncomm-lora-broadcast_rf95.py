@@ -56,8 +56,14 @@ except KeyError as e:
 # Import args
 #
 
-bcount= int(sys.argv[1])
-message = sys.argv[2]
+parser = argparse.ArgumentParser(description='Broadcast a LoRa message.')
+parser.add_argument('-c','--count', type=int, help='number of times te repeate the message', required=True)
+parser.add_argument('-m','--message', help='Message to be broadcast in quotes', required=True)
+args = vars(parser.parse_args())
+
+bcount = args['count']
+message = args['message']
+
 
 #
 # Variables

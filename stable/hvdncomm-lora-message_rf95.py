@@ -59,8 +59,17 @@ except KeyError as e:
 # Import args
 #
 
-recipient = int(sys.argv[1])
-message = sys.argv[2]
+#recipient = int(sys.argv[1])
+#message = sys.argv[2]
+
+
+parser = argparse.ArgumentParser(description='Send a LoRa message.')
+parser.add_argument('-d','--destination', type=int, help='Destination address 1-255', required=True)
+parser.add_argument('-m','--message', help='Message to be sent in quotes', required=True)
+args = vars(parser.parse_args())
+
+recipient = args['destination']
+message = args['message']
 
 
 #
