@@ -28,7 +28,7 @@
 ##
 
 # HVDN Archive Filename
-hvdn_hasviolet_archive="hvdn-comm_${CURRENTEPOCTIME}"
+hvdn_hasviolet_archive=hvdn-comm_${CURRENTEPOCTIME}.tgz
 
 # HVDN LocalRepo Home Directory
 hvdn_localrepo=$HOME/hvdn
