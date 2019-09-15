@@ -6,9 +6,8 @@ hvdn_hasviolet_install.sh
    Given a Raspbian Lite image, this script will install all the required packages, libraries, and github repos
    required to implement the HVDN Communicator.
 
-   The HVDN Communicator hardware requirements include
+hvdn_hasviolet_update.sh
 
-          Raspberry Pi Zero Wireless
-          Adafruit LoRa Radio Bonnet with OLED RFM95W @ 9145 MHz 
+   Given existing HVDN HAS Violet install, this script will archive/compress current install in the home diretcory, 
+   install all any packages, libraries, and github repos required to implement the HVDN Communicator.
 
-          https://www.adafruit.com/product/4074

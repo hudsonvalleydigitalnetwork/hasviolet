@@ -1,15 +1,15 @@
 #!/bin/bash
 
 ###
-### HVDN_HASVIOLET_INSTALL
+### HVDN_HASVIOLET_UPDATE
 ###
 
 ##
 ##
 ## This script is part of the HASviolet project.
 ##
-## Given a Raspbian Lite image, this script will install all the packegs, libraries, and github repo
-## required to implement the HVDN Communicator.
+## This updates all the packages, libraries, and github repo
+## required to run the HVDN Communicator.
 ##
 ## The HVDN Communicator hardware required includes Raspberry Pi Zero Wireles plus the
 ## Adafruit LoRa Radio Bonnet with OLED RFM95W @ 9145 MHz
@@ -20,13 +20,18 @@
 ##
 ## VERSION
 ##
-## 2019-09-13	Genesis of script
-## 2019-09-14	Includes pyRF95 repo
+## 2019-09-15	Genesis of script
 ##
 
 ##
 ## INIT VARIABLES 
 ##
+
+# Current date time for unique archive name
+timestamped='date +"%Y-%m-%d" + ${CURRENTEPOCTIME}'
+
+# HVDN Archive Filename
+hvdn_hasviolet_archive="hvdn-comm_"+$timestamped
 
 # HVDN LocalRepo Home Directory
 hvdn_localrepo=$HOME/hvdn
@@ -54,25 +59,25 @@ pyrf95_localrepo=$hvdn_localrepo/pyRF95
 ##
 
 echo " "
-echo "HVDN HASviolet Install"
+echo "HVDN HASviolet Update"
 echo " "
-echo "- Install Raspbian Packages"
-echo " "
-
-sudo apt-get install python3-pip
-sudo apt-get install git
-sudo apt-get install nginx
-
-echo " "
-echo "- Install Python Libraries"
+echo "- Install Additional Raspbian Packages"
 echo " "
 
-#sudo pip3 install adafruit-circuitpython-rfm69
-sudo pip3 install adafruit-circuitpython-rfm9x
-sudo pip3 install adafruit-circuitpython-ssd1306
-sudo pip3 install adafruit-circuitpython-framebuf
-sudo pip3 install aprs
-sudo pip3 install aprslib
+#sudo apt-get install python3-pip
+#sudo apt-get install git
+#sudo apt-get install nginx
+
+echo " "
+echo "- Install Additional Python Libraries"
+echo " "
+
+##sudo pip3 install adafruit-circuitpython-rfm69
+#sudo pip3 install adafruit-circuitpython-rfm9x
+#sudo pip3 install adafruit-circuitpython-ssd1306
+#sudo pip3 install adafruit-circuitpython-framebuf
+#sudo pip3 install aprs
+#sudo pip3 install aprslib
 
 #Customize Environment
 sudo cat >/etc/motd <<EOL
@@ -81,17 +86,21 @@ sudo cat >/etc/motd <<EOL
 | ' \ V / _` | ' \
 |_||_\_/\__,_|_||_|
 -------------------
-Alpha version 20190914
+Alpha version 20190915
 
 EOL
 
-
-
 echo " "
-echo "- Create HVDN LocalRepo and HVDN-Comm directories"
+echo "- Archive current HVDN-Comm directory"
 echo " "
 
 cd $HOME
+tar -zcvf $hvdn_hasviolet_archive $hvdn_hasviolet_install
+
+rm -rf $hvdn_localrepo
+rm -rf $hvdn_hasviolet_localrepo
+rm -rf $hvdn_hasviolet_install
+
 mkdir $hvdn_localrepo
 mkdir $hvdn_hasviolet_localrepo
 mkdir $hvdn_hasviolet_install
@@ -148,4 +157,4 @@ echo " "
 echo "HVDN-Comm is installed in $hvdn_hasviolet_install"
 echo " "
 
-exit 0
+exit 0:
