@@ -67,6 +67,7 @@ echo " "
 echo "- Install Python Libraries"
 echo " "
 
+sudo pip3 install urwid
 #sudo pip3 install adafruit-circuitpython-rfm69
 sudo pip3 install adafruit-circuitpython-rfm9x
 sudo pip3 install adafruit-circuitpython-ssd1306
