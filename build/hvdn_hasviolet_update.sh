@@ -90,7 +90,8 @@ echo " "
 echo " "
 echo "- Archive current HVDN-Comm directory"
 echo " "
-
+echo "  Creating $hvdn_hasviolet_archive in $HOME"
+echo " "
 cd $HOME
 tar -zcvf $hvdn_hasviolet_archive $hvdn_hasviolet_install
 
@@ -153,4 +154,6 @@ EOL
 echo " "
 echo "HVDN-Comm is installed in $hvdn_hasviolet_install"
 echo " "
+
+exit 0
 
