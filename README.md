@@ -1,7 +1,6 @@
 # HAS Violet
 
 
-hardware/has-violet-hw.png
 ![alt-test](https://github.com/hudsonvalleydigitalnetwork/hasviolet/raw/master/hardware/has-violet-hw.png)
 
 Project HAS Violet, brought to you by HVDN, the letter Q and numbers 8, 4 and 5. 
