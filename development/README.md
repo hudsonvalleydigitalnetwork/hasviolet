@@ -13,7 +13,7 @@ hvdn-comm.ini
 - Config file used by hvdncomm apps (differs from stable version)
 
 hvdncomm-lora-chat.py
-- Half-duplex LoRa messaging app (255)
+- Half-duplex LoRa messaging app
 - Usage: ./hvdncomm-lora-chat
 - Starts and loops in Listening Mode until CTRL-Z hit to send a message or CTRL-C to exit program
 - When in send mode
