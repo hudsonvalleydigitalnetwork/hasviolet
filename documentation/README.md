@@ -7,6 +7,7 @@ All code in this directory has been tested as functional and stable.
 
 ### HVDN Communicator Linux Build Guide
 * How to build HVDN Communnicator with nothing but the hardware and Internet access.
+* OpenOffice and PDF format
 
 
 
