@@ -17,12 +17,12 @@ hvdncomm-lora-chat.py
 - Usage: ./hvdncomm-lora-chat
 - Starts and loops in Listening Mode until CTRL-Z hit to send a message or CTRL-C to exit program
 - When in send mode
-- - - Recipient is node id (255 = broadcast address)
-- - - Message is whatever message followed by enter
-- - - Message is sent, return to listening mode
+--- Recipient is node id (255 = broadcast address)
+--- Message is whatever message followed by enter
+--- Message is sent, return to listening mode
 
 rf95.py
-- RFM95 library used by hvdncom apps ending in rf95.py
+- RFM95 library used by hvdncom apps
 - Sourced from https://github.com/ladecadence/pyRF95
 
 test.py
