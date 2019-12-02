@@ -82,7 +82,7 @@ sudo cat >/etc/motd <<EOL
 | ' \ V / _` | ' \
 |_||_\_/\__,_|_||_|
 -------------------
-Alpha version 20190914
+Alpha version 20191202
 
 EOL
 
