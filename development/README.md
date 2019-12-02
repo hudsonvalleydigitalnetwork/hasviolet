@@ -10,24 +10,12 @@ font5x8.bin
 - Font file for the Adafruit OLED display
 
 hvdn-comm.ini
-- Config file used by hvdncomm apps
+- Config file used by hvdncomm apps (differs from stable version)
 
-hvdncomm-lora-broadcast_rdl.py
-- Sends message to LoRa broadcast address (255)
-- Usage: ./hvdncomm-lora-broadcast_rdla.py %1 %2
+hvdncomm-lora-chat_rf95.py
+- Half-duplex LoRa messgaing app (255)
+- Usage: ./hvdncomm-lora-chat_rf95
 - %1 is number of times to repeat, %2 is message in double quotes
-- Uses raspi-lora library which needs to be installed ( sudo pip3 install raspi-lora )
-- More info at https://pypi.org/project/raspi-lora/
-
-hvdncomm-lora-message_rdl.py
-- Sends message to another LoRa station
-- Usage: ./hvdncomm-lora-message_rdl.py %1 %2
-- %1 is node address of destination (1-255), %2 is message in double quotes
-- Uses pyRF95 library (rf95.py)
-
-hvdncomm-lora-rx_ada.py
-- Listens for messages from other LoRa stations
-- Usage: ./hvdncomm-lora-rx_ada.py
 - Uses raspi-lora library which needs to be installed ( sudo pip3 install raspi-lora )
 - More info at https://pypi.org/project/raspi-lora/
 
