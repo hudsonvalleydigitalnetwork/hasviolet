@@ -12,9 +12,9 @@ font5x8.bin
 hvdn-comm.ini
 - Config file used by hvdncomm apps (differs from stable version)
 
-hvdncomm-lora-chat_rf95.py
+hvdncomm-lora-chat.py
 - Half-duplex LoRa messgaing app (255)
-- Usage: ./hvdncomm-lora-chat_rf95
+- Usage: ./hvdncomm-lora-chat
 - %1 is number of times to repeat, %2 is message in double quotes
 - Uses raspi-lora library which needs to be installed ( sudo pip3 install raspi-lora )
 - More info at https://pypi.org/project/raspi-lora/
