@@ -25,6 +25,3 @@ rf95.py
 - RFM95 library used by hvdncom apps
 - Sourced from https://github.com/ladecadence/pyRF95
 
-test.py
-- Test program that verifies board and demonstrates how to display text
-- Adapted from : https://learn.adafruit.com/lora-and-lorawan-for-raspberry-pi
