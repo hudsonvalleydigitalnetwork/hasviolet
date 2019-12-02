@@ -13,11 +13,13 @@ hvdn-comm.ini
 - Config file used by hvdncomm apps (differs from stable version)
 
 hvdncomm-lora-chat.py
-- Half-duplex LoRa messgaing app (255)
+- Half-duplex LoRa messaging app (255)
 - Usage: ./hvdncomm-lora-chat
-- %1 is number of times to repeat, %2 is message in double quotes
-- Uses raspi-lora library which needs to be installed ( sudo pip3 install raspi-lora )
-- More info at https://pypi.org/project/raspi-lora/
+- Starts and loops in Listening Mode until CTRL-Z hit to send a message or CTRL-C to exit program
+- When in send mode
+- - - Recipient is node id (255 = broadcast address)
+- - - Message is whatever message followed by enter
+- - - Message is sent, return to listening mode
 
 rf95.py
 - RFM95 library used by hvdncom apps ending in rf95.py
