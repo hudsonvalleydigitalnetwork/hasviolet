@@ -9,9 +9,9 @@ All code in this directory remains experimental. Use at your own risk.
 * Font file for the Adafruit OLED display
 
 ### hvdn-comm.ini
-* Config file used by hvdncomm apps (differs from stable version)
+* Config file used by hvdncomm apps
 
-### hvdncomm-lora-chat.py
+### hvdncomm-lora-chat_WIP.py
 * Half-duplex LoRa messaging app
 * Usage: ./hvdncomm-lora-chat
 * Starts and loops in Listening Mode

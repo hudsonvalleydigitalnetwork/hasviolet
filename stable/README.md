@@ -17,6 +17,16 @@ All code in this directory has been tested as functional and stable.
 * COUNT is number of times to repeat, MESSAGE is message to send in double quotes
 * Uses pyRF95 library (rf95.py)
 
+### hvdncomm-lora-chat.py
+* Half-duplex LoRa messaging app
+* Usage: ./hvdncomm-lora-chat
+* Starts and loops in Listening Mode
+* CTRL-Z to send a message, CTRL-C to exit program
+* When in send mode
+  * Recipient is node id (255 = broadcast address)
+  * Message is whatever message followed by enter
+  * Message is sent, return to listening mode
+
 ### hvdncomm-lora-message_rf95.py
 * Sends message to another LoRa station
 * Usage: ./hvdncomm-lora-message_ada.py -d DESTINATION -m MESSAGE
