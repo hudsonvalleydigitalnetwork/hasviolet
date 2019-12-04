@@ -12,14 +12,22 @@ All code in this directory remains experimental. Use at your own risk.
 * Config file used by hvdncomm apps
 
 ### hvdncomm-lora-chat_WIP.py
-* Half-duplex LoRa messaging app
-* Usage: ./hvdncomm-lora-chat
-* Starts and loops in Listening Mode
-* CTRL-Z to send a message, CTRL-C to exit program
-* When in send mode
-  * Recipient is node id (255 = broadcast address)
-  * Message is whatever message followed by enter
-  * Message is sent, return to listening mode
+  Half-duplex LoRa messaging app
+  
+  ```
+  Usage: ./hvdncomm-lora-chat [-r] [-s]
+
+  OPTIONS
+          -r Raw data instead of ASCII
+
+          -s Show RSSI
+
+  * Starts and loops in Listening Mode
+  * CTRL-Z to send a message, CTRL-C to exit program
+  * When in send mode
+    * Recipient is node id (255 = broadcast address)
+    * Message is whatever message followed by enter
+    * Message is sent, return to listening mode
 
 ### rf95.py
 * RFM95 library used by hvdncom apps
