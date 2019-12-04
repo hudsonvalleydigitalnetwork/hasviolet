@@ -27,7 +27,7 @@ All code in this directory has been tested as functional and stable.
           -r Raw data instead of ASCII
 
           -s Show RSSI
-
+  ```
   * Starts and loops in Listening Mode
   * CTRL-Z to send a message, CTRL-C to exit program
   * When in send mode
