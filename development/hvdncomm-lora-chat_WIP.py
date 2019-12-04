@@ -1,14 +1,11 @@
 #!/usr/bin/python3
 #
-# HVDN LORA CHAT RF95
+# HVDN LORA CHAT
 #
-# Usage: hvdncomm-lora-chat_r95.py
-#
+# Usage: hvdncomm-lora-chat.py
 #
 # Dependencies:
-#
 #     This uses rf95 library
-#
 #
 # Revisions:
 #
@@ -20,18 +17,19 @@
 # Import Libraries
 #
 
-import argparse
-import configparser
-import sys
-import time
-import signal
-#from signal import signal, SIGSTSTP
-import busio
-from digitalio import DigitalInOut, Direction, Pull
-import board
 import adafruit_ssd1306
+import argparse
+import board
+import busio
+import configparser
+import curses
+from digitalio import DigitalInOut, Direction, Pull
 #import rf95
 from rf95 import RF95, Bw31_25Cr48Sf512
+import signal
+#from signal import signal, SIGSTSTP
+import sys
+import time
 
 
 #
@@ -55,23 +53,17 @@ except KeyError as e:
 #
 # Import args
 #
-#
-#recipient = int(sys.argv[1])
-#message = sys.argv[2]
-#
-#
-#parser = argparse.ArgumentParser(description='Send a LoRa message.')
-#parser.add_argument('-d','--destination', type=int, help='Destination address 1-255', required=True)
-#parser.add_argument('-m','--message', help='Message to be sent in quotes', required=True)
-#args = vars(parser.parse_args())
-#
-#recipient = args['destination']
-#message = args['message']
 
+parser = argparse.ArgumentParser(description='LoRa Chat Program.')
+parser.add_argument('-r','--raw_data', help='Receive raw data', action='store_true')
+parser.add_argument('-s','--signal', help='Signal Strength', action='store_true')
+args = vars(parser.parse_args())
+arg_hvdn_rawdata = args['raw_data']
+arg_signal_rssi = args['signal']
 
 
 #
-# Variables
+# Variableshttps://www.tutorialspoint.com/python/python_if_else.htm
 #
 
 # gpio_rfm_irq - Use chip select 1. GPIO pin 22 will be used for interrupts
@@ -83,6 +75,58 @@ except KeyError as e:
 
 hvdn_recipient = "255"
 hvdn_message = "testing"
+
+
+#
+# FUNCTIONS
+#
+
+def OLED_display(OLED_where, OLED_msg):
+    display.fill(0)
+    if OLED_where == 'logo':
+        display.text(OLED_msg, 0, 10, 1)
+    elif OLED_where == 'rxid':
+        display.text(OLED_msg, 0, 20, 1)
+    elif OLED_where == 'rxmsg':
+        display.text(OLED_msg, 0, 20, 1)
+    elif OLED_where == 'txid':
+        display.text(OLED_msg, 0, 0, 1)
+    elif OLED_where == 'txmsg':
+        display.text(OLED_msg, 0, 0, 1)
+    elif OLED_where == 'bye':
+        display.text(OLED_msg, 0, 10, 1)
+        display.show()
+        time.sleep (3)
+        display.fill(0)
+        display.show()
+    else:
+        display.fill(0)
+    display.show()
+
+def hvdn_handler(signal_received, frame):
+    # Handle any cleanup here
+    print('SIGINT or CTRL-C detected. Exiting gracefully')
+    rf95.set_mode_idle()
+    rf95.cleanup()
+    OLED_display('bye','GoodBye...')
+    exit(0)
+
+def hvdn_txmode(signal_received, frame):
+    print ('Recipient:')
+    hvdn_recipient = input()
+    if hvdn_recipient == '/QUIT':
+      rf95.set_mode_idle()
+      rf95.cleanup()
+      OLED_display('quit','')
+      exit(0)
+    print ('Message:')
+    hvdn_message = input()
+    rf95.send(rf95.str_to_data(hvdn_message))
+    rf95.wait_packet_sent()
+    print('TX: ' + hvdn_recipient + ' : ' + hvdn_message)
+    OLED_display('txmsg','TX:' + hvdn_recipient + ' :' + hvdn_message)
+    rf95.set_mode_idle
+
 
 #
 # Setup
@@ -100,55 +144,7 @@ display.show()
 width = display.width
 height = display.height
 
-# Startup OLED Message
 
-display.fill(0)
-display.text('HVDN Communicator', 35, 0, 2)
-display.show()
-
-
-#
-# FUNCTIONS
-#
-def handler(signal_received, frame):
-    # Handle any cleanup here
-    print('SIGINT or CTRL-C detected. Exiting gracefully')
-    rf95.set_mode_idle()
-    rf95.cleanup()
-    display.fill(0)
-    display.show()
-    exit(0)
-
-def hvdn_txmode(signal_received, frame):
-    print ('Recipient:')
-    hvdn_recipient = input()
-    if hvdn_recipient == '/QUIT':
-      rf95.set_mode_idle()
-      rf95.cleanup()
-      display.fill(0)
-      display.show()
-      exit(0) 
-    print ('Message:')
-    hvdn_message = input()
-    rf95.send(rf95.str_to_data(hvdn_message))
-    rf95.wait_packet_sent()
-    print("Sending to", hvdn_recipient)
-    display.fill(0)
-    display.text('Sending to', 0, 0, 1)
-    display.text(str(hvdn_recipient), 5, 10, 1)
-    display.show()
-    time.sleep(3)
-    print ("Sent")
-    display.fill(0)
-    display.text('Sent', 5, 10, 1)
-    display.show()
-    time.sleep(2)
-    display.fill(0)
-    display.text('HVDN Communicator', 5, 10, 1)
-    display.show()
-    display.fill(0)
-    display.show()
-    rf95.set_mode_idle
 #
 # MAIN
 #
@@ -158,33 +154,46 @@ def hvdn_txmode(signal_received, frame):
 rf95 = RF95(cs=gpio_rfm_cs, int_pin=gpio_rfm_irq, reset_pin=None)
 rf95.set_frequency(freqmhz)
 rf95.set_tx_power(txpwr)
-#rf95.set_modem_config(modemcfg)
+#rf95.set_modem_config(modemcfg)('RAW:',data,':RSSI:',data_rssi)
 rf95.init()
 
-# Tell Python to run the handler() function when SIGSTP aka control-Z is recieved
+# SIGTSTP aka control-Z is quit, SIGINT is send mode= True:
 signal.signal(signal.SIGTSTP, hvdn_txmode)
-signal.signal(signal.SIGINT, handler)
+signal.signal(signal.SIGINT, hvdn_handler)
+
+# Display Start Message
+OLED_display('logo','HVDN Comm - LoRa Chat')
 print()
-print('HVDN Communicator Chat')
+print('HVDN Communicator - LoRa Chat')
 print()
 
 # While not hearing packets check for tab pressed to ennter tx mode
 while True:
     while not rf95.available():
-#        signal.signal(signal.SIGTSTP, hvdn_txmode)
         pass
     data = rf95.recv()
-    print ('  RAW:   ',data)
+    data_rssi = str(int(rf95.last_rssi))
+    data_stringed = str(data)
     data_ascii=""
     for i in data:
         data_ascii=data_ascii+chr(i)
-    print ('ASCII:  ',data_ascii)
-    print (' RSSI:  ',rf95.last_rssi)
+    if (arg_hvdn_rawdata) and (arg_signal_rssi):
+        datadisplay_string = 'RAW:'+ data_stringed +':RSSI:'+data_rssi
+        print ('RAW:',data,':RSSI:',data_rssi)
+        OLED_display('rxmsg','RAW:' + data_stringed + ' :' + data_rssi)
+    elif (arg_hvdn_rawdata):
+        datadisplay_string = 'RAW:'+ data_stringed
+        print ('RAW:',data)
+        OLED_display('rxmsg','RAW:' + data_stringed)
+    elif (arg_signal_rssi):
+        datadisplay_string = 'RX:'+ data_ascii +':RSSI:'+data_rssi
+        print ('RX:',data_ascii,':RSSI:',data_rssi)
+        OLED_display('rxmsg','RX:' + data_ascii + ' :' + data_rssi)
+
+    else:
+        print ('RX:',data_ascii)
+        OLED_display('rxmsg','RX:' + data_ascii)
     print ()
-#       display.fill(0)
-#       display.text(data, 1, 10, 1)
-#       display.text(data_ascii, 1, 15, 1)
-#       display.show()
-    display.fill(0)
-    display.show()
+display.fill(0)
+display.show()
 rf95.cleanup()
