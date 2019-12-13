@@ -11,21 +11,26 @@ All code in this directory has been tested as functional and stable.
 ### hvdn-comm.ini
 * Config file used by hvdncomm apps
 
-### hvdncomm-lora-broadcast_rf95.py
-* Sends message to LoRa broadcast address (255)
-* Usage: ./hvdncomm-lora-broadcast_ada.py  -c COUNT -m MESSAGE
-* COUNT is number of times to repeat, MESSAGE is message to send in double quotes
-* Uses pyRF95 library (rf95.py)
+### hvdn_lora-beacon.py
+  Beacon a LoRa message
 
-### hvdncomm-lora-chat.py
+  ```
+  Usage: hvdn_lora-beacon.py -c COUNT -t DELAY "message"
+
+  OPTIONS
+           -c Number of times to repeat MESSAGE
+           -t NUmber of seconds before repeat MESSAGE
+           MESSAGE is message to be send within double quotes
+  ```
+
+### hvdn_lora-chat.py
   Half-duplex LoRa messaging app
   
   ```
-  Usage: ./hvdncomm-lora-chat [-r] [-s]
+  Usage: ./hvdn_lora-chat [-r] [-s]
 
   OPTIONS
           -r Raw data instead of ASCII
-
           -s Show RSSI
   ```
   * Starts and loops in Listening Mode
@@ -35,19 +40,30 @@ All code in this directory has been tested as functional and stable.
     * Message is whatever message followed by enter
     * Message is sent, return to listening mode
 
-### hvdncomm-lora-message_rf95.py
-* Sends message to another LoRa station
-* Usage: ./hvdncomm-lora-message_ada.py -d DESTINATION -m MESSAGE
-* DESTINATION is node address of destination (1-255), MESSAGE is message to send in double quotes
-* Uses pyRF95 library (rf95.py)
+### hvdn_lora-tx.py
+  Send a LoRa message
 
-### hvdncomm-lora-rx_rf95.py
-* Listens for messages from other LoRa stations
-* Usage: ./hvdncomm-lora-rx_rf95.py
-* Uses pyRF95 library (rf95.py)
+  ```
+  Usage: hvdn_lora-tx.py -d DESTINATION "message"
 
+  OPTIONS
+           -d Destination ID
+           MESSAGE is message to be send within double quotes
+  ```
+
+### hvdn_lora-rx.py
+ Listens for messages from other LoRa stations
+
+  ```
+  Usage: ./hvdn_lora-rx.py -r -s
+
+  OPTIONS
+	  -h, --help      show this help message and exit
+	  -r, --raw_data  Receive raw data
+	  -s, --signal    Signal Strength
+  ```
+  
 ### rf95.py
 * RFM95 library used by hvdncom apps ending in rf95.py
 * Sourced from https://github.com/ladecadence/pyRF95
-
 

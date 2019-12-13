@@ -2,19 +2,20 @@
 #
 # HVDN LORA CHAT
 #
-# Usage: hvdncomm-lora-chat.py
 #
-# Dependencies:
-#     This uses rf95 library
+# Usage: hvdn_lora-chat.py
 #
-# Revisions:
 #
-# To-do:
+# REVISIONS:
+#
+#
+# TO-DO:
 #
 #
 
+
 #
-# Import Libraries
+# IMPORT LIBRARIES
 #
 
 import adafruit_ssd1306
@@ -22,18 +23,15 @@ import argparse
 import board
 import busio
 import configparser
-import curses
 from digitalio import DigitalInOut, Direction, Pull
-#import rf95
 from rf95 import RF95, Bw31_25Cr48Sf512
 import signal
-#from signal import signal, SIGSTSTP
 import sys
 import time
 
 
 #
-# Import Settings
+# IMPORT SETTINGS
 #
 
 config = configparser.ConfigParser()
@@ -50,8 +48,9 @@ except KeyError as e:
    raise LookupError("Error hvdn-comm.ini[DEFAULT] : {} missing.".format(str(e)))
    exit (1)
 
+
 #
-# Import args
+# IMPORT ARGS
 #
 
 parser = argparse.ArgumentParser(description='LoRa Chat Program.')
@@ -63,18 +62,13 @@ arg_signal_rssi = args['signal']
 
 
 #
-# Variableshttps://www.tutorialspoint.com/python/python_if_else.htm
+# VARIABLES
 #
 
 # gpio_rfm_irq - Use chip select 1. GPIO pin 22 will be used for interrupts
 # node_address - The address of this device will be set to (1-254)
 # freqmhz - The freq of this device in MHz (911.250 MHz is recommended)
-# recipient - Address of receiving LoRa node, 255 = broadcast
-# message - message to be sent. Must be in quotes or only will send one word
-# modemcfg - LoRa signal settings
-
-hvdn_recipient = "255"
-hvdn_message = "testing"
+# recipient - Address of receiveing LoRa node, 255 = broadcast
 
 
 #
@@ -103,7 +97,7 @@ def OLED_display(OLED_where, OLED_msg):
         display.fill(0)
     display.show()
 
-def hvdn_handler(signal_received, frame):
+def sigs_handler(signal_received, frame):
     # Handle any cleanup here
     print('SIGINT or CTRL-C detected. Exiting gracefully')
     rf95.set_mode_idle()
@@ -111,7 +105,7 @@ def hvdn_handler(signal_received, frame):
     OLED_display('bye','GoodBye...')
     exit(0)
 
-def hvdn_txmode(signal_received, frame):
+def sigs_txmode(signal_received, frame):
     print ('Recipient:')
     hvdn_recipient = input()
     if hvdn_recipient == '/QUIT':
@@ -129,7 +123,7 @@ def hvdn_txmode(signal_received, frame):
 
 
 #
-# Setup
+# SETUP
 #
 
 # Create the I2C interface.
@@ -157,9 +151,10 @@ rf95.set_tx_power(txpwr)
 #rf95.set_modem_config(modemcfg)('RAW:',data,':RSSI:',data_rssi)
 rf95.init()
 
-# SIGTSTP aka control-Z is quit, SIGINT is send mode= True:
-signal.signal(signal.SIGTSTP, hvdn_txmode)
-signal.signal(signal.SIGINT, hvdn_handler)
+# CTRL-Z is SIGTSTP to Send
+# CTRL-C is SIGINT and closes program gracefully
+signal.signal(signal.SIGTSTP, sigs_txmode)
+signal.signal(signal.SIGINT, sigs_handler)
 
 # Display Start Message
 OLED_display('logo','HVDN Comm - LoRa Chat')
