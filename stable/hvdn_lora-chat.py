@@ -3,13 +3,16 @@
 # HVDN LORA CHAT
 #
 #
-# Usage: hvdn_lora-chat.py
+#  Usage: hvdn_lora-chat [-r] [-s]
 #
+#      Within program use CTRL-Z to Send a message and
+#      CTRL-C to exit program
 #
-# REVISIONS:
+#  OPTIONS
+#        -r Raw data RX instead of ASCII
+#        -s Show RSSI RX
 #
-#
-# TO-DO:
+#  TO-DO:
 #
 #
 
@@ -53,7 +56,7 @@ except KeyError as e:
 # IMPORT ARGS
 #
 
-parser = argparse.ArgumentParser(description='LoRa Chat Program.')
+parser = argparse.ArgumentParser(description='HVDN LoRa Chat')
 parser.add_argument('-r','--raw_data', help='Receive raw data', action='store_true')
 parser.add_argument('-s','--signal', help='Signal Strength', action='store_true')
 args = vars(parser.parse_args())
@@ -74,6 +77,14 @@ arg_signal_rssi = args['signal']
 #
 # FUNCTIONS
 #
+
+def sigs_handler(signal_received, frame):
+    # Handle any cleanup here
+    print('SIGINT or CTRL-C detected. Exiting gracefully')
+    rf95.set_mode_idle()
+    rf95.cleanup()
+    OLED_display('bye','GoodBye...')
+    exit(0)
 
 def OLED_display(OLED_where, OLED_msg):
     display.fill(0)
@@ -96,14 +107,6 @@ def OLED_display(OLED_where, OLED_msg):
     else:
         display.fill(0)
     display.show()
-
-def sigs_handler(signal_received, frame):
-    # Handle any cleanup here
-    print('SIGINT or CTRL-C detected. Exiting gracefully')
-    rf95.set_mode_idle()
-    rf95.cleanup()
-    OLED_display('bye','GoodBye...')
-    exit(0)
 
 def sigs_txmode(signal_received, frame):
     print ('Recipient:')
@@ -132,11 +135,15 @@ i2c = busio.I2C(board.SCL, board.SDA)
 # 128x32 OLED Display
 display = adafruit_ssd1306.SSD1306_I2C(128, 32, i2c, addr=0x3c)
 
-# Clear the display.
+# Clear the OLED display.
 display.fill(0)
 display.show()
 width = display.width
 height = display.height
+
+# Startup OLED Message
+display.fill(0)
+display.text('HVDN LoRa Chat', 35, 0, 2)
 
 
 #
@@ -157,9 +164,9 @@ signal.signal(signal.SIGTSTP, sigs_txmode)
 signal.signal(signal.SIGINT, sigs_handler)
 
 # Display Start Message
-OLED_display('logo','HVDN Comm - LoRa Chat')
+OLED_display('logo','HVDN LoRa Chat')
 print()
-print('HVDN Communicator - LoRa Chat')
+print('HVDN LoRa Chat')
 print()
 
 # While not hearing packets check for tab pressed to ennter tx mode
@@ -184,7 +191,6 @@ while True:
         datadisplay_string = 'RX:'+ data_ascii +':RSSI:'+data_rssi
         print ('RX:',data_ascii,':RSSI:',data_rssi)
         OLED_display('rxmsg','RX:' + data_ascii + ' :' + data_rssi)
-
     else:
         print ('RX:',data_ascii)
         OLED_display('rxmsg','RX:' + data_ascii)

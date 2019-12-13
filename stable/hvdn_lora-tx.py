@@ -3,10 +3,11 @@
 # HVDN LORA TX
 #
 #
-# Usage: hvdn_lora-tx.py destination-node "message"
+#  Usage: hvdn_lora-tx.py destination-node "message"
 #
-#
-# REVISIONS:
+#  OPTIONS
+#       destination-node is LoRa Node Number ID destination
+#       MESSAGE is sent in double quotes
 #
 #
 # TO-DO:
@@ -54,7 +55,7 @@ except KeyError as e:
 # IMPORT ARGS
 #
 
-parser = argparse.ArgumentParser(description='Send a LoRa message.')
+parser = argparse.ArgumentParser(description='HVDN LoRa TX')
 parser.add_argument('-d','--destination', type=int, help='Destination address 1-255', required=True)
 parser.add_argument('-m','--message', help='Message to be sent in quotes', required=True)
 args = vars(parser.parse_args())
@@ -76,14 +77,36 @@ message = args['message']
 #
 # FUNCTIONS
 #
+
 def sigs_handler(signal_received, frame):
     # Handle any cleanup here
     print('SIGINT or CTRL-C detected. Exiting gracefully')
     rf95.set_mode_idle()
     rf95.cleanup()
-    display.fill(0)
-    display.show()
+    OLED_display('bye','GoodBye...')
     exit(0)
+
+def OLED_display(OLED_where, OLED_msg):
+    display.fill(0)
+    if OLED_where == 'logo':
+        display.text(OLED_msg, 0, 10, 1)
+    elif OLED_where == 'rxid':
+        display.text(OLED_msg, 0, 20, 1)
+    elif OLED_where == 'rxmsg':
+        display.text(OLED_msg, 0, 20, 1)
+    elif OLED_where == 'txid':
+        display.text(OLED_msg, 0, 0, 1)
+    elif OLED_where == 'txmsg':
+        display.text(OLED_msg, 0, 0, 1)
+    elif OLED_where == 'bye':
+        display.text(OLED_msg, 0, 10, 1)
+        display.show()
+        time.sleep (3)
+        display.fill(0)
+        display.show()
+    else:
+        display.fill(0)
+    display.show()
 
 
 #
@@ -96,7 +119,7 @@ i2c = busio.I2C(board.SCL, board.SDA)
 # 128x32 OLED Display
 display = adafruit_ssd1306.SSD1306_I2C(128, 32, i2c, addr=0x3c)
 
-# Clear the display.
+# Clear the OLED display.
 display.fill(0)
 display.show()
 width = display.width
@@ -108,10 +131,9 @@ display.fill(0)
 display.text('HVDN LoRa TX', 35, 0, 2)
 display.show()
 
+# SIGTINT aka control-C is quit
+signal.signal(signal.SIGINT, sigs_handler)
 
-#
-# MAIN
-#
 
 #
 # MAIN
@@ -119,30 +141,33 @@ display.show()
 
 # Setup Radio
 
-#rf95 = RF95(cs=1, int_pin=22, reset_pin=None)
 rf95 = RF95(cs=gpio_rfm_cs, int_pin=gpio_rfm_irq, reset_pin=None)
 rf95.set_frequency(freqmhz)
 rf95.set_tx_power(txpwr)
 # Custom predefined mode
 #rf95.set_modem_config(Bw31_25Cr48Sf512)
+#rf95.set_modem_config(modemcfg)
 rf95.init()
+
+# SIGTINT aka control-C is quit
+signal.signal(signal.SIGINT, sigs_handler)
 
 # Send message
 
-if __name__ == '__main__':
-    # Tell Python to run the handler() function when SIGINT is recieved
-    signal(SIGINT, sigs_handler)
-    print('HVDN LoRa TX is running...')
-    print('Press CTRL-C to exit.')
+print('HVDN LoRa TX is running...')
+print('Press CTRL-C to exit.')
 
 rf95.send(rf95.str_to_data(message))
 rf95.wait_packet_sent()
+
 print("Sending to", recipient)
 display.fill(0)
 display.text('Sending to', 0, 0, 1)
 display.text(str(recipient), 5, 10, 1)
 display.show()
+
 time.sleep(3)
+
 print ("Sent")
 display.fill(0)
 display.text('Sent', 5, 10, 1)
