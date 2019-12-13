@@ -2,7 +2,7 @@
 
 ## Build
 
-Project HAS Violet, brought to you by HVDN, the letter Q and numbers 8, 4 and 5.
+Shell scripts to build/update from a Raspbian Lite image
 
 ### hvdn_hasviolet_install.sh
 

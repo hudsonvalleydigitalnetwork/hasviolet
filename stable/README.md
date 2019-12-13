@@ -30,8 +30,9 @@ All code in this directory has been tested as functional and stable.
   Usage: ./hvdn_lora-chat [-r] [-s]
 
   OPTIONS
-          -r Raw data instead of ASCII
-          -s Show RSSI
+	  -h, --help      show this help message and exit
+	  -r, --raw_data  Receive raw data
+	  -s, --signal    Signal Strength
   ```
   * Starts and loops in Listening Mode
   * CTRL-Z to send a message, CTRL-C to exit program

@@ -2,7 +2,6 @@
 
 ## Development
 
-Project HAS Violet, brought to you by HVDN, the letter Q and numbers 8, 4 and 5. 
 All code in this directory remains experimental. Use at your own risk.
 
 ### font5x8.bin
