@@ -18,7 +18,8 @@
   https://github.com/Heltec-Aaron-Lee/WiFi_Kit_series
 */
 #include "heltec.h"
-#include "images.h"
+/*include "images.h"*/
+#include "hvdnimg.h"
 
 #define BAND    911250000  //you can set band here directly,e.g. 868E6,915E6
 
@@ -31,7 +32,7 @@ String call ="TEST FROM NOCALL"; //replace NOCALL with your call
 void logo()
 {
   Heltec.display->clear();
-  Heltec.display->drawXbm(0,5,logo_width,logo_height,logo_bits);
+  Heltec.display->drawXbm(0,5,hvdnimg_width,hvdnimg_height,hvdnimg_bits);
   Heltec.display->display();
 }
 

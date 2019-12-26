@@ -17,17 +17,19 @@
   this project also realess in GitHub:
   https://github.com/Heltec-Aaron-Lee/WiFi_Kit_series
 */
-#include "heltec.h" 
-#include "images.h"
+#include "heltec.h"
+/*include "images.h"*/
+#include "hvdnimg.h"
 
 #define BAND    911250000  //you can set band here directly,e.g. 868E6,915E6
 String rssi = "RSSI --";
 String packSize = "--";
 String packet ;
 
-void logo(){
+void logo()
+{
   Heltec.display->clear();
-  Heltec.display->drawXbm(0,5,logo_width,logo_height,logo_bits);
+  Heltec.display->drawXbm(0,5,hvdnimg_width,hvdnimg_height,hvdnimg_bits);
   Heltec.display->display();
 }
 
