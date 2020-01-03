@@ -29,10 +29,10 @@
 ##
 
 # HVDN LocalRepo Home Directory
-hvdn_localrepo=$HOME/hvdn
+hvdn_localrepo=$HOME/hvdn-repo
 
 # HVDN Communicator LocalRepo (GitHub clone)
-hvdn_hasviolet_localrepo=$HOME/hvdn/hasviolet
+hvdn_hasviolet_localrepo=$HOME/hvdn-repo/hasviolet
 
 # HVDN Communicator install path
 hvdn_hasviolet_install=$HOME/hvdn-comm
@@ -61,32 +61,18 @@ echo " "
 
 sudo apt-get install python3-pip
 sudo apt-get install git
-sudo apt-get install nginx
 
 echo " "
 echo "- Install Python Libraries"
 echo " "
 
-sudo pip3 install urwid
-#sudo pip3 install adafruit-circuitpython-rfm69
-sudo pip3 install adafruit-circuitpython-rfm9x
-sudo pip3 install adafruit-circuitpython-ssd1306
-sudo pip3 install adafruit-circuitpython-framebuf
+sudo apt-get install python3-pil
 sudo pip3 install aprs
 sudo pip3 install aprslib
-
-#Customize Environment
-sudo cat >/etc/motd <<EOL
- _          _
-| |___ ____| |_ _
-| ' \ V / _` | ' \
-|_||_\_/\__,_|_||_|
--------------------
-Alpha version 20191202
-
-EOL
-
-
+#sudo pip3 install adafruit-circuitpython-rfm69
+#sudo pip3 install adafruit-circuitpython-rfm9x
+sudo pip3 install adafruit-circuitpython-ssd1306
+sudo pip3 install adafruit-circuitpython-framebuf
 
 echo " "
 echo "- Create HVDN LocalRepo and HVDN-Comm directories"
@@ -116,34 +102,17 @@ echo " "
 
 cp -R $hvdn_hasviolet_localrepo/stable/* $hvdn_hasviolet_install
 
-# Generate hvdn-comm.ini file
+#Customize Environment
+sudo cat >/etc/motd <<EOL
+ _          _
+| |___ ____| |_ _
+| ' \ V / _` | ' \
+|_||_\_/\__,_|_||_|
+-------------------
+Alpha version 20200103
 
-gpio_rfm_cs=1
-gpio_rfm_irq=22
-node_address=1
-freqmhz=911.25
-txpwr=5
-
-echo " "
-echo "- Create hvdn-comm.ini file"
-echo " "
-
-echo " "
-echo "What will be the node address for this device (1-254):"
-read node_address
-
-echo " "
-echo "What TXpower level will you use (5-23):"
-read txpwr
-
-cat >$hvdn_hasviolet_ini <<EOL
-[DEFAULT]
-gpio_rfm_cs=${gpio_rfm_cs}
-gpio_rfm_irq=${gpio_rfm_irq}
-node_address=${node_address}
-freqmhz=${freqmhz}
-txpwr=${txpwr}
 EOL
+
 
 echo " "
 echo "HVDN-Comm is installed in $hvdn_hasviolet_install"
