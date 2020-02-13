@@ -71,13 +71,6 @@ sudo pip3 install adafruit-circuitpython-ssd1306
 sudo pip3 install adafruit-circuitpython-framebuf
 
 echo " "
-echo "- Install HVDN Repo"
-echo " "
-
-cd $hvdn_localrepo
-git clone $hvdn_hasviolet_repo
-
-echo " "
 echo "- Create HVDN working directory"
 echo " "
 
