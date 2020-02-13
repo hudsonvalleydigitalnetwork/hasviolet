@@ -77,7 +77,6 @@ echo " "
 cd $HOME
 mkdir $hvdn_localrepo
 mkdir $hasviolet_localrepo
-mkdir $hasviolet_install
 cd $hvdn_localrepo
 git clone $hvdn_hasviolet_repo
 
@@ -85,7 +84,8 @@ echo " "
 echo "- Create HVDN working directory"
 echo " "
 
-cp -R $hasviolet_localrepo/stable/* $hvdn_hasviolet_install
+mkdir $hasviolet_install
+cp -R $hasviolet_localrepo/stable/* $hasviolet_install
 
 echo " "
 echo "HAS Violet installation complete. All apps are in $hasviolet_install"
