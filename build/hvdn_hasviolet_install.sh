@@ -22,7 +22,7 @@
 ##
 ## 2019-09-13	Genesis of script
 ## 2019-09-14	Includes pyRF95 repo
-##
+## 2020-02-12   Permission error for MOTD, Changing working app path, Clean up script
 
 ##
 ## INIT VARIABLES 
@@ -31,23 +31,18 @@
 # HVDN LocalRepo Home Directory
 hvdn_localrepo=$HOME/hvdn-repo
 
-# HVDN Communicator LocalRepo (GitHub clone)
-hvdn_hasviolet_localrepo=$HOME/hvdn-repo/hasviolet
+# HAS Violet LocalRepo (GitHub clone)
+hasviolet_localrepo=$HOME/hvdn-repo/hasviolet
 
-# HVDN Communicator install path
-hvdn_hasviolet_install=$HOME/hvdn-comm
+# HAS Violet install path
+hasviolet_install=$HOME/hvdn-comm
 
-# HVDN Communicator INI file
-hvdn_hasviolet_ini=$hvdn_hasviolet_install/hvdn-comm.ini
+# HAS Violet INI file
+hasviolet_ini=$hvdn_hasviolet_install/hvdn-comm.ini
 
-# HVDN HASviolet GitHub Repo
+# HASviolet GitHub Repo
 hvdn_hasviolet_repo="https://github.com/hudsonvalleydigitalnetwork/hasviolet.git"
 
-# pyRF95 Library repo
-pyrf95_repo="https://github.com/ladecadence/pyRF95"
-
-# pyRF95 LocalRepo (GitHub clone)
-pyrf95_localrepo=$hvdn_localrepo/pyRF95
 
 ##
 ##  START 
@@ -61,6 +56,7 @@ echo " "
 
 sudo apt-get install python3-pip
 sudo apt-get install git
+sudo apt-get install vim
 
 echo " "
 echo "- Install Python Libraries"
@@ -69,35 +65,24 @@ echo " "
 sudo apt-get install python3-pil
 sudo pip3 install aprs
 sudo pip3 install aprslib
-#sudo pip3 install adafruit-circuitpython-rfm69
-#sudo pip3 install adafruit-circuitpython-rfm9x
+sudo pip3 install adafruit-circuitpython-rfm69
+sudo pip3 install adafruit-circuitpython-rfm9x
 sudo pip3 install adafruit-circuitpython-ssd1306
 sudo pip3 install adafruit-circuitpython-framebuf
 
 echo " "
-echo "- Create HVDN LocalRepo and HVDN-Comm directories"
+echo "- Install HVDN Repo"
 echo " "
 
 cd $HOME
 mkdir $hvdn_localrepo
-mkdir $hvdn_hasviolet_localrepo
-mkdir $hvdn_hasviolet_install
-
-echo " "
-echo "- Clone HVDN Repo"
-echo " "
-
+mkdir $hasviolet_localrepo
+mkdir $hasviolet_install
 cd $hvdn_localrepo
 git clone $hvdn_hasviolet_repo
 
 echo " "
-echo "- Clone pyRF95 Repo"
-echo " "
-
-git clone $pyrf95_repo
-
-echo " "
-echo "- Install HVDN-Comm"
+echo "- Creat HVDN workin directory"
 echo " "
 
 cp -R $hvdn_hasviolet_localrepo/stable/* $hvdn_hasviolet_install
@@ -109,13 +94,13 @@ sudo cat >/etc/motd <<EOL
 | ' \ V / _` | ' \
 |_||_\_/\__,_|_||_|
 -------------------
-Alpha version 20200103
+BETA 20200212
 
 EOL
 
 
 echo " "
-echo "HVDN-Comm is installed in $hvdn_hasviolet_install"
+echo "HAS Violet installation complete. All apps are in $hasviolet_install"
 echo " "
 
 exit 0
