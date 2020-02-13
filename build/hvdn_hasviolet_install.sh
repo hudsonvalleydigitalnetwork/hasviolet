@@ -74,9 +74,6 @@ echo " "
 echo "- Install HVDN Repo"
 echo " "
 
-cd $HOME
-mkdir $hvdn_localrepo
-mkdir $hasviolet_localrepo
 cd $hvdn_localrepo
 git clone $hvdn_hasviolet_repo
 
