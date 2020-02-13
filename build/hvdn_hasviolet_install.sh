@@ -35,10 +35,10 @@ hvdn_localrepo=$HOME/hvdn-repo
 hasviolet_localrepo=$HOME/hvdn-repo/hasviolet
 
 # HAS Violet install path
-hasviolet_install=$HOME/hvdn-comm
+hasviolet_install=$HOME/hvdn
 
 # HAS Violet INI file
-hasviolet_ini=$hvdn_hasviolet_install/hvdn-comm.ini
+hasviolet_ini=$hasviolet_install/hvdn-comm.ini
 
 # HASviolet GitHub Repo
 hvdn_hasviolet_repo="https://github.com/hudsonvalleydigitalnetwork/hasviolet.git"
@@ -82,22 +82,10 @@ cd $hvdn_localrepo
 git clone $hvdn_hasviolet_repo
 
 echo " "
-echo "- Creat HVDN workin directory"
+echo "- Create HVDN working directory"
 echo " "
 
-cp -R $hvdn_hasviolet_localrepo/stable/* $hvdn_hasviolet_install
-
-#Customize Environment
-sudo cat >/etc/motd <<EOL
- _          _
-| |___ ____| |_ _
-| ' \ V / _` | ' \
-|_||_\_/\__,_|_||_|
--------------------
-BETA 20200212
-
-EOL
-
+cp -R $hasviolet_localrepo/stable/* $hvdn_hasviolet_install
 
 echo " "
 echo "HAS Violet installation complete. All apps are in $hasviolet_install"
