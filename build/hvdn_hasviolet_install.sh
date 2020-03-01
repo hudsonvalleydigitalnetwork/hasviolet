@@ -54,15 +54,15 @@ echo " "
 echo "- Install Raspbian Packages"
 echo " "
 
-sudo apt-get install python3-pip
-sudo apt-get install git
-sudo apt-get install vim
+sudo apt-get -y install python3-pip
+sudo apt-get -y install git
+sudo apt-get -y install vim
 
 echo " "
 echo "- Install Python Libraries"
 echo " "
 
-sudo apt-get install python3-pil
+sudo apt-get -y install python3-pil
 sudo pip3 install aprs
 sudo pip3 install aprslib
 sudo pip3 install adafruit-circuitpython-rfm69
