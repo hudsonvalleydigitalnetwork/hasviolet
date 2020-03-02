@@ -138,8 +138,9 @@ signal.signal(signal.SIGINT, sigs_handler)
 OLED_display('logo','HVDN LoRa RX')
 print()
 print('HVDN LoRa RX')
-print()
-
+print('CTRL-C to exit')
+print('--------------')
+#print()
 
 #
 # MAIN
@@ -183,7 +184,7 @@ while True:
     else:
         print ('RX:',data_ascii)
         OLED_display('rxmsg','RX:' + data_ascii)
-    print ()
+    #print ()
 display.fill(0)
 display.show()
 rf95.cleanup()
