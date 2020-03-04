@@ -118,7 +118,7 @@ def sigs_txmode(signal_received, frame):
       exit(0)
     print ('Message:')
     hvdn_message = input()
-    rf95.send(rf95.str_to_data(hvdn_message))
+    rf95.send(rf95.str_to_data(hvdn_recipient + " : " + hvdn_message))
     rf95.wait_packet_sent()
     print('TX: ' + hvdn_recipient + ' : ' + hvdn_message)
     OLED_display('txmsg','TX:' + hvdn_recipient + ' :' + hvdn_message)
@@ -167,6 +167,7 @@ signal.signal(signal.SIGINT, sigs_handler)
 OLED_display('logo','HASviolet Chat')
 print()
 print('HASviolet Chat')
+print('Recevice only mode! (Use Ctrl-Z to send)')
 print()
 
 # While not hearing packets check for tab pressed to ennter tx mode
