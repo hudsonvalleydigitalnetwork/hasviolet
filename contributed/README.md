@@ -1,4 +1,4 @@
-# HAS Violet
+# HASviolet
 
 ## Contributed
 

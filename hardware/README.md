@@ -1,8 +1,8 @@
-# HAS Violet
+# HASviolet
 
 ## Hardware
 
-Project HAS Violet, brought to you by HVDN, the letter Q and numbers 8, 4 and 5. 
+Project HASviolet, brought to you by HVDN, the letter Q and numbers 8, 4 and 5. 
 
 
 ### Adafruit LoRa Radio Bonnet with OLED - RFM95W @ 915 MHz - RadioFruit
