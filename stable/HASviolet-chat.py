@@ -47,6 +47,7 @@ try:
    freqmhz = float(config["DEFAULT"]["freqmhz"])
    txpwr = int(config["DEFAULT"]["txpwr"])
    modemcfg = str(config["DEFAULT"]["modemcfg"])
+   mycall = str(config["DEFAULT"]["mycall"])
 except KeyError as e:
    raise LookupError("Error HAsviolet.ini[DEFAULT] : {} missing.".format(str(e)))
    exit (1)
@@ -71,7 +72,7 @@ arg_signal_rssi = args['signal']
 # gpio_rfm_irq - Use chip select 1. GPIO pin 22 will be used for interrupts
 # node_address - The address of this device will be set to (1-254)
 # freqmhz - The freq of this device in MHz (911.250 MHz is recommended)
-# recipient - Address of receiveing LoRa node, 255 = broadcast
+# recipient - Address of receiving node
 
 
 #
@@ -109,6 +110,7 @@ def OLED_display(OLED_where, OLED_msg):
     display.show()
 
 def sigs_txmode(signal_received, frame):
+    print ('Entering TX Mode ...')
     print ('Recipient:')
     hvdn_recipient = input()
     if hvdn_recipient == '/QUIT':
@@ -123,6 +125,8 @@ def sigs_txmode(signal_received, frame):
     print('TX: ' + hvdn_recipient + ' : ' + hvdn_message)
     OLED_display('txmsg','TX:' + hvdn_recipient + ' :' + hvdn_message)
     rf95.set_mode_idle
+    print()
+    print('RX:')
 
 
 #
@@ -167,7 +171,10 @@ signal.signal(signal.SIGINT, sigs_handler)
 OLED_display('logo','HASviolet Chat')
 print()
 print('HASviolet Chat')
-print('Recevice only mode! (Use Ctrl-Z to send)')
+print()
+print('Entering RX mode ... (Use Ctrl-Z to send)')
+print()
+print('RX:')
 print()
 
 # While not hearing packets check for tab pressed to ennter tx mode

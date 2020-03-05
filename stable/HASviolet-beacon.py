@@ -46,6 +46,7 @@ try:
    freqmhz = float(config["DEFAULT"]["freqmhz"])
    txpwr = int(config["DEFAULT"]["txpwr"])
    modemcfg = str(config["DEFAULT"]["modemcfg"])
+   mycall = str(config["DEFAULT"]["mycall"])
 except KeyError as e:
    raise LookupError("Error HASviolet.ini[DEFAULT] : {} missing.".format(str(e)))
    exit (1)
@@ -73,7 +74,7 @@ timedelay = args['time']
 # gpio_rfm_irq - Use chip select 1. GPIO pin 22 will be used for interrupts
 # node_address - The address of this device will be set to (1-254)
 # freqmhz - The freq of this device in MHz (911.250 MHz is recommended)
-# recipient - Address of receiveing LoRa node, 255 = broadcast
+# recipient - Address of receiveing node
 # message - message as caputred from args
 
 
