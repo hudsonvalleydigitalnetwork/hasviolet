@@ -31,7 +31,7 @@ from rf95 import RF95, Bw31_25Cr48Sf512
 import signal
 import sys
 import time
-
+import os # added this to use local stty to turn input on and off
 
 #
 # IMPORT SETTINGS
@@ -81,6 +81,7 @@ arg_signal_rssi = args['signal']
 
 def sigs_handler(signal_received, frame):
     # Handle any cleanup here
+    os.system ('stty echo') # turn terminal echo back on since program is done  
     print('Exiting program gracefully')
     rf95.set_mode_idle()
     rf95.cleanup()
@@ -110,25 +111,18 @@ def OLED_display(OLED_where, OLED_msg):
     display.show()
 
 def sigs_txmode(signal_received, frame):
-    print()
-    print ('<TX Mode>)')
-    print ('Recipient:'),
-    hvdn_recipient = input()
-    if hvdn_recipient == '/QUIT':
+    os.system ('stty echo') # turn terminal echo back on
+    hvdn_message = input('TX: ' + hvdn_name + ' | ')
+    if hvdn_message == '/QUIT':
       rf95.set_mode_idle()
       rf95.cleanup()
       OLED_display('quit','')
       exit(0)
-    print ('Message:'),
-    hvdn_message = input()
-    rf95.send(rf95.str_to_data(hvdn_recipient + " : " + hvdn_message))
+    rf95.send(rf95.str_to_data(hvdn_name + " | " + hvdn_message))
     rf95.wait_packet_sent()
-    print('TX: ' + hvdn_recipient + ' : ' + hvdn_message)
-    OLED_display('txmsg','TX:' + hvdn_recipient + ' :' + hvdn_message)
+    OLED_display('txmsg','TX:' + hvdn_message)
     rf95.set_mode_idle
-    print()
-    print('<RX Mode>')
-
+    os.system ('stty -echo') # turn terminal echo off since we are done
 
 #
 # SETUP
@@ -170,11 +164,14 @@ signal.signal(signal.SIGINT, sigs_handler)
 
 # Display Start Message
 OLED_display('logo','HASviolet Chat')
+
+hvdn_name = input('Name or Call: ')
+
+os.system ('stty -echo') # turn off terminal echo off
 print()
 print('HASviolet Chat')
-print('    (Entering RX mode ... use Ctrl-Z to send)')
-print()
-print('<RX MODE>')
+print('    (Entering RX mode ... use Ctrl-Z to send, Ctrl-C to exit)')
+print('-------------------------------------------------------------')
 
 # While not hearing packets check for tab pressed to ennter tx mode
 while True:
@@ -201,7 +198,6 @@ while True:
     else:
         print ('RX:',data_ascii)
         OLED_display('rxmsg','RX:' + data_ascii)
-    print ()
 display.fill(0)
 display.show()
 rf95.cleanup()
