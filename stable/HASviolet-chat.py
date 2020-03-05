@@ -39,7 +39,7 @@ import time
 
 config = configparser.ConfigParser()
 config.sections()
-config.read('hvdn-comm.ini')
+config.read('HASviolet.ini')
 try:
    gpio_rfm_cs = int(config["DEFAULT"]["gpio_rfm_cs"])
    gpio_rfm_irq = int(config["DEFAULT"]["gpio_rfm_irq"])
