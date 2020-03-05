@@ -110,15 +110,16 @@ def OLED_display(OLED_where, OLED_msg):
     display.show()
 
 def sigs_txmode(signal_received, frame):
+    print()
     print ('<TX Mode>)')
-    print ('Recipient:'),
+    print 'Recipient:',
     hvdn_recipient = input()
     if hvdn_recipient == '/QUIT':
       rf95.set_mode_idle()
       rf95.cleanup()
       OLED_display('quit','')
       exit(0)
-    print ('Message:'),
+    print 'Message:',
     hvdn_message = input()
     rf95.send(rf95.str_to_data(hvdn_recipient + " : " + hvdn_message))
     rf95.wait_packet_sent()
@@ -171,9 +172,9 @@ signal.signal(signal.SIGINT, sigs_handler)
 OLED_display('logo','HASviolet Chat')
 print()
 print('HASviolet Chat')
+print('    (Entering RX mode ... use Ctrl-Z to send)')
 print()
-print('(Entering RX mode ... use Ctrl-Z to send)')
-print()
+print('<RX MODE>')
 
 # While not hearing packets check for tab pressed to ennter tx mode
 while True:
