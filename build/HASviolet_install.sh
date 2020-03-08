@@ -42,7 +42,7 @@ hasviolet_install=$HOME/HASviolet
 hasviolet_ini=$hasviolet_install/HASviolet.ini
 
 # HASviolet GitHub Repo
-hvdn_hasviolet_repo="https://github.com/hudsonvalleydigitalnetwork/hasviolet.git"
+hasviolet_github_repo="https://github.com/hudsonvalleydigitalnetwork/hasviolet.git"
 
 
 ##
@@ -76,7 +76,7 @@ echo "- Clone HASviolet Repository"
 echi " "
 
 cd $hvdn_localrepo
-git clone $hvdn_hasviolet_repo
+git clone $hasviolet_github_repo
 
 echo " "
 echo "- Create HASviolet working directory"
