@@ -72,6 +72,13 @@ sudo pip3 install adafruit-circuitpython-ssd1306
 sudo pip3 install adafruit-circuitpython-framebuf
 
 echo " "
+echo "- Clone HASviolet Repository"
+echi " "
+
+cd $hvdn_localrepo
+git clone $hvdn_hasviolet_repo
+
+echo " "
 echo "- Create HASviolet working directory"
 echo " "
 
@@ -79,7 +86,8 @@ mkdir $hasviolet_install
 cp -R $hasviolet_localrepo/stable/* $hasviolet_install
 
 echo " "
-echo "HASviolet installation complete. All apps are in $hasviolet_install"
+echo "HASviolet installation complete."
+echo "All apps are in $hasviolet_install"
 echo " "
 
 exit 0
