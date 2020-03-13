@@ -52,8 +52,8 @@ After=multi-user.target
 [Service]
 Type=idle
 PIDFile=/run/HASviolet-service.pid
-WorkingDirectory=/home/pi/hasviolet
-ExecStart=/home/pi/hasviolet/HASviolet-duckhunt.py
+WorkingDirectory=/home/pi/HASviolet
+ExecStart=/home/pi/HASviolet/HASviolet-duckhunt.py
 ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/HASviolet-service.pid
 TimeoutStopSec=5
 
