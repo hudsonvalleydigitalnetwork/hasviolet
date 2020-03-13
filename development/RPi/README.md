@@ -26,4 +26,3 @@ All code in this directory is under active development. USE AT YOUR OWN RISK !!
 * RFM95 library used by hvdncom apps ending in rf95.py
 * Sourced from https://github.com/ladecadence/pyRF95
 
-Svol;
