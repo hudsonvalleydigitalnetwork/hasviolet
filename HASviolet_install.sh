@@ -35,7 +35,7 @@
 hvdn_localrepo=$HOME/HVDN-repo
 
 # HASviolet LocalRepo (GitHub clone)
-hasviolet_localrepo=$HOME/HVDN-repo/HASviolet
+hasviolet_localrepo=$HOME/HVDN-repo/hasviolet
 
 # HASviolet install path
 hasviolet_install=$HOME/HASviolet
@@ -75,7 +75,7 @@ sudo pip3 install adafruit-circuitpython-framebuf
 
 echo " "
 echo "- Clone HASviolet Repository"
-echi " "
+echo " "
 
 mkdir $hvdn_localrepo
 cd $hvdn_localrepo
@@ -93,7 +93,7 @@ echo "HASviolet installation complete."
 echo "All apps are in $hasviolet_install"
 echo " "
 echo "To run the apps, you must be in the $hasviolet_install directory and"
-echo "prefix the app name with .\/\<app-name\>"
+echo "prefix the app name with ./<app-name>"
 
 cd $hasviolet_install
 exit 0
