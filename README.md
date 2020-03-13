@@ -48,10 +48,3 @@ wget https://raw.githubusercontent.com/joecupano/launchtest/master/hasty.sh
 chmod 755 hasty.sh
 ./hasty.sh
 ```
-
-Upgrade Script
-```
-wget https://raw.githubusercontent.com/joecupano/launchtest/master/hastier.sh
-chmod 755 hastier.sh
-./hastier.sh
-```
