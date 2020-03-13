@@ -75,7 +75,7 @@ except KeyError as e:
 #
 
 hasname = mycall + "-" + ssid
-payload = hasname + " | " + message 
+payload = hasname + " | " + beacon 
 timedelay = 5
 getout = False
 
