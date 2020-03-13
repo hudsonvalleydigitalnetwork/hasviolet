@@ -43,17 +43,15 @@ Start with reading the the [HASviolet Installation Guide](https://github.com/hud
 Because the repo is private, the installation and upgrade scripts cannot be retrieved from this repo. Instead perform the following from within the /home/pi directory;
 
 Install Script
-'''
+```
 wget https://raw.githubusercontent.com/joecupano/launchtest/master/hasty.sh
 chmod 755 hasty.sh
 ./hasty.sh
-'''
+```
 
 Upgrade Script
-'''
-wget Update Script
-'''
+```
 wget https://raw.githubusercontent.com/joecupano/launchtest/master/hastier.sh
 chmod 755 hastier.sh
 ./hastier.sh
-'''
+```
