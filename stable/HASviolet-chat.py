@@ -123,8 +123,8 @@ def sigs_txmode(signal_received, frame):
       rf95.cleanup()
       OLED_display('quit','')
       exit(0)
-    payload = hasname " | " + message
-    rf95.send(rf95.str_to_data(payload)
+    payload = hasname + " | " + message
+    rf95.send(rf95.str_to_data(payload))
     rf95.wait_packet_sent()
     OLED_display('txmsg','TX:' + payload)
     rf95.set_mode_idle
