@@ -48,6 +48,8 @@ try:
    txpwr = int(config["DEFAULT"]["txpwr"])
    modemcfg = str(config["DEFAULT"]["modemcfg"])
    mycall = str(config["DEFAULT"]["mycall"])
+   ssid = int(config["DEFAULT"]["ssid"])
+   beacon = str(config["DEFAULT"]["beacon"])
 except KeyError as e:
    raise LookupError("Error HASviolet.ini[DEFAULT] : {} missing.".format(str(e)))
    exit (1)
@@ -72,7 +74,8 @@ arg_signal_rssi = args['signal']
 # gpio_rfm_irq - Use chip select 1. GPIO pin 22 will be used for interrupts
 # node_address - The address of this device will be set to (1-254)
 # freqmhz - The freq of this device in MHz (911.250 MHz is recommended)
-# recipient - Address of receiving node
+# hasname - mycall + "-" + ssid
+# payload - hasname + message
 
 
 #

@@ -48,6 +48,8 @@ try:
    txpwr = int(config["DEFAULT"]["txpwr"])
    modemcfg = str(config["DEFAULT"]["modemcfg"])
    mycall = str(config["DEFAULT"]["mycall"])
+   ssid = int(config["DEFAULT"]["ssid"])
+   beacon = str(config["DEFAULT"]["beacon"])
 except KeyError as e:
    raise LookupError("Error HAsviolet.ini[DEFAULT] : {} missing.".format(str(e)))
    exit (1)
@@ -72,7 +74,10 @@ arg_signal_rssi = args['signal']
 # gpio_rfm_irq - Use chip select 1. GPIO pin 22 will be used for interrupts
 # node_address - The address of this device will be set to (1-254)
 # freqmhz - The freq of this device in MHz (911.250 MHz is recommended)
-# recipient - Address of receiving node
+# hasname - mycall + "-" + ssid
+# payload - hasname + message
+
+hasname = mycall + "-" + ssid
 
 
 #
@@ -112,15 +117,16 @@ def OLED_display(OLED_where, OLED_msg):
 
 def sigs_txmode(signal_received, frame):
     os.system ('stty echo') # turn terminal echo back on
-    hvdn_message = input('TX: ' + hvdn_name + ' | ')
+    hvdn_message = input('TX: ' + hasname + ' | ')
     if hvdn_message == '/QUIT':
       rf95.set_mode_idle()
       rf95.cleanup()
       OLED_display('quit','')
       exit(0)
-    rf95.send(rf95.str_to_data(hvdn_name + " | " + hvdn_message))
+    payload = hasname " | " + message
+    rf95.send(rf95.str_to_data(payload)
     rf95.wait_packet_sent()
-    OLED_display('txmsg','TX:' + hvdn_message)
+    OLED_display('txmsg','TX:' + payload)
     rf95.set_mode_idle
     os.system ('stty -echo') # turn terminal echo off since we are done
 
@@ -165,15 +171,13 @@ signal.signal(signal.SIGINT, sigs_handler)
 # Display Start Message
 OLED_display('logo','HASviolet Chat')
 
-hvdn_name = input('Name or Call: ')
-
 os.system ('stty -echo') # turn off terminal echo off
 print()
 print('HASviolet Chat')
 print('    (Entering RX mode ... use Ctrl-Z to send, Ctrl-C to exit)')
 print('-------------------------------------------------------------')
 
-# While not hearing packets check for tab pressed to ennter tx mode
+# While not hearing packets check for ctrl-z pressed to enter tx mode
 while True:
     while not rf95.available():
         pass

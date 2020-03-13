@@ -49,6 +49,8 @@ try:
    txpwr = int(config["DEFAULT"]["txpwr"])
    modemcfg = str(config["DEFAULT"]["modemcfg"])
    mycall = str(config["DEFAULT"]["mycall"])
+   ssid = int(config["DEFAULT"]["ssid"])
+   beacon = str(config["DEFAULT"]["beacon"])
 except KeyError as e:
    raise LookupError("Error HASviolet.ini[DEFAULT] : {} missing.".format(str(e)))
    exit (1)
@@ -72,7 +74,8 @@ except KeyError as e:
 # getout - used for beaking loops for mode exit detection
 #
 
-message = "Quack Qauck : " + mycall
+hasname = mycall + "-" + ssid
+payload = hasname + " | " + message 
 timedelay = 5
 getout = False
 
@@ -166,7 +169,7 @@ rf95.init()
 while True:
     if not beaconA.value:
         while btnB.value:
-            rf95.send(rf95.str_to_data(message))
+            rf95.send(rf95.str_to_data(payload))
             rf95.wait_packet_sent()
             display.fill(0)
             display.text("Beaconing ...", 0, 0, 1)

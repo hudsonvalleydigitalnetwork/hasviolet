@@ -47,6 +47,8 @@ try:
    txpwr = int(config["DEFAULT"]["txpwr"])
    modemcfg = str(config["DEFAULT"]["modemcfg"])
    mycall = str(config["DEFAULT"]["mycall"])
+   ssid = int(config["DEFAULT"]["ssid"])
+   beacon = str(config["DEFAULT"]["beacon"])
 except KeyError as e:
    raise LookupError("Error HASviolet.ini[DEFAULT] : {} missing.".format(str(e)))
    exit (1)
@@ -59,7 +61,8 @@ except KeyError as e:
 parser = argparse.ArgumentParser(description='HASviolet Beacon')
 parser.add_argument('-c','--count', type=int, help='number of times te repeate the message', required=True)
 parser.add_argument('-t','--time', type=int, help='number of seconds between repeating message', required=True)
-parser.add_argument('-m','--message', help='Message to be broadcast in quotes', required=True)
+parser.add_argument('-m','--message', help='Message to be broadcast in quotes. Default is beacon setting from INI file', default=beacon)
+
 args = vars(parser.parse_args())
 
 bcount = args['count']
@@ -74,10 +77,13 @@ timedelay = args['time']
 # gpio_rfm_irq - Use chip select 1. GPIO pin 22 will be used for interrupts
 # node_address - The address of this device will be set to (1-254)
 # freqmhz - The freq of this device in MHz (911.250 MHz is recommended)
-# recipient - Address of receiveing node
-# message - message as caputred from args
+# recipient - Address of receiving node
+# message - message as captured from args or INI
+# hasname - mycall + "-" + ssid
+# payload - hasname + message
 
-
+hasname = mycall + "-" + ssid
+payload = hasname + " | " + message 
 
 #
 # FUNCTIONS
@@ -163,12 +169,12 @@ if __name__ == '__main__':
     print('Press CTRL-C to exit.')
     while bcount > reprinse:
        reprinse = reprinse + 1
-       rf95.send(rf95.str_to_data(message))
+       rf95.send(rf95.str_to_data(payload))
        rf95.wait_packet_sent()
-       print("Sent ", reprinse,":", message)
+       print("Sent ", reprinse,":", payload)
        display.fill(0)
        display.text("Sending Count " + str(reprinse), 0, 0, 1)
-       display.text(message, 5, 10, 1)
+       display.text(payload, 5, 10, 1)
        display.show()
        time.sleep(timedelay)
 print ("Closing ...")
