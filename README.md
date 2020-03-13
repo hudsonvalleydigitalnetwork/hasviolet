@@ -17,7 +17,7 @@ Goal: Utilize the 900 MHz unlicensed ISM band and parrallel licensed amateur rad
 
 Creating an agnostic and universally appealing project name was important to create wider appeal for the project. The name of "Violet" was selected by first starting with a color and then looking for a story behind it. With all colors easily rendered by a standardized HTML CSS HEX code, the value of 8B0BB4 also translates to a decimal value of 911250. This value looks like the frequency of 911.250 MHz and thus is the main frequency to be used for the HVDN sponsored "Project HASviolet".  The word "HAS" is a simple acronym made up of the first letter of the words "Hardware", "Antenna" and "Software". The full project name is "HASviolet" which is as fun to say or promote its goal and use cases.
 
-## Project HASviolet: Component Description
+## What is HASviolet
 
 Three different components make up the entirety of the HASviolet Project. They are: 
 
