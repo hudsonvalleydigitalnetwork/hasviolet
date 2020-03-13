@@ -1,5 +1,5 @@
 #
-# HASviole-headless.service
+# HASviolet.service
 #
 #
 # DESCRIPTION
@@ -25,19 +25,19 @@
 #     You will need to stop the service to use HASviolet interactively during your session.
 #     This can be done by executing the following:
 #
-#            sudo systemctl stop HASviolet-headless.service
+#            sudo systemctl stop HASviolet.service
 #
 #     Service will start again on reboot.
 #
 # TO DISABLE THE SERVICE
 #
-#     sudo systemctl stop HASviolet-headless.service
-#     sudo systemctl disable HASviolet-headless.service
+#     sudo systemctl stop HASviolet.service
+#     sudo systemctl disable HASviolet.service
 #
 # TO RE-ENABLE THE SERVICE
 #
 #     sudo systemctl daemon-reload
-#     sudo systemctl enable HASviolet-headless.service
+#     sudo systemctl enable HASviolet.service
 #     sudo sync
 #     sudo reboot
 #
@@ -51,10 +51,10 @@ After=multi-user.target
 
 [Service]
 Type=idle
-PIDFile=/run/HASviolet-headless.pid
+PIDFile=/run/HASviolet-service.pid
 WorkingDirectory=/home/pi/hasviolet
 ExecStart=/home/pi/hasviolet/HASviolet-duckhunt.py
-ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/HASviolet-headless.pid
+ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/HASviolet-service.pid
 TimeoutStopSec=5
 
 [Install]
