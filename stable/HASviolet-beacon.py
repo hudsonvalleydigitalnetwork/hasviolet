@@ -59,7 +59,7 @@ except KeyError as e:
 #
 
 parser = argparse.ArgumentParser(description='HASviolet Beacon')
-parser.add_argument('-c','--count', type=int, help='number of times te repeate the message', required=True)
+parser.add_argument('-c','--count', type=int, help='number of times to repeat the message', required=True)
 parser.add_argument('-t','--time', type=int, help='number of seconds between repeating message', required=True)
 parser.add_argument('-m','--message', help='Message to be broadcast in quotes. Default is beacon setting from INI file', default=beacon)
 
