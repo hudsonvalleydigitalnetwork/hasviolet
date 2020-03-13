@@ -96,4 +96,5 @@ echo "To run the apps, you must be in the $hasviolet_install directory and"
 echo "prefix the app name with ./<app-name>"
 
 cd $hasviolet_install
+sleep 3
 exit 0
