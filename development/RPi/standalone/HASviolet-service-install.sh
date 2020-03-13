@@ -25,6 +25,7 @@ sudo chown root:root /lib/systemd/system/HASviolet.service
 sudo chmod 644 /lib/systemd/system/HASviolet.service
 sudo systemctl daemon-reload
 sudo systemctl enable HASviolet.service
+sudo systemctl start HASviolet.service
 sudo sync
 
 echo " "
@@ -44,5 +45,5 @@ echo "           ./HASviolet-service.sh start"
 echo " "
 echo " "
 echo " "
-echo "Service installed but not started. Reboot or start per instrcution above."
+echo "Service installed and started."
 echo " "
