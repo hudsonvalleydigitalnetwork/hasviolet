@@ -117,15 +117,17 @@ def OLED_display(OLED_where, OLED_msg):
 
 def sigs_txmode(signal_received, frame):
     os.system ('stty echo') # turn terminal echo back on
-    hvdn_message = input('TX: ' + hasname + ' | ')
-    if hvdn_message == '/QUIT':
+    recipientid = input('CALL: ')
+    message = input('MSG: ')
+    if recipientid == '/QUIT':
       rf95.set_mode_idle()
       rf95.cleanup()
       OLED_display('quit','')
       exit(0)
-    payload = hasname + " | " + message
+    payload = recipientid + " | " + message 
     rf95.send(rf95.str_to_data(payload))
     rf95.wait_packet_sent()
+    print ('TX:',payload)
     OLED_display('txmsg','TX:' + payload)
     rf95.set_mode_idle
     os.system ('stty -echo') # turn terminal echo off since we are done
