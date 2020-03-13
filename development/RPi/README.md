@@ -5,6 +5,9 @@
 Project HASviolet, brought to you by HVDN, the letter Q and numbers 8, 4 and 5. 
 All code in this directory is under active development. USE AT YOUR OWN RISK !!
 
+## Standalone
+* All files for HASviolet to run standalone
+
 ### font5x8.bin
 * Font file for the Adafruit OLED display
 
