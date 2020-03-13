@@ -21,20 +21,17 @@ Creating an agnostic and universally appealing project name was important to cre
 
 Three different components make up the entirety of the HASviolet Project. They are: 
 
-### Hardware
-HASviolet is comprised of low cost common off the shelf hardware or COTS. This approach reduced project design time and created a low barrier of entry for anyone interested in the project. The initial approved hardware includes the [Adafruit LoRa Radio Bonnet with OLED - RFM95W @ 915MHz - RadioFruit and the Raspberry Pi Zero Wireless](https://www.adafruit.com/product/4074) attached to a [Raspberry Pi Zero WH](https://www.adafruit.com/product/3708). Future hardware will include microcontrollers using standard form factors (ie Feathwerwing) with LoRa in other spectrum bands that offer additional convergence of ISM and amateur radio experimentation opportunities.
+     * Hardware - HASviolet is comprised of low cost common off the shelf hardware or COTS. This approach reduced project design time and created a low barrier of entry for anyone interested in the project. The initial approved hardware includes the [Adafruit LoRa Radio Bonnet with OLED - RFM95W @ 915MHz - RadioFruit and the Raspberry Pi Zero Wireless](https://www.adafruit.com/product/4074) attached to a [Raspberry Pi Zero WH](https://www.adafruit.com/product/3708). Future hardware will include microcontrollers using standard form factors (ie Feathwerwing) with LoRa in other spectrum bands that offer additional convergence of ISM and amateur radio experimentation opportunities.
 
-### Antenna
-The 902 to 928 MHz ISM spectrum for unlicensed communication in ITU region 2 has a few limitations to consider. Tolerance for interference from other users and maximum transmission power that creates a 50 mV/m of electrical field strength at 3 meters distance are what has to be considered in HASviolet. The (US) Federal Communications Commission title 47 part 15 provides further detail. 
+     * Antenna - The 902 to 928 MHz ISM spectrum for unlicensed communication in ITU region 2 has a few limitations to consider. Tolerance for interference from other users and maximum transmission power that creates a 50 mV/m of electrical field strength at 3 meters distance are what has to be considered in HASviolet. The (US) Federal Communications Commission title 47 part 15 provides further detail. 
+     
+     The Amateur Radio service however in ITU region 2 is exempt from transmission power limitations that restrict range for unlicensed users, but has to accommodate interference from other licensed or unlicensed users. In order to maintain compliance, HVDN promotes the adoption of field strength measuring equipment and use of the appropriate antenna dependent on the user’s frequency of 911.250 MHz with or without an Amateur Radio license.
+     
+     The HASviolet project includes an HVDN designed directional broadband multi-frequency (433/900) ISM and amateur radio antenna to help create awareness of the benefits of gaining an Amateur Radio license for longer range communication. Unlicensed users may appreciate the antenna’s ability to receive signals from further away and to show immediate value in gaining an Amateur Radio license.
 
-The Amateur Radio service however in ITU region 2 is exempt from transmission power limitations that restrict range for unlicensed users, but has to accommodate interference from other licensed or unlicensed users. In order to maintain compliance, HVDN promotes the adoption of field strength measuring equipment and use of the appropriate antenna dependent on the user’s frequency of 911.250 MHz with or without an Amateur Radio license.
-
-The HASviolet project includes an HVDN designed directional broadband multi-frequency (433/900) ISM and amateur radio antenna to help create awareness of the benefits of gaining an Amateur Radio license for longer range communication. Unlicensed users may appreciate the antenna’s ability to receive signals from further away and to show immediate value in gaining an Amateur Radio license.
-
-### Software
-By assembling project HASviolet from common off the shelf hardware, a simple software package was needed to provide easy setup and use of HASviolet.  The basic demonstrator application for HASviolet is a text based communicator that utilizes python libraries and all sorts of other crap that my collaborators will elaborate on. The overall goal though, is to make an image that is easy to deploy and get up and running very quickly.
+     * Software - By assembling project HASviolet from common off the shelf hardware, a simple software package was needed to provide easy setup and use of HASviolet.  The basic demonstrator application for HASviolet is a text based communicator that utilizes python libraries and all sorts of other crap that my collaborators will elaborate on. The overall goal though, is to make an image that is easy to deploy and get up and running very quickly.
 
 ## Getting Started
 
-Start with reading the the HASviolet Installation Guide. It will tell you what hardware you will need, installing Raspbian Lite OS, and downloading the install automation script.
+Start with reading the the [HASviolet Installation Guide](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet_Installation_Guide_v1.pdf). It will tell you what hardware you will need, installing Raspbian Lite OS, and downloading then running the [install automation script](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet_install.sh).
 
