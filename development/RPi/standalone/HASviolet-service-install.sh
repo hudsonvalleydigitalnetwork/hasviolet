@@ -20,9 +20,9 @@ echo " "
 echo "- Sudo privilege required"
 echo " "
 
-sudo cp /home/pi/hasviolet/HASviolet.service /lib/systemd/system/HASviolet.service
+sudo cp /home/pi/HASviolet/HASviolet.service /lib/systemd/system/HASviolet.service
 sudo chown root:root /lib/systemd/system/HASviolet.service
-sudo chmode 644 /lib/systemd/system/HASviolet.service
+sudo chmod 644 /lib/systemd/system/HASviolet.service
 sudo systemctl daemon-reload
 sudo systemctl enable HASviolet.service
 sudo sync
@@ -44,7 +44,5 @@ echo "           ./HASviolet-service start"
 echo " "
 echo " "
 echo " "
-echo "System will reboot in fifteen seconds"
+echo "System reboot recommended"
 echo " "
-sleep 15
-sudo reboot
