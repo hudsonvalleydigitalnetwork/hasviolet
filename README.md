@@ -38,9 +38,9 @@ Three different components make up the entirety of the HASviolet Project. They a
 
 Start with reading the the [HASviolet Installation Guide](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet_Installation_Guide_v1.pdf). It will tell you what hardware you will need, installing Raspbian Lite OS, and downloading then running the [install automation script](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet_install.sh).
 
-## 2020-03-13 PRE-LAUNCH TESTING
+## 2020-03-13 SPECIAL NOTICE
 
-Because the repo is private, the installation and upgrade scripts cannot be retrieved from this repo. Instead perform the following from within the /home/pi directory;
+Because the repo is private until launch, the installation and upgrade scripts cannot be retrieved from this repo. Instead perform the following from within the /home/pi directory;
 
 Install Script
 ```
