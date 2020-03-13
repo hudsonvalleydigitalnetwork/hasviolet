@@ -47,7 +47,7 @@ try:
    txpwr = int(config["DEFAULT"]["txpwr"])
    modemcfg = str(config["DEFAULT"]["modemcfg"])
    mycall = str(config["DEFAULT"]["mycall"])
-   ssid = int(config["DEFAULT"]["ssid"])
+   ssid = str(config["DEFAULT"]["ssid"])
    beacon = str(config["DEFAULT"]["beacon"])
 except KeyError as e:
    raise LookupError("Error HASviolet.ini[DEFAULT] : {} missing.".format(str(e)))

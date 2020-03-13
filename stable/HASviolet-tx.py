@@ -47,7 +47,7 @@ try:
    txpwr = int(config["DEFAULT"]["txpwr"])
    modemcfg = str(config["DEFAULT"]["modemcfg"])
    mycall = str(config["DEFAULT"]["mycall"])
-   ssid = int(config["DEFAULT"]["ssid"])
+   ssid = str(config["DEFAULT"]["ssid"])
    beacon = str(config["DEFAULT"]["beacon"])
 except KeyError as e:
    raise LookupError("Error HASviolet.ini[DEFAULT] : {} missing.".format(str(e)))
@@ -59,7 +59,7 @@ except KeyError as e:
 #
 
 parser = argparse.ArgumentParser(description='HASviolet TX')
-parser.add_argument('-d','--destination', type=int, help='Destination address 1-255', required=True)
+parser.add_argument('-d','--destination', help='Destination Name-Call', required=True)
 parser.add_argument('-m','--message', help='Message to be sent in quotes', required=True)
 args = vars(parser.parse_args())
 

@@ -90,11 +90,22 @@ cp -R $hasviolet_localrepo/stable/* $hasviolet_install
 
 echo " "
 echo "HASviolet installation complete."
-echo "All apps are in $hasviolet_install"
+echo " "
+echo "- The HASviolet repo has been cloned to $hasviolet_localrepo"
+echo "- A working directory with all apps is installed in $hasviolet_install"
 echo " "
 echo "To run the apps, you must be in the $hasviolet_install directory and"
 echo "prefix the app name with ./<app-name>"
+echo " "
+echo "for example:       ./HASviolet-rx.py"
+echo " "
 
 cd $hasviolet_install
+
+echo " "
+echo "Enjoy! -- The HASviolet Team at HVDN "
+echo " "
+echo " "
+
 sleep 3
 exit 0
