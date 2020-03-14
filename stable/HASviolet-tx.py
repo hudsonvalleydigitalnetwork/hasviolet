@@ -161,30 +161,23 @@ signal.signal(signal.SIGINT, sigs_handler)
 
 # Send message
 
-print('HASviolet TX is running...')
-print('Press CTRL-C to exit.')
+print('HASviolet TX')
 
 rf95.send(rf95.str_to_data(payload))
 rf95.wait_packet_sent()
 
-print("Sending to", recipient)
+print("TX: ", payload)
 display.fill(0)
-display.text('Sending to', 0, 0, 1)
-display.text(str(recipient), 5, 10, 1)
+display.text('TX:', 0, 0, 1)
+display.text(payload, 5, 10, 1)
 display.show()
 
-time.sleep(3)
-
-print ("Sent")
-display.fill(0)
-display.text('Sent', 5, 10, 1)
-display.show()
-time.sleep(2)
+time.sleep(5)
 display.fill(0)
 display.text('HASviolet TX', 5, 10, 1)
 display.show()
 
-print ("Closing ...")
+print ("Sent...")
 
 display.fill(0)
 display.show()
