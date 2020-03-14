@@ -36,7 +36,7 @@ Three different components make up the entirety of the HASviolet Project. They a
 
 ## Getting Started
 
-Start with reading the the [HASviolet Installation Guide](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet_Installation_Guide_v1.pdf). It will tell you what hardware you will need, installing Raspbian Lite OS, and downloading then running the [install automation script](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet_install.sh).
+Start with reading the the [HASviolet Installation Guide](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet_Installation_Guide_v1-1.pdf). It wil     l tell you what hardware you will need, installing Raspbian Lite OS, and downloading then running the [install automation script](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet_install.sh).
 
 ## 2020-03-13 SPECIAL NOTICE
 
