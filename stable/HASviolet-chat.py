@@ -129,7 +129,6 @@ def sigs_txmode(signal_received, frame):
     rf95.wait_packet_sent()
     print ()
     print ('TX:',payload)
-    print ()
     OLED_display('txmsg','TX:' + payload)
     rf95.set_mode_idle
     os.system ('stty -echo') # turn terminal echo off since we are done
@@ -206,7 +205,6 @@ while True:
     else:
         print ('RX:',data_ascii)
         OLED_display('rxmsg','RX:' + data_ascii)
-    print()
 display.fill(0)
 display.show()
 rf95.cleanup()
