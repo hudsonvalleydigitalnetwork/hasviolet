@@ -123,8 +123,7 @@ def sigs_txmode(signal_received, frame):
     payload = hasname + ">" + recipient + " | " + message 
     rf95.send(rf95.str_to_data(payload))
     rf95.wait_packet_sent()
-    print ()
-    print ('TX:',payload)
+    print ('<TX>',payload)
     print ()
     OLED_display('txmsg','TX:' + payload)
     rf95.set_mode_idle
@@ -157,7 +156,7 @@ display.text('HASviolet Chat', 35, 0, 2)
 
 # Setup Radio
 
-rf95 = RF95(cs=gpio_rfm_cs, int_pin=gpio_rfm_irq, reset_pin=None)print('HASviolet TX')
+rf95 = RF95(cs=gpio_rfm_cs, int_pin=gpio_rfm_irq, reset_pin=None)
 rf95.init()
 
 # CTRL-Z is SIGTSTP to Send
