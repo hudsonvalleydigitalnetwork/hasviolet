@@ -1,16 +1,15 @@
 #!/usr/bin/python3
 #
-# HASviolet CHAT
+# HASviolet RX
 #
 #
-#  Usage: HASviolet-chat [-r] [-s]
-#
-#      Within program use CTRL-Z to Send a message and
-#      CTRL-C to exit program
+# Usage: HASviolet-rx.py [-r] [-s]
 #
 #  OPTIONS
-#        -r Raw data RX instead of ASCII
-#        -s Show RSSI RX
+#      -h, --help      show this help message and exit
+#      -r, --raw_data  Receive raw data
+#      -s, --signal    Signal Strength
+#
 #
 #  TO-DO:
 #
@@ -18,7 +17,7 @@
 
 
 #
-# IMPORT LIBRARIES
+# Import Libraries
 #
 
 import adafruit_ssd1306
@@ -26,12 +25,13 @@ import argparse
 import board
 import busio
 import configparser
+import curses
 from digitalio import DigitalInOut, Direction, Pull
 from rf95 import RF95, Bw31_25Cr48Sf512
 import signal
 import sys
 import time
-import os # added this to use local stty to turn input on and off
+
 
 #
 # IMPORT SETTINGS
@@ -48,7 +48,7 @@ try:
    txpwr = int(config["DEFAULT"]["txpwr"])
    modemcfg = str(config["DEFAULT"]["modemcfg"])
    mycall = str(config["DEFAULT"]["mycall"])
-   ssid = str(config["DEFAULT"]["ssid"])
+   ssid = int(config["DEFAULT"]["ssid"])
    beacon = str(config["DEFAULT"]["beacon"])
 except KeyError as e:
    raise LookupError("Error HASviolet.ini[DEFAULT] : {} missing.".format(str(e)))
@@ -59,7 +59,7 @@ except KeyError as e:
 # IMPORT ARGS
 #
 
-parser = argparse.ArgumentParser(description='HASviolet Chat')
+parser = argparse.ArgumentParser(description='HASviolet RX')
 parser.add_argument('-r','--raw_data', help='Receive raw data', action='store_true')
 parser.add_argument('-s','--signal', help='Signal Strength', action='store_true')
 args = vars(parser.parse_args())
@@ -77,8 +77,6 @@ arg_signal_rssi = args['signal']
 # hasname - mycall + "-" + ssid
 # payload - hasname + message
 
-hasname = mycall + "-" + ssid
-
 
 #
 # FUNCTIONS
@@ -86,8 +84,7 @@ hasname = mycall + "-" + ssid
 
 def sigs_handler(signal_received, frame):
     # Handle any cleanup here
-    os.system ('stty echo') # turn terminal echo back on since program is done  
-    print('Exiting program gracefully')
+    print('SIGINT or CTRL-C detected. Exiting gracefully')
     rf95.set_mode_idle()
     rf95.cleanup()
     OLED_display('bye','GoodBye...')
@@ -115,18 +112,6 @@ def OLED_display(OLED_where, OLED_msg):
         display.fill(0)
     display.show()
 
-def sigs_txmode(signal_received, frame):
-    os.system ('stty echo') # turn terminal echo back on
-    recipient = input('CALL-SSID: ')
-    message = input('MSG: ')
-    payload = recipient + " | " + message 
-    rf95.send(rf95.str_to_data(payload))
-    rf95.wait_packet_sent()
-    print ()
-    print ('TX:',payload)
-    OLED_display('txmsg','TX:' + payload)
-    rf95.set_mode_idle
-    os.system ('stty -echo') # turn terminal echo off since we are done
 
 #
 # SETUP
@@ -138,16 +123,28 @@ i2c = busio.I2C(board.SCL, board.SDA)
 # 128x32 OLED Display
 display = adafruit_ssd1306.SSD1306_I2C(128, 32, i2c, addr=0x3c)
 
-# Clear the OLED display.
+# Clear the display.
 display.fill(0)
 display.show()
 width = display.width
 height = display.height
 
 # Startup OLED Message
-display.fill(0)
-display.text('HASviolet Chat', 35, 0, 2)
 
+display.fill(0)
+display.text('HVDN LoRa RX', 35, 0, 2)
+display.show()
+
+# SIGTINT aka control-C is quit
+signal.signal(signal.SIGINT, sigs_handler)
+
+# Display Start Message
+OLED_display('logo','HASviolet RX')
+print()
+print('HASviolet RX')
+print('CTRL-C to exit')
+print('--------------')
+#print()
 
 #
 # MAIN
@@ -158,24 +155,15 @@ display.text('HASviolet Chat', 35, 0, 2)
 rf95 = RF95(cs=gpio_rfm_cs, int_pin=gpio_rfm_irq, reset_pin=None)
 rf95.set_frequency(freqmhz)
 rf95.set_tx_power(txpwr)
-#rf95.set_modem_config(modemcfg)('RAW:',data,':RSSI:',data_rssi)
+# Custom predefined mode
+#rf95.set_modem_config(Bw31_25Cr48Sf512)
+#rf95.set_modem_config(modemcfg)
 rf95.init()
 
-# CTRL-Z is SIGTSTP to Send
-# CTRL-C is SIGINT and closes program gracefully
-signal.signal(signal.SIGTSTP, sigs_txmode)
+# SIGTINT aka control-C is quit
 signal.signal(signal.SIGINT, sigs_handler)
 
-# Display Start Message
-OLED_display('logo','HASviolet Chat')
-
-os.system ('stty -echo') # turn off terminal echo off
-print()
-print('HASviolet Chat')
-print('    (Entering RX mode ... use Ctrl-Z to send, Ctrl-C to exit)')
-print('-------------------------------------------------------------')
-
-# While not hearing packets check for ctrl-z pressed to enter tx mode
+# While not hearing packets check for tab pressed to ennter tx mode
 while True:
     while not rf95.available():
         pass
@@ -200,6 +188,7 @@ while True:
     else:
         print ('RX:',data_ascii)
         OLED_display('rxmsg','RX:' + data_ascii)
+    #print ()
 display.fill(0)
 display.show()
 rf95.cleanup()
