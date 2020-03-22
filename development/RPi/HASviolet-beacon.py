@@ -1,16 +1,17 @@
 #!/usr/bin/python3
 #
-# HASviolet TX
+# HASviolet BEACON
 #
 #
-#  Usage: HASviolet-tx.py destination-node "message"
+#  Usage: HASviolet-beacon.py -c COUNT -t DELAY "message"
 #
 #  OPTIONS
-#       destination-node is LoRa Node Number ID destination
-#       MESSAGE is sent in double quotes
+#           -c Number of times to repeat MESSAGE
+#           -t NUmber of seconds before repeat MESSAGE
+#           MESSAGE is sendt in double quotes
 #
 #
-# TO-DO:
+#  TO-DO:
 #
 #
 
@@ -18,7 +19,6 @@
 #
 # IMPORT LIBRARIES
 #
-
 
 import adafruit_ssd1306
 import argparse
@@ -58,13 +58,16 @@ except KeyError as e:
 # IMPORT ARGS
 #
 
-parser = argparse.ArgumentParser(description='HASviolet TX')
-parser.add_argument('-d','--destination', help='Destination Name-Call', required=True)
-parser.add_argument('-m','--message', help='Message to be sent in quotes', required=True)
+parser = argparse.ArgumentParser(description='HASviolet Beacon')
+parser.add_argument('-c','--count', type=int, help='number of times to repeat the message', required=True)
+parser.add_argument('-t','--time', type=int, help='number of seconds between repeating message', required=True)
+parser.add_argument('-m','--message', help='Message to be broadcast in quotes. Default is beacon setting from INI file', default=beacon)
+
 args = vars(parser.parse_args())
 
-recipient = args['destination']
+bcount = args['count']
 message = args['message']
+timedelay = args['time']
 
 
 #
@@ -75,11 +78,12 @@ message = args['message']
 # node_address - The address of this device will be set to (1-254)
 # freqmhz - The freq of this device in MHz (911.250 MHz is recommended)
 # recipient - Address of receiving node
+# message - message as captured from args or INI
 # hasname - mycall + "-" + ssid
 # payload - hasname + message
 
 hasname = mycall + "-" + ssid
-payload = hasname + ">" + recipient + " | " + message 
+payload = hasname + ">BEACON | " + message 
 
 #
 # FUNCTIONS
@@ -87,10 +91,11 @@ payload = hasname + ">" + recipient + " | " + message
 
 def sigs_handler(signal_received, frame):
     # Handle any cleanup here
-    print('SIGINT or CTRL-C detected. Exiting gracefully')
+    print('CTRL-C detected. Exiting gracefully')
     rf95.set_mode_idle()
     rf95.cleanup()
-    OLED_display('bye','GoodBye...')
+    display.fill(0)
+    display.show()
     exit(0)
 
 def OLED_display(OLED_where, OLED_msg):
@@ -135,11 +140,7 @@ height = display.height
 # Startup OLED Message
 
 display.fill(0)
-display.text('HASviolet TX', 35, 0, 2)
-display.show()
-
-# SIGTINT aka control-C is quit
-signal.signal(signal.SIGINT, sigs_handler)
+display.text('HASviolet Beacon', 35, 0, 2)
 
 
 #
@@ -148,31 +149,33 @@ signal.signal(signal.SIGINT, sigs_handler)
 
 # Setup Radio
 
+#rf95 = RF95(cs=1, int_pin=22, reset_pin=None)
 rf95 = RF95(cs=gpio_rfm_cs, int_pin=gpio_rfm_irq, reset_pin=None)
 rf95.set_frequency(freqmhz)
 rf95.set_tx_power(txpwr)
 # Custom predefined mode
 #rf95.set_modem_config(Bw31_25Cr48Sf512)
-#rf95.set_modem_config(modemcfg)
 rf95.init()
 
-# SIGTINT aka control-C is quit
+# CTRL-C is SIGINT and closes program gracefully
 signal.signal(signal.SIGINT, sigs_handler)
 
-# Send message
-rf95.send(rf95.str_to_data(payload))
-rf95.wait_packet_sent()
+# Send broadcast
 
-print(payload)
-display.fill(0)
-display.text('TX:', 0, 0, 1)
-display.text(payload, 5, 10, 1)
-display.show()
+reprinse=0
 
-time.sleep(5)
-display.fill(0)
-display.text('HASviolet TX', 5, 10, 1)
-display.show()
+if __name__ == '__main__':
+    while bcount > reprinse:
+       reprinse = reprinse + 1
+       rf95.send(rf95.str_to_data(payload))
+       rf95.wait_packet_sent()
+       print(payload)
+       display.fill(0)
+       display.text("Sending Count " + str(reprinse), 0, 0, 1)
+       display.text(payload, 5, 10, 1)
+       display.show()
+       time.sleep(timedelay)
+print ("Closing ...")
 
 display.fill(0)
 display.show()

@@ -183,10 +183,10 @@ while True:
         OLED_display('rxmsg','RAW:' + data_stringed)
     elif (arg_signal_rssi):
         datadisplay_string = 'RX:'+ data_ascii +':RSSI:'+data_rssi
-        print ('RX:',data_ascii,':RSSI:',data_rssi)
+        print (data_ascii,':RSSI:',data_rssi)
         OLED_display('rxmsg','RX:' + data_ascii + ' :' + data_rssi)
     else:
-        print ('RX:',data_ascii)
+        print (data_ascii)
         OLED_display('rxmsg','RX:' + data_ascii)
 display.fill(0)
 display.show()
