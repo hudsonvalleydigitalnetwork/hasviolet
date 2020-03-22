@@ -80,8 +80,8 @@ message = args['message']
 # hasvpayload - header + message
 
 hasvname = mycall + "-" + ssid
-hasvheader = hasvname + ">" + recipient
-hasvpayload = header + " | " + message 
+hasvheader = hasvname + ">" + hasvrecipient
+hasvpayload = hasvheader + " | " + message 
 
 #
 # FUNCTIONS

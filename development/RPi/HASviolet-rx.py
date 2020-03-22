@@ -21,7 +21,7 @@
 #
 
 import adafruit_ssd1306
-import argparse+ " | " + message 
+import argparse 
 import board
 import busio
 import configparser
@@ -31,7 +31,10 @@ from rf95 import RF95, Bw31_25Cr48Sf512
 import signal
 import sys
 import time
-+ " | " + message 
+
+
+#
+# IMPORT SETTINGS
 #
 
 config = configparser.ConfigParser()

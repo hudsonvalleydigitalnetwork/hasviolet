@@ -178,6 +178,38 @@ print('HASviolet Chat')
 print('    (Entering RX mode ... use Ctrl-Z to send, Ctrl-C to exit)')
 print('-------------------------------------------------------------')
 
+# While not hearing packets check for tab pressed to ennter tx mode
+while True:
+    while not rf95.available():
+        pass
+    data = rf95.recv()
+    data_rssi = str(int(rf95.last_rssi))
+    data_stringed = str(data)
+    data_ascii=""
+    for i in data:
+        data_ascii=data_ascii+chr(i)
+    if (arg_hvdn_rawdata) and (arg_signal_rssi):
+        datadisplay_string = 'RAW:'+ data_stringed +':RSSI:'+data_rssi
+        print ('RAW:',data,':RSSI:',data_rssi)
+        OLED_display('rxmsg','RAW:' + data_stringed + ' :' + data_rssi)
+    elif (arg_hvdn_rawdata):
+        datadisplay_string = 'RAW:'+ data_stringed
+        print ('RAW:',data)
+        OLED_display('rxmsg','RAW:' + data_stringed)
+    elif (arg_signal_rssi):
+        datadisplay_string = 'RX:'+ data_ascii +':RSSI:'+data_rssi
+        print (data_ascii,':RSSI:',data_rssi)
+        OLED_display('rxmsg','RX:' + data_ascii + ' :' + data_rssi)
+    else:
+        print (data_ascii)
+        OLED_display('rxmsg','RX:' + data_ascii)
+display.fill(0)
+display.show()
+rf95.cleanup()
+
+
+
+
 # While not hearing packets check for ctrl-z pressed to enter tx mode
 while True:
     while not rf95.available():
