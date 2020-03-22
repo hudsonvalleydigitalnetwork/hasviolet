@@ -117,14 +117,15 @@ def OLED_display(OLED_where, OLED_msg):
 
 def sigs_txmode(signal_received, frame):
     os.system ('stty echo') # turn terminal echo back on
-    print ()
-    recipient = input('CALL: ')
+    print () 
+    recipient = input('CALL-SSID: ')
     message = input('MSG: ')
-    payload = hasname + ">" + recipient + " | " + message 
+    payload = hasname + ">" + recipient " | " + message 
     rf95.send(rf95.str_to_data(payload))
     rf95.wait_packet_sent()
     print ()
     print ('TX:',payload)
+    print ()
     OLED_display('txmsg','TX:' + payload)
     rf95.set_mode_idle
     os.system ('stty -echo') # turn terminal echo off since we are done
@@ -187,20 +188,17 @@ while True:
     for i in data:
         data_ascii=data_ascii+chr(i)
     if (arg_hvdn_rawdata) and (arg_signal_rssi):
-        datadisplay_string = 'RAW:'+ data_stringed +':RSSI:'+data_rssi
         print ('RAW:',data,':RSSI:',data_rssi)
         OLED_display('rxmsg','RAW:' + data_stringed + ' :' + data_rssi)
     elif (arg_hvdn_rawdata):
-        datadisplay_string = 'RAW:'+ data_stringed
         print ('RAW:',data)
         OLED_display('rxmsg','RAW:' + data_stringed)
     elif (arg_signal_rssi):
-        datadisplay_string = 'RX:'+ data_ascii +':RSSI:'+data_rssi
         print (data_ascii,':RSSI:',data_rssi)
-        OLED_display(data_ascii + ' :' + data_rssi)
+        OLED_display('rxmsg', data_ascii + ' :' + data_rssi)
     else:
         print (data_ascii)
-        OLED_display(data_ascii)
+        OLED_display('rxmsg', data_ascii)
 display.fill(0)
 display.show()
 rf95.cleanup()
