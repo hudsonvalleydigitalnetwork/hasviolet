@@ -162,11 +162,17 @@ display.text('HASviolet Chat', 35, 0, 2)
 # Setup Radio
 
 rf95 = RF95(cs=gpio_rfm_cs, int_pin=gpio_rfm_irq, reset_pin=None)
+rf95.set_frequency(freqmhz)
+rf95.set_tx_power(txpwr)
+#rf95.set_modem_config(modemcfg)('RAW:',data,':RSSI:',data_rssi)
 rf95.init()
 
 # CTRL-Z is SIGTSTP to Send
 # CTRL-C is SIGINT and closes program gracefully
-signal.signal(signal.SIGTSTP, sigs_txmode)dr@mBUI3
+signal.signal(signal.SIGTSTP, sigs_txmode)
+signal.signal(signal.SIGINT, sigs_handler)
+
+# Display Start Message
 OLED_display('logo','HASviolet Chat')
 
 os.system ('stty -echo') # turn off terminal echo off
