@@ -126,7 +126,7 @@ def sigs_txmode(signal_received, frame):
     message = input('MSG: ')
     hasvheader = hasvname + ">" + hasvrecipient
     hasvpayload = hasvheader + " | " + message 
-    rf95.send(rf95.str_to_data(payload))
+    rf95.send(rf95.str_to_data(hasvpayload))
     rf95.wait_packet_sent()
     print ('<TX>',hasvpayload)
     print ()
@@ -166,10 +166,7 @@ rf95.init()
 
 # CTRL-Z is SIGTSTP to Send
 # CTRL-C is SIGINT and closes program gracefully
-signal.signal(signal.SIGTSTP, sigs_txmode)
-signal.signal(signal.SIGINT, sigs_handler)
-
-# Display Start Message
+signal.signal(signal.SIGTSTP, sigs_txmode)dr@mBUI3
 OLED_display('logo','HASviolet Chat')
 
 os.system ('stty -echo') # turn off terminal echo off
