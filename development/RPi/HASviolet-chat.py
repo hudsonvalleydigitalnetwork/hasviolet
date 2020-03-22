@@ -117,6 +117,7 @@ def OLED_display(OLED_where, OLED_msg):
 
 def sigs_txmode(signal_received, frame):
     os.system ('stty echo') # turn terminal echo back on
+    print ()
     recipient = input('CALL: ')
     message = input('MSG: ')
     payload = hasname + ">" + recipient + " | " + message 
