@@ -74,10 +74,14 @@ arg_signal_rssi = args['signal']
 # gpio_rfm_irq - Use chip select 1. GPIO pin 22 will be used for interrupts
 # node_address - The address of this device will be set to (1-254)
 # freqmhz - The freq of this device in MHz (911.250 MHz is recommended)
-# hasname - mycall + "-" + ssid
-# payload - hasname + message
+# hasvrecipient - Address of receiving node
+# hasvname - mycall + "-" + ssid
+# hasvheader - hasname + ">" + hasvrecipient
+# hasvpayload - header + message
 
-hasname = mycall + "-" + ssid
+hasvname = mycall + "-" + ssid
+#hasvheader = hasvname + ">" + recipient
+#hasvpayload = header + " | " + message 
 
 
 #
@@ -118,14 +122,15 @@ def OLED_display(OLED_where, OLED_msg):
 def sigs_txmode(signal_received, frame):
     os.system ('stty echo') # turn terminal echo back on
     print () 
-    recipient = input('CALL-SSID: ')
+    hasvrecipient = input('CALL-SSID: ')
     message = input('MSG: ')
-    payload = hasname + ">" + recipient + " | " + message 
+    hasvheader = hasvname + ">" + hasvrecipient
+    hasvpayload = hasvheader + " | " + message 
     rf95.send(rf95.str_to_data(payload))
     rf95.wait_packet_sent()
-    print ('<TX>',payload)
+    print ('<TX>',hasvpayload)
     print ()
-    OLED_display('txmsg','TX:' + payload)
+    OLED_display('txmsg','TX:' + hasvpayload)
     rf95.set_mode_idle
     os.system ('stty -echo') # turn terminal echo off since we are done
 
@@ -179,16 +184,16 @@ while True:
         pass
     data = rf95.recv()
     data_rssi = str(int(rf95.last_rssi))
-    data_stringed = str(data)
+    hasvpayload = str(data)
     data_ascii=""
     for i in data:
         data_ascii=data_ascii+chr(i)
     if (arg_hvdn_rawdata) and (arg_signal_rssi):
         print ('RAW:',data,':RSSI:',data_rssi)
-        OLED_display('rxmsg','RAW:' + data_stringed + ' :' + data_rssi)
+        OLED_display('rxmsg','RAW:' + hasvpayload + ' :' + data_rssi)
     elif (arg_hvdn_rawdata):
         print ('RAW:',data)
-        OLED_display('rxmsg','RAW:' + data_stringed)
+        OLED_display('rxmsg','RAW:' + hasvpayload)
     elif (arg_signal_rssi):
         print (data_ascii,':RSSI:',data_rssi)
         OLED_display('rxmsg', data_ascii + ' :' + data_rssi)

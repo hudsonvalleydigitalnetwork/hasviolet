@@ -21,7 +21,7 @@
 #
 
 import adafruit_ssd1306
-import argparse
+import argparse+ " | " + message 
 import board
 import busio
 import configparser
@@ -31,10 +31,7 @@ from rf95 import RF95, Bw31_25Cr48Sf512
 import signal
 import sys
 import time
-
-
-#
-# IMPORT SETTINGS
++ " | " + message 
 #
 
 config = configparser.ConfigParser()
@@ -74,8 +71,10 @@ arg_signal_rssi = args['signal']
 # gpio_rfm_irq - Use chip select 1. GPIO pin 22 will be used for interrupts
 # node_address - The address of this device will be set to (1-254)
 # freqmhz - The freq of this device in MHz (911.250 MHz is recommended)
-# hasname - mycall + "-" + ssid
-# payload - hasname + message
+# hasvrecipient - Address of receiving node
+# hasvname - mycall + "-" + ssid
+# hasvheader - hasname + ">" + hasvrecipient
+# hasvpayload - header + message
 
 
 #
@@ -140,11 +139,7 @@ signal.signal(signal.SIGINT, sigs_handler)
 
 # Display Start Message
 OLED_display('logo','HASviolet RX')
-#print()
-#print('HASviolet RX')
-#print('CTRL-C to exit')
-#print('--------------')
-#print()
+
 
 #
 # MAIN
@@ -155,9 +150,6 @@ OLED_display('logo','HASviolet RX')
 rf95 = RF95(cs=gpio_rfm_cs, int_pin=gpio_rfm_irq, reset_pin=None)
 rf95.set_frequency(freqmhz)
 rf95.set_tx_power(txpwr)
-# Custom predefined mode
-#rf95.set_modem_config(Bw31_25Cr48Sf512)
-#rf95.set_modem_config(modemcfg)
 rf95.init()
 
 # SIGTINT aka control-C is quit
