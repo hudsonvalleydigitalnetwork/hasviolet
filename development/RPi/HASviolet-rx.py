@@ -140,10 +140,10 @@ signal.signal(signal.SIGINT, sigs_handler)
 
 # Display Start Message
 OLED_display('logo','HASviolet RX')
-print()
-print('HASviolet RX')
-print('CTRL-C to exit')
-print('--------------')
+#print()
+#print('HASviolet RX')
+#print('CTRL-C to exit')
+#print('--------------')
 #print()
 
 #
@@ -188,7 +188,6 @@ while True:
     else:
         print ('RX:',data_ascii)
         OLED_display('rxmsg','RX:' + data_ascii)
-    #print ()
 display.fill(0)
 display.show()
 rf95.cleanup()

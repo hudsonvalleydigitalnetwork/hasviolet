@@ -79,7 +79,7 @@ message = args['message']
 # payload - hasname + message
 
 hasname = mycall + "-" + ssid
-payload = hasname + ">" + recipient " | " + message 
+payload = hasname + ">" + recipient + " | " + message 
 
 #
 # FUNCTIONS
@@ -160,13 +160,10 @@ rf95.init()
 signal.signal(signal.SIGINT, sigs_handler)
 
 # Send message
-
-print('HASviolet TX')
-
 rf95.send(rf95.str_to_data(payload))
 rf95.wait_packet_sent()
 
-print("TX: ", payload)
+print(payload)
 display.fill(0)
 display.text('TX:', 0, 0, 1)
 display.text(payload, 5, 10, 1)
