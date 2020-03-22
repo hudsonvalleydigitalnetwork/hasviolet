@@ -117,6 +117,7 @@ def OLED_display(OLED_where, OLED_msg):
 
 def sigs_txmode(signal_received, frame):
     os.system ('stty echo') # turn terminal echo back on
+    print () 
     recipient = input('CALL-SSID: ')
     message = input('MSG: ')
     payload = recipient + " | " + message 
@@ -124,6 +125,7 @@ def sigs_txmode(signal_received, frame):
     rf95.wait_packet_sent()
     print ()
     print ('TX:',payload)
+    print ()
     OLED_display('txmsg','TX:' + payload)
     rf95.set_mode_idle
     os.system ('stty -echo') # turn terminal echo off since we are done
