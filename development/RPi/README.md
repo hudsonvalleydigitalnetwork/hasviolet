@@ -26,7 +26,7 @@ All code in this directory is under active development. USE AT YOUR OWN RISK !!
            MESSAGE is message to be send within double quotes
   ```
 
-### HASviolet0-config.py
+### HASviolet-config.py
 * HASviolet.ini editor
 
 ### HASviolet-rx.py
