@@ -42,7 +42,7 @@ Start with reading the the [HASviolet Installation Guide](https://github.com/hud
 
 Because the repo is private until launch, the fresh installation and "Scorched Earth Update" scripts cannot be retrieved from this repo. Instead perform the following from within the /home/pi directory;
 
-###Fresh Install Script
+### Fresh Install Script
 ```
 wget https://raw.githubusercontent.com/joecupano/launchtest/master/hasty.sh
 chmod 755 hasty.sh
@@ -55,7 +55,7 @@ To include a working directory to test the development code append dev to the sc
 ./hasty.sh dev
 ```
 
-###Scorched Earth Script
+### Scorched Earth Script
 ```
 wget https://raw.githubusercontent.com/joecupano/launchtest/master/hastier.sh
 chmod 755 hastier.sh
