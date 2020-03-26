@@ -52,6 +52,18 @@ All code in this directory is under active development. USE AT YOUR OWN RISK !!
            MESSAGE is message to be send within double quotes
   ```
   
+### HASviolet-update.sh
+  Update existing HASviolet install to lastest stable 
+
+  ```
+  Usage: HASviolet-update.sh [dev]
+
+  OPTIONS
+           dev
+           Creates a working directory to use development code
+           in ~/DEVviolet
+  ```
+  
 ### rf95.py
 * RFM95 library used by hvdncom apps ending in rf95.py
 * Sourced from https://github.com/ladecadence/pyRF95
