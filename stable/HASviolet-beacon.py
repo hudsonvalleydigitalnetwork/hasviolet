@@ -77,13 +77,16 @@ timedelay = args['time']
 # gpio_rfm_irq - Use chip select 1. GPIO pin 22 will be used for interrupts
 # node_address - The address of this device will be set to (1-254)
 # freqmhz - The freq of this device in MHz (911.250 MHz is recommended)
-# recipient - Address of receiving node
-# message - message as captured from args or INI
-# hasname - mycall + "-" + ssid
-# payload - hasname + message
+# hasvrecipient - Address of receiving node
+# hasvname - mycall + "-" + ssid
+# hasvheader - hasname + ">" + hasvrecipient
+# hasvpayload - header + message
 
-hasname = mycall + "-" + ssid
-payload = hasname + " | " + message 
+
+hasvname = mycall + "-" + ssid
+hasvrecipient = "BEACON"
+hasvheader = hasvname + ">" + hasvrecipient
+hasvpayload = hasvheader + " | " + message 
 
 #
 # FUNCTIONS
@@ -165,16 +168,14 @@ signal.signal(signal.SIGINT, sigs_handler)
 reprinse=0
 
 if __name__ == '__main__':
-    print('HASviolet Beacon Running...')
-    print('Press CTRL-C to exit.')
     while bcount > reprinse:
        reprinse = reprinse + 1
-       rf95.send(rf95.str_to_data(payload))
+       rf95.send(rf95.str_to_data(hasvpayload))
        rf95.wait_packet_sent()
-       print("Sent ", reprinse,":", payload)
+       print(hasvpayload)
        display.fill(0)
        display.text("Sending Count " + str(reprinse), 0, 0, 1)
-       display.text(payload, 5, 10, 1)
+       display.text(hasvpayload, 5, 10, 1)
        display.show()
        time.sleep(timedelay)
 print ("Closing ...")

@@ -21,7 +21,7 @@
 #
 
 import adafruit_ssd1306
-import argparse
+import argparse 
 import board
 import busio
 import configparser
@@ -74,8 +74,10 @@ arg_signal_rssi = args['signal']
 # gpio_rfm_irq - Use chip select 1. GPIO pin 22 will be used for interrupts
 # node_address - The address of this device will be set to (1-254)
 # freqmhz - The freq of this device in MHz (911.250 MHz is recommended)
-# hasname - mycall + "-" + ssid
-# payload - hasname + message
+# hasvrecipient - Address of receiving node
+# hasvname - mycall + "-" + ssid
+# hasvheader - hasname + ">" + hasvrecipient
+# hasvpayload - header + message
 
 
 #
@@ -140,11 +142,7 @@ signal.signal(signal.SIGINT, sigs_handler)
 
 # Display Start Message
 OLED_display('logo','HASviolet RX')
-print()
-print('HASviolet RX')
-print('CTRL-C to exit')
-print('--------------')
-#print()
+
 
 #
 # MAIN
@@ -155,9 +153,6 @@ print('--------------')
 rf95 = RF95(cs=gpio_rfm_cs, int_pin=gpio_rfm_irq, reset_pin=None)
 rf95.set_frequency(freqmhz)
 rf95.set_tx_power(txpwr)
-# Custom predefined mode
-#rf95.set_modem_config(Bw31_25Cr48Sf512)
-#rf95.set_modem_config(modemcfg)
 rf95.init()
 
 # SIGTINT aka control-C is quit
@@ -183,12 +178,11 @@ while True:
         OLED_display('rxmsg','RAW:' + data_stringed)
     elif (arg_signal_rssi):
         datadisplay_string = 'RX:'+ data_ascii +':RSSI:'+data_rssi
-        print ('RX:',data_ascii,':RSSI:',data_rssi)
+        print (data_ascii,':RSSI:',data_rssi)
         OLED_display('rxmsg','RX:' + data_ascii + ' :' + data_rssi)
     else:
-        print ('RX:',data_ascii)
+        print (data_ascii)
         OLED_display('rxmsg','RX:' + data_ascii)
-    #print ()
 display.fill(0)
 display.show()
 rf95.cleanup()

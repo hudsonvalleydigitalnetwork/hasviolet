@@ -63,7 +63,7 @@ parser.add_argument('-d','--destination', help='Destination Name-Call', required
 parser.add_argument('-m','--message', help='Message to be sent in quotes', required=True)
 args = vars(parser.parse_args())
 
-recipient = args['destination']
+hasvrecipient = args['destination']
 message = args['message']
 
 
@@ -74,12 +74,14 @@ message = args['message']
 # gpio_rfm_irq - Use chip select 1. GPIO pin 22 will be used for interrupts
 # node_address - The address of this device will be set to (1-254)
 # freqmhz - The freq of this device in MHz (911.250 MHz is recommended)
-# recipient - Address of receiving node
-# hasname - mycall + "-" + ssid
-# payload - hasname + message
+# hasvrecipient - Address of receiving node
+# hasvname - mycall + "-" + ssid
+# hasvheader - hasname + ">" + hasvrecipient
+# hasvpayload - header + message
 
-hasname = mycall + "-" + ssid
-payload = hasname + " | " + message 
+hasvname = mycall + "-" + ssid
+hasvheader = hasvname + ">" + hasvrecipient
+hasvpayload = hasvheader + " | " + message 
 
 #
 # FUNCTIONS
@@ -155,29 +157,23 @@ rf95.set_tx_power(txpwr)
 #rf95.set_modem_config(Bw31_25Cr48Sf512)
 #rf95.set_modem_config(modemcfg)
 rf95.init()
-
-# SIGTINT aka control-C is quit
-signal.signal(signal.SIGINT, sigs_handler)
+# hasname - mycall + "-" + ssid
+# payload - hasname + message
 
 # Send message
-
-print('HASviolet TX')
-
-rf95.send(rf95.str_to_data(payload))
+rf95.send(rf95.str_to_data(hasvpayload))
 rf95.wait_packet_sent()
 
-print("TX: ", payload)
+print(hasvpayload)
 display.fill(0)
 display.text('TX:', 0, 0, 1)
-display.text(payload, 5, 10, 1)
+display.text(hasvpayload, 5, 10, 1)
 display.show()
 
 time.sleep(5)
 display.fill(0)
 display.text('HASviolet TX', 5, 10, 1)
 display.show()
-
-print ("Sent...")
 
 display.fill(0)
 display.show()
