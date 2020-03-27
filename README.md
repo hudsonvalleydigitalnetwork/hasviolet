@@ -37,33 +37,3 @@ Three different components make up the entirety of the HASviolet Project. They a
 ## Getting Started
 
 Start with reading the the [HASviolet Installation Guide](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet_Installation_Guide_v1-1.pdf). It wil     l tell you what hardware you will need, installing Raspbian Lite OS, and downloading then running the [install automation script](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet_install.sh).
-
-## 2020-03-24 SPECIAL NOTICE
-
-Because the repo is private until launch, the fresh installation and "Scorched Earth Update" scripts cannot be retrieved from this repo. Instead perform the following from within the /home/pi directory;
-
-### Fresh Install Script
-```
-wget https://raw.githubusercontent.com/joecupano/launchtest/master/hasty.sh
-chmod 755 hasty.sh
-./hasty.sh
-```
-
-To include a working directory to test the development code append dev to the script when running it
-
-```
-./hasty.sh dev
-```
-
-### Scorched Earth Script
-```
-wget https://raw.githubusercontent.com/joecupano/launchtest/master/hastier.sh
-chmod 755 hastier.sh
-./hastier.sh
-```
-
-To include a working directory to test the development code append dev to the script when running it
-
-```
-./hastier.sh dev
-```
