@@ -11,7 +11,7 @@ HVDN is a virtual organization and currently does not offer in person meetings a
 
 Our primary goal is to offer a challenge to our members looking to try something new, rather than be weighted down by others that are too many steps behind.  All of HVDN members motivate each other to keep pushing forward.
 
-You can read more about us at hvdn.org 
+You can read more about us at [hvdn.org ](https://hvdn.org)
 
 ## Do you HASviolet?
 
