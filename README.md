@@ -62,10 +62,10 @@ The 902 to 928 MHz ISM spectrum for unlicensed communication in ITU region 2 has
 
 The Amateur Radio service however in ITU region 2 is exempt from transmission power limitations that restrict range for unlicensed users, but has to accommodate interference from other licensed or unlicensed users, such as public utility and other "Internet Of Things" applications. 
 
+![alt-test](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/antenna/HVDN_HASviolet_Git_Antenna_V1.jpg)
 
 
-
-In order to maintain compliance, HVDN promotes the adoption of field strength measuring equipment and use of the appropriate antenna dependent on our primary HASviolet operating frequency of 911.250 MHz with or without an Amateur Radio license.
+In order to maintain compliance, HVDN promotes the adoption of field strength measuring equipment and use of the appropriate antenna dependent on our primary HASviolet operating frequency of 911.250 MHz with or without an Amateur Radio license. Please visit our [blog](http://notebook.hvdn.org/2018/02/rssi-dbm-oh-my.html) for details about field strength measurements.
 
 The HASviolet project includes an HVDN designed directional broadband ISM and amateur radio antenna to help create awareness of the benefits of gaining an Amateur Radio license for longer range communication. 
 
