@@ -11,7 +11,7 @@ HVDN is a virtual organization and currently does not offer in person meetings a
 
 Our primary goal is to offer a challenge to our members looking to try something new, rather than be weighted down by others that are too many steps behind.  All of HVDN members motivate each other to keep pushing forward.
 
-You can read more about us at [hvdn.org ](https://hvdn.org)
+You can read more about us at [hvdn.org ](https://hvdn.org) and of course at [hvdn.org/violet](https://hvdn.org/violet)
 
 ## Do you HASviolet?
 
@@ -86,6 +86,21 @@ The overall goal though, is to make an image that is easy to deploy and get up a
 
 Start with reading the the [HASviolet Installation Guide](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet_Installation_Guide_v1-1.pdf). 
 
-It will tell you what hardware you will need, installing Raspbian Lite OS, downloading from Git followed then running the [install automation script](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet_install.sh).
+It will tell you:
+
+Step 1: Installing Raspbian Lite OS
+
+Step 2: Configuring your hardware (Via config.txt and cmdline.txt plus through raspi-config)
+
+Step 3: Downloading from Git followed then running the [install automation script](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet_install.sh).
+
+If you want to cheat a little, after following what is needed in step 1 & 2:
+
+>wget https://raw.githubusercontent.com/hudsonvalleydigitalnetwork/hasviolet/master/HASviolet_install.sh
+
+>chmod 755 HASviolet_install.sh
+
+>./HASviolet_install.sh
+
 
 ![alt-test](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/hardware/hasviolet-hw.png)
