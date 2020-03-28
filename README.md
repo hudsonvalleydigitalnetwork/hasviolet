@@ -41,7 +41,7 @@ The full project name is "HASviolet" which is as fun to say or promote its goal 
      • Joe Cupano NE2Z (Hardware Certification & General Do'er of Stuff)
      • Steve Bossert K2GOG (Antenna/RF Design & Public User Experience/Information)
 
-  *Note: This is our first attempt at a Git repo....so go easy on us....  :)
+       *Note: This is our first attempt at a Git repo....so go easy on us....  :)
 
 ## What is HASviolet
 
