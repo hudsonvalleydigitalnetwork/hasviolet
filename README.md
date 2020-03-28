@@ -1,7 +1,7 @@
 # HASviolet
 
 
-![alt-test](https://github.com/hudsonvalleydigitalnetwork/hasviolet/raw/master/hardware/hasviolet-hw.png)
+![alt-test](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/hardware/HVDN_HASviolet_Git_Banner_1.jpg)
 
 ## Who is HVDN?
 
