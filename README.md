@@ -79,6 +79,9 @@ These all utilize python libraries and all sorts of other crap that we feel we d
 
 The overall goal though, is to make an image that is easy to deploy and get up and running very quickly.
 
+![alt-test](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/development/HVDN_HASviolet_Git_Software.jpg)
+
+
 ## Getting Started
 
 Start with reading the the [HASviolet Installation Guide](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet_Installation_Guide_v1-1.pdf). 
