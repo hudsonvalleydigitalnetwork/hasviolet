@@ -52,12 +52,18 @@ HASviolet is comprised of low cost common off the shelf hardware or COTS. This a
 
 The initial approved hardware includes the [Adafruit LoRa Radio Bonnet with OLED - RFM95W @ 915MHz - RadioFruit and the Raspberry Pi Zero Wireless](https://www.adafruit.com/product/4074) attached to a [Raspberry Pi Zero WH](https://www.adafruit.com/product/3708). 
 
+![alt-test](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/hardware/HVDN_HASviolet_Git_Hardware_1.jpg)
+
+
 Future hardware will include microcontrollers using standard form factors (ie Feathwerwing) with LoRa in other spectrum bands that offer additional convergence of ISM and amateur radio experimentation opportunities.
 
 ### Antenna
 The 902 to 928 MHz ISM spectrum for unlicensed communication in ITU region 2 has a few limitations to consider. Tolerance for interference from other users and maximum transmission power that creates a 50 mV/m of electrical field strength at 3 meters distance are what has to be considered in HASviolet. The (US) [Federal Communications Commission title 47 part 15](https://www.fcc.gov/wireless/bureau-divisions/technologies-systems-and-innovation-division/rules-regulations-title-47) provides further detail. 
 
 The Amateur Radio service however in ITU region 2 is exempt from transmission power limitations that restrict range for unlicensed users, but has to accommodate interference from other licensed or unlicensed users, such as public utility and other "Internet Of Things" applications. 
+
+
+
 
 In order to maintain compliance, HVDN promotes the adoption of field strength measuring equipment and use of the appropriate antenna dependent on our primary HASviolet operating frequency of 911.250 MHz with or without an Amateur Radio license.
 
