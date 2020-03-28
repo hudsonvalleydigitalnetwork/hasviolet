@@ -43,7 +43,7 @@ The full project name is "HASviolet" which is as fun to say or promote its goal 
 
        *Note: This is our first attempt at a Git repo....so go easy on us....  :)
 
-## What is HASviolet
+## What is HASviolet?
 
 Three different components make up the entirety of the HASviolet Project. They are: 
 
