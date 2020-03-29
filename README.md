@@ -60,6 +60,8 @@ The initial "HASviolet Certified" hardware includes the [Adafruit LoRa Radio Bon
 
 Future hardware will include other microcontrollers using standard form factors (Example: [Featherwing](https://hvdnnotebook.blogspot.com/2018/11/hvdn-reset-is-feather-better.html)) with LoRa capability. 
 
+Joe Apuzzo N1JTA led much of the selection of hardware for the project along with input from Joe Cupano NE2Z and Steve Bossert K2GOG.
+
 ### Antenna
 
 The 902 to 928 MHz ISM spectrum for unlicensed communication in [ITU region 2](https://en.wikipedia.org/wiki/ITU_Region) has a few limitations to consider. Tolerance for interference from other users and maximum transmission power that creates a 50 mV/m of electrical field strength at 3 meters distance are what has to be considered in HASviolet. 
@@ -80,13 +82,20 @@ Unlicensed users may appreciate the antenna’s ability to send and receive sign
 
 Our goal through our antenna example is to show immediate value in gaining an amateur radio license to help with further education and challenges.
 
+Steve Bossert K2GOG led the antenna design and was helped with assembly instruction feedback from Joe Cupano NE2Z and Joe Apuzzo N1JTA plus members of the the [Squidwrench](http://squidwrench.org/) maker space. The design and assembly process has even gave us inspiration for an even more advanced design that is easier to build that will be available in our next release during the summer of 2020.
+
+
 ### Software 
 
-By assembling project HASviolet from common off the shelf hardware, a simple software package was needed to provide easy setup and use of HASviolet.  Our basic "Python" based demonstrator applications for include a stand alone receive, stand alone transmit, beacon mode and text based communicator easily accessible via any terminal application such as [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/) or [MobileSSH](https://play.google.com/store/apps/details?id=mobileSSH.feng.gao&hl=en_US)
+By assembling project HASviolet from common off the shelf hardware, a simple software package was needed to provide easy setup and use of HASviolet.  
 
-There is a really great amount of documention showing how we built the code to help others easily experiment with it. This includes both built in help functions using the "-h" command as well as our detailed installation, user guides and articles found on our blog.
+Our basic "Python" based demonstrator applications include stand alone receive, stand alone transmit, beacon mode and text based communicator modes easily accessible via any terminal application such as [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/) or [MobileSSH](https://play.google.com/store/apps/details?id=mobileSSH.feng.gao&hl=en_US)
+
+There is a really great amount of documention showing how we built the code to help others easily experiment with it. This includes both built in application help functions using the "-h" command as well as our detailed installation, user guides and articles found on our blog.
 
 Overall, we really wanted to make this easy to deploy to help you get up and running very quickly.
+
+Joe Cupano NE2Z led the entire software development process and only had minimal input on its core functionality from others, including the [HVopen](https://hvopen.org/) open source software user group. User interface (UI) and user experience (UX) feedback were provided by Steve Bossert K2GOG and Joe Apuzzo N1JTA. Our goal is to provide quarterly software updates moving forward.
 
 ![alt-test](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/development/HVDN_HASviolet_Git_Software.jpg)
 
