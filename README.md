@@ -5,43 +5,47 @@
 
 ## Who is HVDN?
 
-The Hudson Valley Digital Network or "HVDN" for short was created in 2017 to become a safe place where Hudson valley residents or those interested in our beautiful area can focus on emerging aspects of amateur radio and converge them with other hobby interests that benefit through the inclusion of wireless technology.  
+The Hudson Valley Digital Network or "HVDN" for short was created in 2017 to become a global ambassador for the Hudson Valley to highlight wireless experimentation and convergence between amateur radio and other hobby areas.
 
-HVDN is a virtual organization and currently does not offer in person meetings at this time, but we do arrange special events as well as virtual communications. While our roots are in amateur radio and are organized as an official club, including an FCC callsign of N2HVD, we are not affiliated with the ARRL so as to encourage alignment outside of traditional amateur radio more easily. 
+HVDN is a virtual organization and currently does not offer in person meetings at this time like traditional "ham radio clubs", but we do arrange special in person and virtual events as found on our "[Activity](https://hvdn.org/activity-1)" page.
 
-Our primary goal is to offer a challenge to our members looking to try something new, rather than be weighted down by others that are too many steps behind.  All of HVDN members motivate each other to keep pushing forward.
+While our roots are in amateur radio and are organized as an official club, including an FCC callsign of N2HVD, we are not affiliated with the [ARRL](http://www.arrl.org/home) so as to best encourage alignment outside of traditional amateur radio more easily. 
+
+Our primary goal is to offer challenges to our members looking to try something new, rather than be weighted down by others that are too many steps behind.  All of HVDN members motivate each other to keep pushing forward and our HASviolet project showcases that well
 
 You can read more about us at [hvdn.org ](https://hvdn.org) and of course at [hvdn.org/violet](https://hvdn.org/violet)
 
 ## Do you HASviolet?
 
-Goal: Utilize the 900 MHz unlicensed ISM band and parrallel licensed amateur radio spectrum to enable an open source data communicator to collectively promote the usage of emerging wireless protocols via converged wireless hobbyist circles. 
+Our goal was to promote experimentation in underutilized amateur radio spectrum and we chose the 900 MHz (33cm) band to do this.  
+
+The 33cm band was a great choice because anyone even without an amateur radio license can experiment here, but may be later motivated to get the basic United States Technician class amateur radio license in order to experiement with higher power transmitters and antenna designs not available to the general hobbyist.
 
 Project HASviolet consists of the following components:
 
-     •	Hardware
-     •	Antenna
-     •	Software
+    • Hardware
+    • Antenna
+    • Software
      
 ## Why “HASviolet”?
 
-Creating an agnostic and universally appealing project name was important to create wider appeal for the project. 
+Creating an agnostic and universally appealing project name was important to us. 
 
-The name of "Violet" was selected by first starting with a color and then looking for a story behind it. With all colors easily rendered by a standardized HTML CSS HEX code, the value of 8B0BB4 also translates to a decimal value of 911250. 
+The word "violet" was selected by first starting with a color and then looking for a story behind it. With all colors easily rendered by a standardized HTML CSS HEX code, the value of 8B0BB4 also translates to a decimal value of 911250. 
 
-This value looks like the frequency of 911.250 MHz and thus is the main frequency to be used for the HVDN sponsored "Project HASviolet".  
+This value looks like the frequency of 911.250 MHz and thus is the main frequency to be used for our project.  We also hope others follow in our steps to use this frequency too for a certain level of "interoperability"  
 
 The word "HAS" is a simple acronym made up of the first letter of the words "Hardware", "Antenna" and "Software". 
 
-The full project name is "HASviolet" which is as fun to say or promote its goal and use cases.
+The full project name is "HASviolet" which is as fun to say as well as to find unique use cases for it!
 
 ## Who is behind HASviolet?
 
-     • Joe Apuzzo N1JTA (Core Software & Git Project Documentation)
-     • Joe Cupano NE2Z (Hardware Certification & General Do'er of Stuff)
-     • Steve Bossert K2GOG (Antenna/RF Design & Public User Experience/Information)
+    • Joe Apuzzo N1JTA (Core Software & Git Project Documentation)
+    • Joe Cupano NE2Z (Hardware Certification & General Do'er of Stuff)
+    • Steve Bossert K2GOG (Antenna/RF Design & Public User Experience/Information)
 
-       *Note: This is our first attempt at a Git repo....so go easy on us....  :)
+    *Note: This is our first attempt at a Git repo....so go easy on us....  :)
 
 ## What is HASviolet?
 
@@ -50,34 +54,39 @@ Three different components make up the entirety of the HASviolet Project. They a
 ### Hardware 
 HASviolet is comprised of low cost common off the shelf hardware or COTS. This approach reduced project design time and created a low barrier of entry for anyone interested in the project. 
 
-The initial approved hardware includes the [Adafruit LoRa Radio Bonnet with OLED - RFM95W @ 915MHz - RadioFruit and the Raspberry Pi Zero Wireless](https://www.adafruit.com/product/4074) attached to a [Raspberry Pi Zero WH](https://www.adafruit.com/product/3708). 
+The initial "HASviolet Certified" hardware includes the [Adafruit LoRa Radio Bonnet with OLED - RFM95W @ 915MHz - RadioFruit and the Raspberry Pi Zero Wireless](https://www.adafruit.com/product/4074) attached to a [Raspberry Pi Zero WH](https://www.adafruit.com/product/3708).  We are also endorsing the [PiSugar](https://github.com/PiSugar/PiSugar) open source battery pack for portable use cases.
 
 ![alt-test](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/hardware/HVDN_HASviolet_Git_Hardware_1.jpg)
 
-
-Future hardware will include microcontrollers using standard form factors (ie Feathwerwing) with LoRa in other spectrum bands that offer additional convergence of ISM and amateur radio experimentation opportunities.
+Future hardware will include other microcontrollers using standard form factors (Example: [Featherwing](https://hvdnnotebook.blogspot.com/2018/11/hvdn-reset-is-feather-better.html)) with LoRa capability. 
 
 ### Antenna
-The 902 to 928 MHz ISM spectrum for unlicensed communication in ITU region 2 has a few limitations to consider. Tolerance for interference from other users and maximum transmission power that creates a 50 mV/m of electrical field strength at 3 meters distance are what has to be considered in HASviolet. The (US) [Federal Communications Commission title 47 part 15](https://www.fcc.gov/wireless/bureau-divisions/technologies-systems-and-innovation-division/rules-regulations-title-47) provides further detail. 
 
-The Amateur Radio service however in ITU region 2 is exempt from transmission power limitations that restrict range for unlicensed users, but has to accommodate interference from other licensed or unlicensed users, such as public utility and other "Internet Of Things" applications. 
+The 902 to 928 MHz ISM spectrum for unlicensed communication in [ITU region 2](https://en.wikipedia.org/wiki/ITU_Region) has a few limitations to consider. Tolerance for interference from other users and maximum transmission power that creates a 50 mV/m of electrical field strength at 3 meters distance are what has to be considered in HASviolet. 
+
+The (US) [Federal Communications Commission title 47 part 15](https://www.fcc.gov/wireless/bureau-divisions/technologies-systems-and-innovation-division/rules-regulations-title-47) provides further detail. 
+
+The Amateur radio service in ITU region 2 is exempt from transmission power limitations that restrict range for unlicensed users, but has to accommodate interference from other licensed or unlicensed users, such as public utility and other "Internet Of Things" application use cases.
 
 ![alt-test](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/antenna/HVDN_HASviolet_Git_Antenna_V1.jpg)
 
+In order to maintain compliance, HVDN promotes the adoption of field strength measuring equipment and use of the appropriate antenna dependent on our primary HASviolet operating frequency of 911.250 MHz with or without an Amateur Radio license. 
 
-In order to maintain compliance, HVDN promotes the adoption of field strength measuring equipment and use of the appropriate antenna dependent on our primary HASviolet operating frequency of 911.250 MHz with or without an Amateur Radio license. Please visit our [blog](http://notebook.hvdn.org/2018/02/rssi-dbm-oh-my.html) for details about field strength measurements.
+Please visit our [blog](http://notebook.hvdn.org/2018/02/rssi-dbm-oh-my.html) for details about field strength measurements.
 
-The HASviolet project includes an HVDN designed directional broadband ISM and amateur radio antenna to help create awareness of the benefits of gaining an Amateur Radio license for longer range communication. 
+The HASviolet project includes an HVDN designed 900 MHz directional broadband ISM and amateur radio antenna to help create awareness of the benefits of gaining an amateur radio license for longer range communication. 
 
-Unlicensed users may appreciate the antenna’s ability to send and receive signals from further away or limit reception or interference in certain directions.  Our goal through this antenna example is to show immediate value in gaining an Amateur Radio license to help with further education and challenges.
+Unlicensed users may appreciate the antenna’s ability to send and receive signals from further away or limit reception or interference in certain directions by simply keeping the power level down on the HASviolet hardware.  
+
+Our goal through our antenna example is to show immediate value in gaining an amateur radio license to help with further education and challenges.
 
 ### Software 
 
-By assembling project HASviolet from common off the shelf hardware, a simple software package was needed to provide easy setup and use of HASviolet.  Our basic demonstrator applications for HASviolet include a stand alone receive, stand alone transmit, beacon mode and text based communicator.
+By assembling project HASviolet from common off the shelf hardware, a simple software package was needed to provide easy setup and use of HASviolet.  Our basic "Python" based demonstrator applications for include a stand alone receive, stand alone transmit, beacon mode and text based communicator easily accessible via any terminal application such as [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/) or [MobileSSH](https://play.google.com/store/apps/details?id=mobileSSH.feng.gao&hl=en_US)
 
-These all utilize python libraries and all sorts of other crap that we feel we did a good job in documenting as part of our project journey. 
+There is a really great amount of documention showing how we built the code to help others easily experiment with it. This includes both built in help functions using the "-h" command as well as our detailed installation, user guides and articles found on our blog.
 
-The overall goal though, is to make an image that is easy to deploy and get up and running very quickly.
+Overall, we really wanted to make this easy to deploy to help you get up and running very quickly.
 
 ![alt-test](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/development/HVDN_HASviolet_Git_Software.jpg)
 
@@ -86,15 +95,15 @@ The overall goal though, is to make an image that is easy to deploy and get up a
 
 Start with reading the the [HASviolet Installation Guide](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet_Installation_Guide_v1-1.pdf). 
 
-It will tell you:
+It will tell you things such as:
 
-Step 1: Installing Raspbian Lite OS
+Step A: Installing Raspbian Lite OS
 
-Step 2: Configuring your hardware (Via config.txt and cmdline.txt plus through raspi-config)
+Step B: Configuring your hardware (Via config.txt and cmdline.txt plus through raspi-config)
 
-Step 3: Downloading from Git followed then running the [install automation script](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet_install.sh).
+Step C: Downloading from Git followed then running the [install automation script](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet_install.sh).
 
-If you want to cheat a little, after following what is needed in step 1 & 2:
+If you want to cheat a little, after following what is needed in step A & B:
 
 >wget https://raw.githubusercontent.com/hudsonvalleydigitalnetwork/hasviolet/master/HASviolet_install.sh
 
