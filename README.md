@@ -121,4 +121,4 @@ If you want to cheat a little, after following what is needed in step A & B:
 >./HASviolet_install.sh
 
 
-![alt-test](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/hardware/hasviolet-hw.png)
+![alt-test](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/hardware/hasviolet-hw-alternate.png)
