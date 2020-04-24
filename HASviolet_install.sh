@@ -66,8 +66,7 @@ echo "- Install Python Libraries"
 echo " "
 
 sudo apt-get -y install python3-pil
-sudo pip3 install aprs
-sudo pip3 install aprslib
+sudo pip3 install spidev
 sudo pip3 install adafruit-circuitpython-rfm69
 sudo pip3 install adafruit-circuitpython-rfm9x
 sudo pip3 install adafruit-circuitpython-ssd1306
