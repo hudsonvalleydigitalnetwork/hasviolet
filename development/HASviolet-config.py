@@ -9,7 +9,7 @@
 #      -h, --help      show this help message and exit
 #
 #
-#  TO-DO:
+#  RELEASE: BERMUDA
 #
 #
 
@@ -33,19 +33,18 @@ import time
 config = configparser.ConfigParser()
 config.sections()
 config.read('HASviolet.ini')
-
 try:
-   gpio_rfm_cs = int(config["USER"]["gpio_rfm_cs"])
-   gpio_rfm_irq = int(config["USER"]["gpio_rfm_irq"])
-   node_address = int(config["USER"]["node_address"])
-   freqmhz = float(config["USER"]["freqmhz"])
-   txpwr = int(config["USER"]["txpwr"])
-   modemcfg = str(config["USER"]["modemcfg"])
-   mycall = str(config["USER"]["mycall"])
-   ssid = int(config["USER"]["ssid"])
-   beacon = str(config["USER"]["beacon"])
+   gpio_rfm_cs = int(config["DEFAULT"]["gpio_rfm_cs"])
+   gpio_rfm_irq = int(config["DEFAULT"]["gpio_rfm_irq"])
+   node_address = int(config["DEFAULT"]["node_address"])
+   freqmhz = float(config["DEFAULT"]["freqmhz"])
+   txpwr = int(config["DEFAULT"]["txpwr"])
+   modemcfg = str(config["DEFAULT"]["modemcfg"])
+   mycall = str(config["DEFAULT"]["mycall"])
+   ssid = int(config["DEFAULT"]["ssid"])
+   beacon = str(config["DEFAULT"]["beacon"])
 except KeyError as e:
-   raise LookupError("Error HASviolet.ini[USER] : {} missing.".format(str(e)))
+   raise LookupError("Error HASviolet.ini[DEFAULT] : {} missing.".format(str(e)))
    exit (1)
 
 
@@ -90,7 +89,27 @@ def do_set_freqchannel():
     print (' ')
     print ('-- Change Frequency')
     print ('-- ')
-    print ('-- You can chodse between 863 t0 870 (EU), 902 to 928 (US)')
+    print ('-- You can choose between 863 t0 870 (EU), 902 to 928 (US) or follow ')
+    print ('-- the frequencies used by the LoRa Alliance Channel Standards as listed below.')
+    print ('-- ')
+    print ('-- ')
+    print ('--     US Frequencies                EU Frequencies')
+    print ('-- ')
+    print ('-- CH_00_900 | 903.08 MHz        CH_10_868 | 865.20 MHz')
+    print ('-- CH_01_900 | 905.24 MHz        CH_11_868 | 865.50 MHz')
+    print ('-- CH_02_900 | 907.40 MHz        CH_12_868 | 865.80 MHz')
+    print ('-- CH_03_900 | 909.56 MHz        CH_13_868 | 866.10 MHz')
+    print ('-- CH_04_900 | 911.72 MHz        CH_14_868 | 866.40 MHz')
+    print ('-- CH_05_900 | 913.88 MHz        CH_15_868 | 866.70 MHz')
+    print ('-- CH_06_900 | 916.04 MHz        CH_16_868 | 867 MHz')
+    print ('-- CH_07_900 | 918.20 MHz        CH_17_868 | 868 MHz')
+    print ('-- CH_08_900 | 920.36 MHz')
+    print ('-- CH_09_900 | 922.52 MHz')
+    print ('-- CH_10_900 | 924.68 MHz')
+    print ('-- CH_11_900 | 926.84 MHz')
+    print ('-- CH_12_900 | 915 MHz')
+    print ('-- ')
+    print ('-- ')
     fun = input('-- Enter new Frequency in MHz: ')  
     if int(fun) < 863:
         fun = 863
@@ -104,6 +123,13 @@ def do_set_freqchannel():
     elif int(fun) > 23:
         fun = 23
     pass
+    return(fun)
+
+def do_set_txpwr():
+    print (' ')
+    print ('-- Change TX Power Level')
+    print ('--')
+    fun = input('Enter 5-23: ')  
     return(fun)
 
 def do_set_beacon():
@@ -184,12 +210,21 @@ while True:
     elif fun=="8":
         do_about()
     elif fun=="9":
-        config.set("USER", "mycall", mycall)
-        config.set("USER", "ssid", ssid)
-        config.set("USER", "freqmhz", freqmhz)
-        config.set("USER", "txpwr", txpwr)
-        config.set("USER", "beacon", beacon)
-        config.set("USER", "modemcfg", modemcfg)
+        #gpio_rfm_cs = int('gpio_rfm_cs')
+        #gpio_rfm_irq = int('gpio_rfm_irq')
+        #node_address = int('node_address')
+        freqmhz = str(freqmhz)
+        txpwr = str(txpwr)
+        modemcfg = str(modemcfg)
+        mycall = str(mycall)
+        ssid = str(ssid)
+        beacon = str(beacon)
+        config.set("DEFAULT", "mycall", mycall)
+        config.set("DEFAULT", "ssid", ssid)
+        config.set("DEFAULT", "freqmhz", freqmhz)
+        config.set("DEFAULT", "txpwr", txpwr)
+        config.set("DEFAULT", "beacon", beacon)
+        config.set("DEFAULT", "modemcfg", modemcfg)
         print ('Writing to HASviolet.ini')
         with open('HASviolet.ini', 'w+') as configfile:
             config.write(configfile)
