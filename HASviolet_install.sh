@@ -58,8 +58,8 @@ hasviolet_ini=$hasviolet_install/HASviolet.ini
 hasviolet_update=0
 
 # HASviolet GitHub Repo
-#hasviolet_github_repo="https://github.com/hudsonvalleydigitalnetwork/hasviolet.git"
-hasviolet_github_repo="https://github.com/joecupano/hasty-banana.git"
+hasviolet_github_repo="https://github.com/hudsonvalleydigitalnetwork/hasviolet.git"
+
 
 ##
 ##  START 
@@ -109,7 +109,7 @@ echo " "
 echo "- Create HASviolet working directory"
 echo " "
 mkdir $hasviolet_install
-cp -R $hasviolet_localrepo/released/* $hasviolet_install
+cp -R $hasviolet_localrepo/stable/* $hasviolet_install
 if [ -f $hasviolet_ini ]; then
     cp ~/HASviolet.ini.bk1 $hasviolet_ini >/dev/null 2>&1
 fi
