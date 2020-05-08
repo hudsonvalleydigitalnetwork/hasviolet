@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###
-### HASVIOLET_INSTALL
+### HASVIOLET-DINSTALL
 ###
 
 ##
@@ -11,21 +11,28 @@
 ## Given a Raspbian Lite image, this script will install all the packegs, libraries, and github repo
 ## required to implement the HVDN Communicator.
 ##
-## The HASviolet hardware required includes Raspberry Pi Zero Wireles plus the
-## Adafruit LoRa Radio Bonnet with OLED RFM95W @ 9145 MHz
+## HASviolet has been design with the Raspberry Pi Zero Wireless providing compute, Radio Modules
+## accessible via SPI, sensors via i2c, and GPS via microUSB besides i2c. Generic Python Libraries
+## for i2c and SPI are installed as well as Adafruit and Sparkfun for specific devcies that include
+## the following.
+## 
 ##
+## Adafruit LoRa Radio Bonnet with OLED RFM95W @ 9145 MHz
 ## https://www.adafruit.com/product/4074
 ##
+## Adafruit Monochrome OLEDs based on SSD1306 drivers
+## https://github.com/adafruit/Adafruit_SSD1306
+##
+## Adafruit_CircuitPython_framebuf
+## https://github.com/adafruit/Adafruit_CircuitPython_framebuf
+##
+## Sparkfun Qwiic Python Package
+## https://github.com/sparkfun/Qwiic_Py
+##
+## pyRF95
+## https://github.com/ladecadence/pyRF95
+##
 
-##
-## VERSION
-##
-## 2019-09-13	Genesis of script
-## 2019-09-14	Includes pyRF95 repo
-## 2020-02-12   Permission error for MOTD, Changing working app path, Clean up script
-## 2020-03-03   Rebrand
-## 2020-03-07   Missing git clone command -- duh
-## 2020-03-11   Missing mkdir command
 
 ##
 ## INIT VARIABLES 
@@ -35,17 +42,24 @@
 hvdn_localrepo=$HOME/HVDN-repo
 
 # HASviolet LocalRepo (GitHub clone)
-hasviolet_localrepo=$HOME/HVDN-repo/hasviolet
+#hasviolet_localrepo=$HOME/HVDN-repo/hasviolet
+hasviolet_localrepo=$HOME/HVDN-repo/hasty-banana
 
-# HASviolet install path
+# HASviolet Working directorydr@mBUI3
 hasviolet_install=$HOME/HASviolet
+
+# HASviolet Dev Directoy
+hasviolet_dev=$HOME/DEVviolet
 
 # HASviolet INI file
 hasviolet_ini=$hasviolet_install/HASviolet.ini
 
-# HASviolet GitHub Repo
-hasviolet_github_repo="https://github.com/hudsonvalleydigitalnetwork/hasviolet.git"
+# HASviolet update
+hasviolet_update=0
 
+# HASviolet GitHub Repo
+#hasviolet_github_repo="https://github.com/hudsonvalleydigitalnetwork/hasviolet.git"
+hasviolet_github_repo="https://github.com/joecupano/hasty-banana.git"
 
 ##
 ##  START 
@@ -57,20 +71,31 @@ echo " "
 echo "- Install Raspbian Packages"
 echo " "
 
-sudo apt-get -y install python3-pip
 sudo apt-get -y install git
-sudo apt-get -y install vim
+sudo apt-get -y install python3-pip
+sudo apt-get -y install python3-pil
 
 echo " "
 echo "- Install Python Libraries"
 echo " "
 
-sudo apt-get -y install python3-pil
 sudo pip3 install spidev
-sudo pip3 install adafruit-circuitpython-rfm69
-sudo pip3 install adafruit-circuitpython-rfm9x
+sudo pip3 install pynmea2
+sudo pip3 install sparkfun-qwiic
 sudo pip3 install adafruit-circuitpython-ssd1306
 sudo pip3 install adafruit-circuitpython-framebuf
+
+if [ -f $hasviolet_ini ]; then
+    cp $hasviolet_ini ~/HASviolet.ini.bk1
+fi
+
+#
+# Ensure this is HASviolet clean
+#
+
+sudo rm -rf $hvdn_localrepo >/dev/null 2>&1
+sudo rm -rf $hasviolet_install >/dev/null 2>&1
+sudo rm -rf $hasviolet_dev >/dev/null 2>&1
 
 echo " "
 echo "- Clone HASviolet Repository"
@@ -83,15 +108,36 @@ git clone $hasviolet_github_repo
 echo " "
 echo "- Create HASviolet working directory"
 echo " "
-
 mkdir $hasviolet_install
-cp -R $hasviolet_localrepo/stable/* $hasviolet_install
+cp -R $hasviolet_localrepo/released/* $hasviolet_install
+if [ -f $hasviolet_ini ]; then
+    cp ~/HASviolet.ini.bk1 $hasviolet_ini >/dev/null 2>&1
+fi
+
+
+
+
+if [ $1 == "dev"] ; then
+    echo " "
+    echo "- Creating DEVviolet working directory"
+    echo " "
+    sudo rm -rf $hasviolet_dev
+    mkdir $hasviolet_dev
+    cp $hasviolet_localrepo/active/* $hasviolet_dev
+    cp $hasviolet_localrepo/RC2/* $hasviolet_dev
+    cp $hasviolet_install/rf95.py $hasviolet_dev
+    cp $hasviolet_install/font5x8.bin $hasviolet_dev
+    cp $hasviolet_install/HASviolet.ini $hasviolet_dev
+fi
 
 echo " "
 echo "HASviolet installation complete."
 echo " "
 echo "- The HASviolet repo has been cloned to $hasviolet_localrepo"
-echo "- A working directory with all apps is installed in $hasviolet_install"
+echo "- A working directory with released apps is installed in $hasviolet_install"
+if [ $1 == "dev"] ; then
+    echo "- A working DEV directory with released plus dev apps is installed in $hasviolet_dev"
+fi
 echo " "
 echo "To run the apps, you must be in the $hasviolet_install directory and"
 echo "prefix the app name with ./<app-name>"
