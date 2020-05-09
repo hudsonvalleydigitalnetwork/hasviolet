@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###
-### HASVIOLET-DINSTALL
+### HASVIOLET-INSTALL
 ###
 
 ##
