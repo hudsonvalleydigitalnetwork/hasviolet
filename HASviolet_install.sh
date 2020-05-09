@@ -114,19 +114,13 @@ if [ -f $hasviolet_ini ]; then
     cp ~/HASviolet.ini.bk1 $hasviolet_ini >/dev/null 2>&1
 fi
 
-
-
-
 if [ $1 == "dev"] ; then
     echo " "
     echo "- Creating DEVviolet working directory"
     echo " "
     sudo rm -rf $hasviolet_dev
     mkdir $hasviolet_dev
-    cp $hasviolet_localrepo/active/* $hasviolet_dev
-    cp $hasviolet_localrepo/RC2/* $hasviolet_dev
-    cp $hasviolet_install/rf95.py $hasviolet_dev
-    cp $hasviolet_install/font5x8.bin $hasviolet_dev
+    cp $hasviolet_localrepo/RC/* $hasviolet_dev
     cp $hasviolet_install/HASviolet.ini $hasviolet_dev
 fi
 
