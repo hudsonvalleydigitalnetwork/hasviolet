@@ -13,10 +13,6 @@ ans libraries
 ### hvdn-logo.xbm
 * Banner image displayed on 128x32 OLED during startup. Substitute your own if you wish!
 
-### rf95.py
-* RFM95 library
-* Sourced from https://github.com/ladecadence/pyRF95
-
 ### HASviolet.ini
 * Config file used by HASviolet apps
 
