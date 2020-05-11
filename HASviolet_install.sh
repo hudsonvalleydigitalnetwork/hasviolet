@@ -42,8 +42,7 @@
 hvdn_localrepo=$HOME/HVDN-repo
 
 # HASviolet LocalRepo (GitHub clone)
-#hasviolet_localrepo=$HOME/HVDN-repo/hasviolet
-hasviolet_localrepo=$HOME/HVDN-repo/hasty-banana
+hasviolet_localrepo=$HOME/HVDN-repo/hasviolet
 
 # HASviolet Working directorydr@mBUI3
 hasviolet_install=$HOME/HASviolet
@@ -120,7 +119,7 @@ if [ $1 == "dev"] ; then
     echo " "
     sudo rm -rf $hasviolet_dev
     mkdir $hasviolet_dev
-    cp $hasviolet_localrepo/RC/* $hasviolet_dev
+    cp $hasviolet_localrepo/development/$hasviolet_dev
     cp $hasviolet_install/HASviolet.ini $hasviolet_dev
 fi
 
