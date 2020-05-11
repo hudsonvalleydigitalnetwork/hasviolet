@@ -1,6 +1,6 @@
-# Development
+# RC (Release Candidate)
   
-All code in this folder is under consideration and continued development for next release.
+All code in this folder is under considration for next release.
 
 ## Required Dependencies
 
@@ -12,6 +12,10 @@ ans libraries
 
 ### hvdn-logo.xbm
 * Banner image displayed on 128x32 OLED during startup. Substitute your own if you wish!
+
+### rf95.py
+* RFM95 library
+* Sourced from https://github.com/ladecadence/pyRF95
 
 ### HASviolet.ini
 * Config file used by HASviolet apps
