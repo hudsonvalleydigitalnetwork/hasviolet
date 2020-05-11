@@ -113,7 +113,7 @@ if [ -f $hasviolet_ini ]; then
     cp ~/HASviolet.ini.bk1 $hasviolet_ini >/dev/null 2>&1
 fi
 
-if [$1 == 'dev'] ; then
+if [ $1 == 'dev' ]; then
     echo " "
     echo "- Creating DEVviolet working directory"
     echo " "
@@ -128,7 +128,7 @@ echo "HASviolet installation complete."
 echo " "
 echo "- The HASviolet repo has been cloned to $hasviolet_localrepo"
 echo "- A working directory with released apps is installed in $hasviolet_install"
-if [$1 == 'dev'] ; then
+if [ $1 == 'dev' ]; then
     echo "- A working DEV directory with released plus dev apps is installed in $hasviolet_dev"
 fi
 echo " "
