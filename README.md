@@ -41,7 +41,7 @@ The full project name is "HASviolet" which is as fun to say as well as to find u
 
 ## Who is behind HASviolet?
 
-    • Joe Apuzzo N1JTA (Hardware Certification & General Do'er of Stuff)
+    • Joe Apuzzo N1JTA (Inital idea)
     • Joe Cupano NE2Z (Core Software & Git Project Documentation)
     • Steve Bossert K2GOG (Antenna/RF Design & Public User Experience/Information)
 
