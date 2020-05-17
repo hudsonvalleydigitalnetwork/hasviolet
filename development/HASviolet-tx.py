@@ -41,7 +41,7 @@ HAShat = HAShid()
 #
 
 parser = argparse.ArgumentParser(description='HASviolet TX')
-parser.add_argument('-d','--destination', help='Destination Name-Call', required=True)
+parser.add_argument('-d', '--destination', help='Destination', default='BEACON-99')
 parser.add_argument('-m','--message', help='Message to be sent in quotes', required=True)
 args = vars(parser.parse_args())
 
@@ -90,13 +90,6 @@ signal.signal(signal.SIGINT, sigs_handler)
 #
 # MAIN
 #
-
-# Setup Radio
-
-# Done in line in line 43
-
-# SIGTINT aka control-C is quit
-signal.signal(signal.SIGINT, sigs_handler)
 
 # Send message
 HASit.tx(hasvpayload)
