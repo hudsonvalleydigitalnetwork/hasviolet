@@ -1,6 +1,6 @@
-# RC (Release Candidate)
+# Development
   
-All code in this folder is under considration for next release.
+All code in this folder is candidate for next release. Use at your own risk til then.
 
 ## Required Dependencies
 
@@ -19,6 +19,40 @@ ans libraries
 
 ### HASviolet.ini
 * Config file used by HASviolet apps
+
+
+### HASviolet-atmos.py
+ Send data from Atmospheric sensors (Sparkfun BME280) 
+
+  ```
+  Usage: ./HASviolet-atmos.py -r -s
+
+  OPTIONS
+	  -h, --help           show this help message and exit
+	  -d, --destination    destination station
+  ```
+
+### HASviolet-distance.py
+ Send data from Distance Measurement Sensor (Sparkfun VL53L1X)
+
+  ```
+  Usage: ./HASviolet-distance.py -r -s
+
+  OPTIONS
+	  -h, --help           show this help message and exit
+	  -d, --destination    destination station
+  ```
+
+### HASviolet-gps.py
+ Send data from microUSB serial connected USB GPS device
+
+  ```
+  Usage: ./HASviolet-gps.py -r -s
+
+  OPTIONS
+	  -h, --help           show this help message and exit
+	  -d, --destination    destination station
+  ```
 
 ### HASvioletHID
 * Library used by HASviolet apps that contains all HID Module related classes and methods
@@ -65,9 +99,10 @@ Standalone applications
   Send a LoRa message
 
   ```
-  Usage: HASviolet-tx.py -d DESTINATION "message"
+  Usage: HASviolet-tx.py -d DESTINATION -m "message"
 
   OPTIONS
-           -d Destination ID
-           MESSAGE is message to be send within double quotes
+           -d Destination (if omitted BEACON-99 is default)
+           -m message to be sent within double quotes
   ```
+
