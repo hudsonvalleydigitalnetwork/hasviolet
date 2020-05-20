@@ -106,3 +106,4 @@ Standalone applications
            -m message to be sent within double quotes
   ```
 
+## XARPS  eXtensible Amateur Radio Payload Specification (DRAFT)
