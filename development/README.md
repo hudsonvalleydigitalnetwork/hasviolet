@@ -99,5 +99,5 @@ is called HASviolet-handheld.py.
   Usage: ./HASviolet-services.sh [ start | stop | remove ]
   ```
 
-# XARPS eXtensible Amateur Radio Payload Specification (DRAFT)
+## XARPS eXtensible Amateur Radio Payload Specification (DRAFT)
 
