@@ -1,4 +1,4 @@
-# RC (Release Candidate)
+# Development
   
 All code in this folder is candidate for next release.
 
@@ -76,10 +76,11 @@ ans libraries
            -m message to be sent within double quotes
   ```
 
-<<<<<<< HEAD
-## Proof of Concept Sensor Applicationsoperations
+## Proof of Concept Sensor Applications
 
-HASviolet_install.sh installs
+* HASviolet-atmos.py
+* HASviolet-gps.py
+* HASviolet-distance.py
 
 
 ## Portable operations
@@ -98,8 +99,5 @@ is called HASviolet-handheld.py.
   Usage: ./HASviolet-services.sh [ start | stop | remove ]
   ```
 
+# XARPS eXtensible Amateur Radio Payload Specification (DRAFT)
 
-
-=======
-## XARPS  eXtensible Amateur Radio Payload Specification (DRAFT)
->>>>>>> f49dfdabe133c57b94b175b94980ac18ce15ff31
