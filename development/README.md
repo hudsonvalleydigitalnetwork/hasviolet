@@ -1,6 +1,6 @@
-# Development
+# RC (Release Candidate)
   
-All code in this folder is candidate for next release. Use at your own risk til then.
+All code in this folder is candidate for next release.
 
 ## Required Dependencies
 
@@ -20,39 +20,8 @@ ans libraries
 ### HASviolet.ini
 * Config file used by HASviolet apps
 
-
-### HASviolet-atmos.py
- Send data from Atmospheric sensors (Sparkfun BME280) 
-
-  ```
-  Usage: ./HASviolet-atmos.py -r -s
-
-  OPTIONS
-	  -h, --help           show this help message and exit
-	  -d, --destination    destination station
-  ```
-
-### HASviolet-distance.py
- Send data from Distance Measurement Sensor (Sparkfun VL53L1X)
-
-  ```
-  Usage: ./HASviolet-distance.py -r -s
-
-  OPTIONS
-	  -h, --help           show this help message and exit
-	  -d, --destination    destination station
-  ```
-
-### HASviolet-gps.py
- Send data from microUSB serial connected USB GPS device
-
-  ```
-  Usage: ./HASviolet-gps.py -r -s
-
-  OPTIONS
-	  -h, --help           show this help message and exit
-	  -d, --destination    destination station
-  ```
+### HASviolet-duckhunt.ini
+* Config file used by Duckhunt game
 
 ### HASvioletHID
 * Library used by HASviolet apps that contains all HID Module related classes and methods
@@ -61,9 +30,7 @@ ans libraries
 * Library used by HASviolet apps that contains all RF Module related classes and methods
 
 
-## HASviolet Applications
-
-Standalone applications
+## Standalone applications
 
 ### HASviolet-beacon.py
   Beacon a LoRa message
@@ -80,8 +47,11 @@ Standalone applications
 ### HASviolet-chat.py
   Interactive half-duplex chat program
 
-### HASviolet-handheld.py
-  Currently only a menu demo of Hanheld feature
+### HASviolet-config.py
+* Configuration tool to configure HASviolet.ini
+
+### HASviolet-duckhunt-config.py
+* Configuration tool to configure HASviolet-duckhunt.ini for Duckhunt game
 
 ### HASviolet-rx.py
  Listens for messages from other LoRa stations
@@ -105,4 +75,27 @@ Standalone applications
            -d Destination (if omitted BEACON-99 is default)
            -m message to be sent within double quotes
   ```
+
+## Proof of Concept Sensor Applicationsoperations
+
+HASviolet_install.sh installs
+
+
+## Portable operations
+
+HASviolet_install.sh installs a systemd service that runs on bootup that enables you to run
+simple RX and TX actvities with the OLED and three HAT buttons. The program the service runs
+is called HASviolet-handheld.py. 
+
+### HASviolet.service
+* Service files required by systemd. Installed by HASviolet-install.sh
+
+### HASviolet-service.sh
+ Start, stop, or remove the HASviolet service that starts HASviolet-handheld on bootup
+
+  ```
+  Usage: ./HASviolet-services.sh [ start | stop | remove ]
+  ```
+
+
 
