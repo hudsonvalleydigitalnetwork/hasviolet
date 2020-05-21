@@ -76,6 +76,7 @@ ans libraries
            -m message to be sent within double quotes
   ```
 
+<<<<<<< HEAD
 ## Proof of Concept Sensor Applicationsoperations
 
 HASviolet_install.sh installs
@@ -99,3 +100,6 @@ is called HASviolet-handheld.py.
 
 
 
+=======
+## XARPS  eXtensible Amateur Radio Payload Specification (DRAFT)
+>>>>>>> f49dfdabe133c57b94b175b94980ac18ce15ff31
