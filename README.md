@@ -102,7 +102,7 @@ Joe Cupano NE2Z led the entire software development process and only had minimal
 
 ## Getting Started
 
-Start with reading the the [HASviolet Installation Guide](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet_Installation_Guide_v1-1.pdf). 
+Start with reading the the [HASviolet Installation Guide](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet_Guide_v20.pdf). 
 
 It will tell you things such as:
 

@@ -12,47 +12,31 @@
 #        -r Raw data RX instead of ASCII
 #        -s Show RSSI RX
 #
-#  TO-DO:
+#  RELEASE: BERMUDA
 #
 #
 
 
 #
-# IMPORT LIBRARIES
+# Import Libraries
 #
 
-import adafruit_ssd1306
-import argparse
-import board
-import busio
+import argparse 
 import configparser
-from digitalio import DigitalInOut, Direction, Pull
-from rf95 import RF95, Bw31_25Cr48Sf512
+import curses
 import signal
 import sys
 import time
-import os # added this to use local stty to turn input on and off
+from HASvioletRF import HASrf
+from HASvioletHID import HAShid
+
 
 #
-# IMPORT SETTINGS
+# Initialise HASviolet
 #
 
-config = configparser.ConfigParser()
-config.sections()
-config.read('HASviolet.ini')
-try:
-   gpio_rfm_cs = int(config["DEFAULT"]["gpio_rfm_cs"])
-   gpio_rfm_irq = int(config["DEFAULT"]["gpio_rfm_irq"])
-   node_address = int(config["DEFAULT"]["node_address"])
-   freqmhz = float(config["DEFAULT"]["freqmhz"])
-   txpwr = int(config["DEFAULT"]["txpwr"])
-   modemcfg = str(config["DEFAULT"]["modemcfg"])
-   mycall = str(config["DEFAULT"]["mycall"])
-   ssid = str(config["DEFAULT"]["ssid"])
-   beacon = str(config["DEFAULT"]["beacon"])
-except KeyError as e:
-   raise LookupError("Error HASviolet.ini[DEFAULT] : {} missing.".format(str(e)))
-   exit (1)
+HASit = HASrf()
+HAShat = HAShid()
 
 
 #
@@ -71,18 +55,6 @@ arg_signal_rssi = args['signal']
 # VARIABLES
 #
 
-# gpio_rfm_irq - Use chip select 1. GPIO pin 22 will be used for interrupts
-# node_address - The address of this device will be set to (1-254)
-# freqmhz - The freq of this device in MHz (911.250 MHz is recommended)
-# hasvrecipient - Address of receiving node
-# hasvname - mycall + "-" + ssid
-# hasvheader - hasname + ">" + hasvrecipient
-# hasvpayload - header + message
-
-hasvname = mycall + "-" + ssid
-#hasvheader = hasvname + ">" + recipient
-#hasvpayload = header + " | " + message 
-
 
 #
 # FUNCTIONS
@@ -90,69 +62,45 @@ hasvname = mycall + "-" + ssid
 
 def sigs_handler(signal_received, frame):
     # Handle any cleanup here
-    os.system ('stty echo') # turn terminal echo back on since program is done  
-    print('Exiting program gracefully')
-    rf95.set_mode_idle()
-    rf95.cleanup()
-    OLED_display('bye','GoodBye...')
+    print('SIGINT or CTRL-C detected. Exiting gracefully')
+    HASit.cleanup()
+    HAShat.OLED.text('Goodbye...', 0, 10, 1)
+    HAShat.OLED.show()
+    time.sleep(2)
+    HAShat.OLED.fill(0)
+    HAShat.OLED.show()
     exit(0)
 
-def OLED_display(OLED_where, OLED_msg):
-    display.fill(0)
-    if OLED_where == 'logo':
-        display.text(OLED_msg, 0, 10, 1)
-    elif OLED_where == 'rxid':
-        display.text(OLED_msg, 0, 20, 1)
-    elif OLED_where == 'rxmsg':
-        display.text(OLED_msg, 0, 20, 1)
-    elif OLED_where == 'txid':
-        display.text(OLED_msg, 0, 0, 1)
-    elif OLED_where == 'txmsg':
-        display.text(OLED_msg, 0, 0, 1)
-    elif OLED_where == 'bye':
-        display.text(OLED_msg, 0, 10, 1)
-        display.show()
-        time.sleep (3)
-        display.fill(0)
-        display.show()
-    else:
-        display.fill(0)
-    display.show()
-
 def sigs_txmode(signal_received, frame):
-    os.system ('stty echo') # turn terminal echo back on
     print () 
     hasvrecipient = input('CALL-SSID: ')
     message = input('MSG: ')
-    hasvheader = hasvname + ">" + hasvrecipient
+    hasvheader = HASit.station + ">" + hasvrecipient
     hasvpayload = hasvheader + " | " + message 
-    rf95.send(rf95.str_to_data(hasvpayload))
-    rf95.wait_packet_sent()
+    HASit.tx(hasvpayload)
     print ('<TX>',hasvpayload)
     print ()
-    OLED_display('txmsg','TX:' + hasvpayload)
-    rf95.set_mode_idle
-    os.system ('stty -echo') # turn terminal echo off since we are done
+
+def rx_oled_scroll():
+    HAShat.OLED.fill(0)
+    HAShat.OLED.show()
+    HASit.ppayload = HASit.receive_ascii.split("|")
+    HAShat.OLED.fill(0)
+    HAShat.OLED.show()
+    HAShat.OLED.text(HASit.ppayload[0], 0, 1, 1)
+    HAShat.OLED.text("RSSI: " + HASit.receive_rssi, 0, 9, 1)
+    HAShat.OLED.text(HASit.ppayload[1], 0, 17, 1)
+    HAShat.OLED.show()
+
 
 #
 # SETUP
 #
 
-# Create the I2C interface.
-i2c = busio.I2C(board.SCL, board.SDA)
+HAShat.logo('hvdn-logo.xbm')
 
-# 128x32 OLED Display
-display = adafruit_ssd1306.SSD1306_I2C(128, 32, i2c, addr=0x3c)
-
-# Clear the OLED display.
-display.fill(0)
-display.show()
-width = display.width
-height = display.height
-
-# Startup OLED Message
-display.fill(0)
-display.text('HASviolet Chat', 35, 0, 2)
+width = HAShat.OLED.width
+height = HAShat.OLED.height
 
 
 #
@@ -161,21 +109,11 @@ display.text('HASviolet Chat', 35, 0, 2)
 
 # Setup Radio
 
-rf95 = RF95(cs=gpio_rfm_cs, int_pin=gpio_rfm_irq, reset_pin=None)
-rf95.set_frequency(freqmhz)
-rf95.set_tx_power(txpwr)
-#rf95.set_modem_config(modemcfg)('RAW:',data,':RSSI:',data_rssi)
-rf95.init()
-
 # CTRL-Z is SIGTSTP to Send
 # CTRL-C is SIGINT and closes program gracefully
 signal.signal(signal.SIGTSTP, sigs_txmode)
 signal.signal(signal.SIGINT, sigs_handler)
 
-# Display Start Message
-OLED_display('logo','HASviolet Chat')
-
-os.system ('stty -echo') # turn off terminal echo off
 print()
 print('HASviolet Chat')
 print('    (Entering RX mode ... use Ctrl-Z to send, Ctrl-C to exit)')
@@ -183,29 +121,20 @@ print('-------------------------------------------------------------')
 
 # While not hearing packets check for tab pressed to ennter tx mode
 while True:
-    while not rf95.available():
-        pass
-    data = rf95.recv()
-    data_rssi = str(int(rf95.last_rssi))
-    data_stringed = str(data)
-    data_ascii=""
-    for i in data:
-        data_ascii=data_ascii+chr(i)
+    HASit.rx()
+    rx_oled_scroll()
     if (arg_hvdn_rawdata) and (arg_signal_rssi):
-        datadisplay_string = 'RAW:'+ data_stringed +':RSSI:'+data_rssi
-        print ('RAW:',data,':RSSI:',data_rssi)
-        OLED_display('rxmsg','RAW:' + data_stringed + ' :' + data_rssi)
+        #datadisplay_string = 'RAW:'+ HASit.receive_string +':RSSI:'+HASit.receive-rssi
+        print ('RAW:',HASit.receive,':RSSI:',HASit.receive_rssi)
     elif (arg_hvdn_rawdata):
-        datadisplay_string = 'RAW:'+ data_stringed
-        print ('RAW:',data)
-        OLED_display('rxmsg','RAW:' + data_stringed)
+        #datadisplay_string = 'RAW:'+ HASit.receive_string
+        print ('RAW:',HASit.receive)
     elif (arg_signal_rssi):
-        datadisplay_string = 'RX:'+ data_ascii +':RSSI:'+data_rssi
-        print (data_ascii,':RSSI:',data_rssi)
-        OLED_display('rxmsg','RX:' + data_ascii + ' :' + data_rssi)
+        #datadisplay_string = 'RX:'+ HASit.receive_ascii +':RSSI:'+HASit.receive-rssi
+        print (HASit.receive_ascii,':RSSI:',HASit.receive_rssi)
     else:
-        print (data_ascii)
-        OLED_display('rxmsg','RX:' + data_ascii)
-display.fill(0)
-display.show()
-rf95.cleanup()
+        print (HASit.receive_ascii)
+
+HAShat.OLED.fill(0)
+HAShat.OLED.show()
+HASit.cleanup()

@@ -1,15 +1,35 @@
-# HASviolet
+# RC (Release Candidate)
+  
+All code in this folder is candidate for next release.
 
-## Stable
+## Required Dependencies
 
-Project HASviolet, brought to you by HVDN, the letter Q and numbers 8, 4 and 5. 
-All code in this directory has been tested as functional and stable.
+Libraries and other files required by all HASviolet applications
+ans libraries
 
 ### font5x8.bin
 * Font file for the Adafruit OLED display
 
+### hvdn-logo.xbm
+* Banner image displayed on 128x32 OLED during startup. Substitute your own if you wish!
+
+### rf95.py
+* RFM95 library
+* Sourced from https://github.com/ladecadence/pyRF95
+
 ### HASviolet.ini
 * Config file used by HASviolet apps
+
+### HASvioletHID
+* Library used by HASviolet apps that contains all HID Module related classes and methods
+
+### HASvioletRF
+* Library used by HASviolet apps that contains all RF Module related classes and methods
+
+
+## HASviolet Applications
+
+Standalone applications
 
 ### HASviolet-beacon.py
   Beacon a LoRa message
@@ -23,16 +43,11 @@ All code in this directory has been tested as functional and stable.
            MESSAGE is message to be send within double quotes
   ```
 
-### HASviolet-tx.py
-  Send a LoRa message
+### HASviolet-chat.py
+  Interactive half-duplex chat program
 
-  ```
-  Usage: HASviolet-tx.py -d DESTINATION "message"
-
-  OPTIONS
-           -d Destination ID
-           MESSAGE is message to be send within double quotes
-  ```
+### HASviolet-handheld.py
+  Currently only a menu demo of Hanheld feature
 
 ### HASviolet-rx.py
  Listens for messages from other LoRa stations
@@ -45,8 +60,14 @@ All code in this directory has been tested as functional and stable.
 	  -r, --raw_data  Receive raw data
 	  -s, --signal    Signal Strength
   ```
-  
-### rf95.py
-* RFM95 library used by hvdncom apps ending in rf95.py
-* Sourced from https://github.com/ladecadence/pyRF95
 
+### HASviolet-tx.py
+  Send a LoRa message
+
+  ```
+  Usage: HASviolet-tx.py -d DESTINATION -m "message"
+
+  OPTIONS
+           -d Destination (if omitted BEACON-99 is default)
+           -m message to be sent within double quotes
+  ```
