@@ -31,4 +31,4 @@ ans libraries
 
 
 ## XARPS eXtensible Amateur Radio Payload Specification (DRAFT)
-
+* This is a Work-in-Progress still being crafted. It is being shared to seed ideas for others.
