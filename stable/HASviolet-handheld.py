@@ -253,7 +253,7 @@ lastoledline = 32
 while True:
     #print(HAShat.menulvl, HAShat.currpos)
     if not HAShat.btnLeft.value:
-        time.sleep(0.05)
+        time.sleep(0.025)
         if not HAShat.btnLeft.value:
             if HAShat.currpos == lastoledline:
                 HAShat.currpos = firstoledline
@@ -273,9 +273,8 @@ while True:
                 game_menu()
             else:
                 pass
-    time.sleep(.025)
     if not HAShat.btnMid.value:
-        time.sleep(.05)
+        time.sleep(.025)
         if not HAShat.btnMid.value: 
             if HAShat.menulvl == "main_menu" and HAShat.currpos == 8:
                 HAShat.menulvl = "tx_menu"
@@ -349,9 +348,7 @@ while True:
                 restart_svc()
             else:
                 pass
-    time.sleep(0.25)
     if not HAShat.btnRight.value:
-       time.sleep(0.05)
+       time.sleep(0.025)
        if not HAShat.btnRight.value:
            restart_svc()
-    time.sleep(0.25)
