@@ -93,7 +93,7 @@ class HAShid:
         # Display the converted image
         self.OLED.image(image)
         self.OLED.show()
-        time.sleep (2)
+        time.sleep (0.5)
         #self.OLED.fill(0)
         #self.OLED.show()
         
