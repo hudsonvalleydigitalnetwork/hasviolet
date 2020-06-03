@@ -7,8 +7,7 @@
 
 case $1 in
     start)
-        sudo systemctl daemon-reload
-        sudo systemctl enable HASviolet.service
+        sudo systemctl start HASviolet.service
         ;;
     stop)
         sudo systemctl stop HASviolet.service
