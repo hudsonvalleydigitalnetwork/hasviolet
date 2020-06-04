@@ -31,4 +31,17 @@ ans libraries
 
 
 ## XARPS eXtensible Amateur Radio Payload Specification (DRAFT)
-* This is a Work-in-Progress still being crafted. It is being shared to seed ideas for others.
+This is a Work-in-Progress still being crafted. The spec itself is being shared to seed
+ideas for others. Tools listed are highly experimental.
+
+### XARPS.py
+* XARPS Library
+
+### XARPS-workbench_local.py
+* XARPS Packet generator and parser using local file 
+
+### XARPS-workbench_rxtx.py
+* XARPS Packet generator and parser using local file with RX and TX capability
+
+
+
