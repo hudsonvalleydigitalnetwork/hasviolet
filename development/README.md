@@ -23,6 +23,15 @@ ans libraries
 ### HASviolet-duckhunt.ini
 * Config file used by Duckhunt game
 
+### HASviolet-duckhunt.py
+* Duckhunt Config Tool (SIMPLE and HARDER only)
+
+### HASviolet-handheld.py
+* Update that remains WIP
+
+### HASviolet-duckhunt_demo.py
+* Duckhunt Config Tool (ALPHA for all modes)
+
 ### HASvioletHID
 * Library used by HASviolet apps that contains all HID Module related classes and methods
 
