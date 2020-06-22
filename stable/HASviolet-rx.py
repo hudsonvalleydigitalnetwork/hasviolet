@@ -72,7 +72,6 @@ def rx_oled_scroll():
     HAShat.OLED.show()
     HAShat.OLED.text(HASit.ppayload[0], 0, 1, 1)
     HAShat.OLED.text("RSSI: " + HASit.receive_rssi, 0, 9, 1)
-    HAShat.OLED.text(HASit.ppayload[1], 0, 17, 1)
     HAShat.OLED.show()
     
 #
