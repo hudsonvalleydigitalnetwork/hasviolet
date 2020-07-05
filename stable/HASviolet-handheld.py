@@ -41,6 +41,28 @@ HAShat = HAShid()
 
 
 #
+# Import settings
+#
+
+config = configparser.ConfigParser()
+config.sections()
+config.read('HASviolet-duckhunt.ini')
+try:
+   duck_simple_message = str(config["SIMPLE"]["message"])
+   duck_simple_interval = int(config["SIMPLE"]["interval"])
+   duck_simple_trigger = int(config["SIMPLE"]["trigger"])
+   duck_simple_action = int(config["SIMPLE"]["action"])
+   duck_harder_message = str(config["HARDER"]["message"])
+   duck_harder_interval = int(config["HARDER"]["interval"])
+   duck_harder_trigger = int(config["HARDER"]["trigger"])
+   duck_harder_action = int(config["HARDER"]["action"])
+   
+except KeyError as e:
+   raise LookupError("Error HASviolet-duckhunt.ini : {} missing.".format(str(e)))
+   exit (1)
+
+
+#
 # FUNCTIONS
 #
 
@@ -154,6 +176,38 @@ def tx_beacon(message):
     restart_svc()
     time.sleep(0.25)
 
+def rx_msg(whom):
+    while HAShat.btnRight.value:
+        HASit.rx()
+        (HASit.header, HASit.payload) = HASit.receive_ascii.split("|")
+        (HASit.source, HASit.destination) = HASit.header.split(">")
+        if whom == 'all':
+            print (HASit.receive_ascii,':RSSI:',HASit.receive_rssi)
+            HAShat.OLED.fill(0)
+            HAShat.OLED.show()
+            HAShat.OLED.text(HASit.header, 0, 1, 1)
+            HAShat.OLED.text("RSSI: " + HASit.receive_rssi, 0, 9, 1)
+            HAShat.OLED.text(HASit.payload, 0, 17, 1)
+            HAShat.OLED.show()
+        if whom == 'BEACON-99':
+            print (HASit.receive_ascii,':RSSI:',HASit.receive_rssi)
+            HAShat.OLED.fill(0)
+            HAShat.OLED.show()
+            HAShat.OLED.text(HASit.header, 0, 1, 1)
+            HAShat.OLED.text("RSSI: " + HASit.receive_rssi, 0, 9, 1)
+            HAShat.OLED.text(HASit.payload, 0, 17, 1)
+            HAShat.OLED.show()
+        if whom == HASit.destination: 
+            print (HASit.receive_ascii,':RSSI:',HASit.receive_rssi)
+            HAShat.OLED.fill(0)
+            HAShat.OLED.show()
+            HAShat.OLED.text(HASit.header, 0, 1, 1)
+            HAShat.OLED.text("RSSI: " + HASit.receive_rssi, 0, 9, 1)
+            HAShat.OLED.text(HASit.payload, 0, 17, 1)
+            HAShat.OLED.show()
+    restart_svc()
+    time.sleep(0.25)
+
 def rx_oled_scroll():
     HAShat.OLED.fill(0)
     HAShat.OLED.show()
@@ -167,15 +221,6 @@ def rx_oled_scroll():
 
 def game_simple():
     print("Simple")
-    config = configparser.ConfigParser()
-    config.sections()
-    config.read('HASviolet-duckhunt.ini')
-    try:
-        duck_simple_message = str(config["SIMPLE"]["message"])
-        duck_simple_interval = int(config["SIMPLE"]["interval"])
-    except KeyError as e:
-        raise LookupError("Error HASviolet-duckhunt.ini : {} missing.".format(str(e)))
-        exit (1)
     hasvheader = HASit.station + ">" + "BEACON-99"
     hasvpayload = hasvheader + " | " + duck_simple_message 
     while HAShat.btnRight.value:
@@ -193,17 +238,6 @@ def game_simple():
 
 def game_harder():
     print("Harder")
-    config = configparser.ConfigParser()
-    config.sections()
-    config.read('HASviolet-duckhunt.ini')
-    try:
-        duck_harder_message = str(config["HARDER"]["message"])
-        duck_harder_interval = int(config["HARDER"]["interval"])
-        duck_harder_message2 = str(config["HARDER"]["message2"])
-        duck_harder_interval2 = int(config["HARDER"]["interval2"])
-    except KeyError as e:
-        raise LookupError("Error HASviolet-duckhunt.ini : {} missing.".format(str(e)))
-        exit (1)
     hasvheader = HASit.station + ">" + "BEACON-99"
     hasvpayload = hasvheader + " | " + duck_harder_message 
     while HAShat.btnRight.value:
