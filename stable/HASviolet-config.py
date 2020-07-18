@@ -115,21 +115,17 @@ def do_set_freqchannel():
         fun = 863
     elif int(fun) > 928:
         fun = 928
-    print ('-- Change TX power')
-    print ('--')
-    fun = input('-- Enter TX power - 5 to 23: ')
-    if int(fun) < 5:
-        fun = 5
-    elif int(fun) > 23:
-        fun = 23
-    pass
     return(fun)
 
 def do_set_txpwr():
     print (' ')
     print ('-- Change TX Power Level')
     print ('--')
-    fun = input('Enter 5-23: ')  
+    fun = input('-- Enter TX power - 5 to 23: ')
+    if int(fun) < 5:
+        fun = 5
+    elif int(fun) > 23:
+        fun = 23  
     return(fun)
 
 def do_set_beacon():
