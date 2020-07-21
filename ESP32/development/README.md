@@ -19,19 +19,17 @@ access this folder as workspace. All this is necessary to compile and upload the
 work on any ESP32 with SX1276 LoRa module and a 0.96in OLED attached. Use at your own risk.
 
 ## Duck Setup (first time Use)
-* Power up the ESP32 and connect to the serial monitor
+* Power up the ESP32 and connect the serial monitor to watch debug output
 * Once you see the HVDN logo a WiFi AP will become available called Duck
 * Connect to the Duck AP with the password 123456789
 * Open a web browser and connect to 192.168.4.1
 * You will have the following menu selections
-
-    Send
-    Receive (disabled)
-    show duck.cfg
-    show duckhunt.cfg
-    set duck.cfg
-    set duckhunt.cfg
-
+  * Send
+  * Receive (disabled)
+  * show duck.cfg
+  * show duckhunt.cfg
+  * set duck.cfg
+  * set duckhunt.cfg
 * Go to "set duck.cfg", make changes, and engage
 * Go to "set duckhunt.cfg", make changes, and engage
 * press RST button on ESP32
@@ -39,6 +37,3 @@ work on any ESP32 with SX1276 LoRa module and a 0.96in OLED attached. Use at you
 ## Duck behavior
 The default behavior is for the Duck to beacon on startup. The 'Send' function works if you want to 
 slip a message in. 'Receive' is not available at this time.
-
-
-
