@@ -25,13 +25,13 @@ work on any ESP32 with SX1276 LoRa module and a 0.96in OLED attached. Use at you
 * Open a web browser and connect to 192.168.4.1
 * You will have the following menu selections
 
-    • Send
-    • Receive (disabled)
-    • show duck.cfg
-    • show duckhunt.cfg
-    • set duck.cfg
-    • set duckhunt.cfg
-    
+    Send
+    Receive (disabled)
+    show duck.cfg
+    show duckhunt.cfg
+    set duck.cfg
+    set duckhunt.cfg
+
 * Go to "set duck.cfg", make changes, and engage
 * Go to "set duckhunt.cfg", make changes, and engage
 * press RST button on ESP32
