@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+ <head>
+ <title>HASviolet</title>
+ <h1>HASviolet</h1>
+ </head>
+
+<body>
+<hr align="center">
+<h2>Send</h2>
+<form action="/sendtx" method="get">
+<p></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hz %FREQUENCY%
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TX Power %TXPWR% 
+<p></p>
+&nbsp;&nbsp;&nbsp;FROM %MYCALL%-%MYSSID%
+<p></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TO <input type="text" name="dstcall" value="%DSTCALL%" size="6" maxlength="7"> </input>
+<input type="text" name="dstssid" value="%DSTSSID%" size="2"> </input>
+</p>
+<p>
+Message <input type="text" name="message" value="%MESSAGE%" size="40" maxlength="200"> </input>
+<p>
+</p>
+<hr align="center">
+<input type="submit" value="Engage">
+</form>
+</body>
+</html>
