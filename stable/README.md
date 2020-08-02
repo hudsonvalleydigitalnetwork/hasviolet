@@ -33,9 +33,9 @@ ans libraries
 * Systemd service file to start HASviolet-handheld.py
 
 
+
 ## HASviolet Core Applications
 
-Standalone applications
 
 ### HASviolet-beacon.py
   Beacon a LoRa message
@@ -86,6 +86,7 @@ Standalone applications
            -d Destination (if omitted BEACON-99 is default)
            -m message to be sent within double quotes
   ```
+
 
 ## HASviolet Handheld Use
 With the OLED and three buttons on the bonnet, core functionality is available to you
