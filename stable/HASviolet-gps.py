@@ -12,7 +12,7 @@
 #
 #
 
-import qwiic
+#import qwiic   uncomment if using i2c sensors
 import io
 import serial
 import time
