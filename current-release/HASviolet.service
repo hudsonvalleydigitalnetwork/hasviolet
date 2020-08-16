@@ -1,0 +1,46 @@
+#
+# HASviolet.service 
+#
+# 20200804-2134
+#
+# DESCRIPTION
+#
+#     This is a systemd service that runs HASviolet-service.py on Pi startup.
+#
+#
+# TO STOP THE SERVICE
+#
+#     ./HASviolet-service.sh stop
+#
+# TO START THE SERVICE
+#
+#     ./HASviolet-service.sh start
+#
+# TO REMOVE THE SERVICE
+#
+#     ./HASviolet-service.sh remove
+#
+
+
+##
+## INIT VARIABLES 
+##
+
+##
+## SCRIPT
+##
+
+[Unit]
+Description=HASviolet Service
+After=multi-user.target
+
+[Service]
+User=pi
+PIDFile=/run/HASviolet-service.pid
+WorkingDirectory=/home/pi/HASviolet
+ExecStart=/home/pi/HASviolet/HASviolet-handheld.py
+ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/HASviolet-service.pid
+TimeoutStopSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -102,23 +102,21 @@ Joe Cupano NE2Z led the entire software development process and only had minimal
 
 ## Getting Started
 
-Start with reading the the [HASviolet Installation Guide](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet_Guide_v20.pdf). 
+Start with reading the the [HASviolet Installation Guide](https://github.com/joecupano/hasty-banana/blob/master/HASviolet-RPi_Guide_v26.pdf). 
 
-It will tell you things such as:
+It covers:
 
-Step A: Installing Raspbian Lite OS
+* Installing Raspbian Lite OS
+* Configuring the RPi hardware (raspi-config settings)
+* Installing HASviolet
+* Usage details on HASviolet applications
 
-Step B: Configuring your hardware (Via config.txt and cmdline.txt plus through raspi-config)
+If want to install while reading the guide just perform the following from the Pi home directory:
 
-Step C: Downloading from Git followed then running the [install automation script](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet_install.sh).
-
-If you want to cheat a little, after following what is needed in step A & B:
-
->wget https://raw.githubusercontent.com/hudsonvalleydigitalnetwork/hasviolet/master/HASviolet_install.sh
-
->chmod 755 HASviolet_install.sh
-
->./HASviolet_install.sh
-
+```
+wget https://raw.githubusercontent.com/hudsonvalleydigitalnetwork/hasviolet/master/HASviolet_install.sh
+chmod 755 HASviolet_install.sh
+./HASviolet_install.sh
+```
 
 ![alt-test](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/hardware/hasviolet-hw-alternate.png)
