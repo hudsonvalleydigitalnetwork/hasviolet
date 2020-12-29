@@ -7,7 +7,7 @@ Go to the [wiki](https://github.com/hudsonvalleydigitalnetwork/hasviolet/wiki/HA
 
 ## Getting Started
 
-Start with reading the the [HASviolet Installation Guide](https://https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet-RPi_Guide_v26.pdf). 
+Start with reading the the [HASviolet Installation Guide](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet-RPi_Guide_v26.pdf). 
 
 It covers:
 
