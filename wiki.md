@@ -102,7 +102,7 @@ Joe Cupano NE2Z led the entire software development process and only had minimal
 
 ## Getting Started
 
-Start with reading the the [HASviolet Installation Guide](https://github.com/joecupano/hasty-banana/blob/master/HASviolet-RPi_Guide_v26.pdf). 
+Start with reading the the [HASviolet Installation Guide](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/HASviolet-RPi_Guide_v26.pdf). 
 
 It covers:
 
