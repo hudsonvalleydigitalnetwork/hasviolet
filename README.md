@@ -23,11 +23,7 @@ The root folder includes all apps and libraries. The following folders contain;
 - 'cfg' config files
 - 'development' code under development that could do dangerous things
 - 'docs' Home of RTFM
-- 'server' all code for running WebGUI service
-
-# To-Do
-
-- Change "channels" via WebUI
+- 'server/static' all files used by running WebGUI service
 
 Party on!
 
@@ -43,7 +39,7 @@ On start, HASviolet_websox.py performs the following in order;
 - listen for (browser) client connections on port 8000.
 
 When a new client connects the following occur in order;
-- Client is served server/static/hasVIOLET_LOGIN.html made pretty with static/hasVIOLET_LOGIN.css
+- Client is served server/static/hasVIOLET_LOGIN.html made pretty with server/static/hasVIOLET_LOGIN.css
 - Client is required to authenticate using ID/password in cfg/hasVIOLET.pwf file
 - Once authenticated, the client is redirected to the Dashboard server/static/hasVIOLET_INDEX.html made pretty with server/static/hasVIOLET.css.
 - After the page is made pretty, static/hasVIOLET_INDEX.html tells the browser to load javascript from server/static/hasVIOLET.js 
@@ -89,7 +85,7 @@ This code is loaded and run by the browser. To see it in action on the browser, 
 ## Modem Notes
 
 A confusing subject but hope the following tranlsates well;
-
+```
 rf95.setFrequency(911);
   rf95.setSpreadingFactor(7);
   rf95.setSignalBandwidth(125E3);
@@ -113,3 +109,4 @@ rf95.setFrequency(911);
     rf95.setSignalBandwidth(125000);
     rf95.setCodingRate4(8);
     rf95.setSpreadingFactor(12); 
+```
