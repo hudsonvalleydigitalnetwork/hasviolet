@@ -13,7 +13,7 @@ The quickest way to get started with HASviolet is to
 - Buy the [hardware](http://www.adafruit.com/wishlists/503542)
 - Clone the [repo](https://github.com/hudsonvalleydigitalnetwork/hasviolet.git)
 - cd into the repo directory and run './HASviolet_install_fresh.sh'
-- [RTFM](https://github.com/joecupano/hasviolet/docs/HASviolet-RPi_Guide_v30.pdf)
+- [RTFM](https://https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/docs/HASviolet-RPi_Guide_v30.pdf)
 
 # What is in the Repo
 
