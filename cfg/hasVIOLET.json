@@ -1,0 +1,118 @@
+{
+	"RADIO": {
+		"channel": "HV1",
+		"rfmodule": "RFM9X",
+		"modemconfig": "Bw125Cr45Sf128",
+		"modem": 0,
+		"frequency": 911250000,
+		"spreadfactor": 7,
+		"codingrate4": 8,
+		"bandwidth": 125000,
+		"txpwr": 10
+	},
+	"HID": {
+		"oled": "128x32"
+	},
+	"CONTACT": {
+		"mycall": "NOCALL",
+		"myssid": "99",
+		"mybeacon": "quack quack",
+		"dstcall": "BEACON",
+		"dstssid": "99"
+	},
+	"MACROS": {
+		"M1": "QRZ",
+		"M2": "QSL",
+		"M3": "73",
+		"M4": "TEST TEST TEST"
+	},
+	"CHANNELS": {
+		"0": {
+			"channelname": "HV0",
+			"modem": 0,
+			"frequency": 911250000
+		},
+		"1": {
+			"channelname": "HV1",
+			"modem": 0,
+			"frequency": 911250000
+		},
+		"2": {
+			"channelname": "HV2",
+			"modem": 2,
+			"frequency": 911250000
+		},
+		"3": {
+			"channelname": "HV3",
+			"modem": 3,
+			"frequency": 911250000
+		},
+		"4": {
+			"channelname": "HV4",
+			"modem": 4,
+			"frequency": 911250000
+		},
+		"5": {
+			"channelname": "HV5",
+			"modem": 1,
+			"frequency": 911250000
+		},
+		"6": {
+			"channelname": "HV6",
+			"modem": 2,
+			"frequency": 911300000
+		},
+		"7": {
+			"channelname": "HV7",
+			"modem": 3,
+			"frequency": 911300000
+		},
+		"8": {
+			"channelname": "HV8",
+			"modem": 0,
+			"frequency": 911300000
+		},
+		"9": {
+			"channelname": "HV9",
+			"modem": 1,
+			"frequency": 911300000
+		}
+	},
+	"MODEMS": {
+		"0": {
+			"modemconfig": "Bw125Cr45Sf128",
+			"modemname": "MEDIUM",
+			"spreadfactor": 7,
+			"codingrate4": 8,
+			"bandwidth": 125000
+		},
+		"1": {
+			"modemconfig": "Bw500Cr45Sf128",
+			"modemname": "FAST-SHRT",
+			"spreadfactor": 7,
+			"codingrate4": 5,
+			"bandwidth": 500000
+		},
+		"2": {
+			"modemconfig": "Bw31_25Cr48Sf512",
+			"modemname": "SLOW-LNG1",
+			"spreadfactor": 7,
+			"codingrate4": 8,
+			"bandwidth": 31250
+		},
+		"3": {
+			"modemconfig": "Bw125Cr48Sf4096",
+			"modemname": "SLOW-LNG2",
+			"spreadfactor": 12,
+			"codingrate4": 8,
+			"bandwidth": 125000
+		},
+		"4": {
+			"modemconfig": "Bw125Cr45Sf2048",
+			"modemname": "SLOW-LNG3",
+			"spreadfactor": 8,
+			"codingrate4": 5,
+			"bandwidth": 125000
+		}
+	}
+}
