@@ -1,2 +1,0 @@
-# hazviolent
-HAS code purifier
