@@ -38,15 +38,15 @@ During install, HASViolet_websox.py server is installed as a daemon under system
 can be used to stop/start/remove/status of the server.
 
 On start, HASviolet_websox.py performs the following in order;
-- loads SSL keys cfg/hasVIOLET.crt and cfg/ghasVIOLET.key
+- loads SSL keys cfg/hasVIOLET.crt and cfg/hasVIOLET.key
 - loads JSON file cfg/hasVIOLET.json 
 - listen for (browser) client connections on port 8000.
 
 When a new client connects the following occur in order;
-- Client is served static/hasVIOLET_LOGIN.html made pretty with static/hasVIOLET_LOGIN.css
+- Client is served server/static/hasVIOLET_LOGIN.html made pretty with static/hasVIOLET_LOGIN.css
 - Client is required to authenticate using ID/password in cfg/hasVIOLET.pwf file
-- Once authenticated, the client is redirected to the Dashaboard static/hasVIOLET_INDEX.html made pretty with static/hasVIOLET.css.
-- After the page is made pretty, static/hasVIOLET_INDEX.html tells the browser to load javascript from  static/hasVIOLET_INDEX.js 
+- Once authenticated, the client is redirected to the Dashboard server/static/hasVIOLET_INDEX.html made pretty with server/static/hasVIOLET.css.
+- After the page is made pretty, static/hasVIOLET_INDEX.html tells the browser to load javascript from server/static/hasVIOLET.js 
 - Javascript instructs the client to the server and load cfg/hasVIOLET.json
 
 ## Server flow
@@ -56,7 +56,7 @@ The server runs two async processes;
 - Tornado Web Framework providing web and websocket services
 - LoRa Transceiver function (HASviolet)
 
-When <mark>HASviolet</mark> sees a LoRa packet, it captures the message and sends a WebSocket client broadcast. When a TX request comes from the (browser) client via WebSockets, <mark>HASit.transmit</mark> is called, transmits the LoRa packet and then trips a conditional inner-loop to restart. We also use this trick if we want to change channels from the client which includes frequency, spreadfactor, coding, and bandwidth.
+When <mark>HASviolet</mark> sees a LoRa packet, it captures the message and sends a WebSocket client broadcast. When a TX request comes from the browser (client) via WebSockets, <mark>HASit.transmit</mark> is called, transmits the LoRa packet and then trips a conditional inner-loop to restart recieving. We also use this trick if we want to change channels from the client which includes frequency, spreadfactor, coding, and bandwidth.
 
 ## Details
 
@@ -69,7 +69,7 @@ The framework uses SSLv3/TLS only. A untrusted self-signed certificate and serve
 hasVIOLET.pwf is a password file that stores ID and password pairs. An account program is included (hasVIOLET_account.py) to generate your own ID and password pairs into the password file. Passwords are stored as hashes to protect them. The password file is pre-populated with three ID:Password pairs provided as examples only and should be immediately replaced using the account program.
 
 ### FAVICON.ICO
- An annoying thing all browsers do is look for a FAVICON.ICO file. The file is a small image icon  that some sites host and is displayed in your browser tab with  the title of the web page. I created one cause I go tired of seeing an error in the Browser inspect console while I was building the app.  If you want to create your own FAVICON.ICO, easiest way is from the following website that generates them.
+An annoying thing all browsers do is look for a FAVICON.ICO file. The file is a small image icon  that some sites host and is displayed in your browser tab with  the title of the web page. I created one cause I go tired of seeing an error in the Browser inspect console while I was building the app.  If you want to create your own FAVICON.ICO, easiest way is from the following website that generates them.
 
  https://www.favicon.cc/
 
@@ -80,7 +80,7 @@ The CSS code is what makes the WebUI shine. It is commented into sections that r
 
 ### Login CSS code (hasVIOLET_LOGIN.css)
 
-The CSS code for static/radioDASH_LOGIN.html
+The CSS code for server/static/hasVIOLET_LOGIN.html
 
 ### JS Code
 This code is loaded and run by the browser. To see it in action on the browser, after loading the web page (in Chrome) right click on empty page space and select Inspect then click on the Console tab. The code generates alot of console.log infor here.
