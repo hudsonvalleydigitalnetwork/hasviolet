@@ -11,7 +11,7 @@ UPDATED: 11 March 2021
 The quickest way to get started with HASviolet is to
 
 - Buy the [hardware](http://www.adafruit.com/wishlists/503542)
-- Install [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/) on a microSD card
+- Install [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/) on a microSD card using (Raspberry Pi Imager)[https://www.raspberrypi.org/software/]
 - Clone the [repo](https://github.com/hudsonvalleydigitalnetwork/hasviolet.git)
 - cd into the repo directory and run './HASviolet_install_fresh.sh'
 - Read the fine [manual](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/docs/HASviolet-RPi_Guide_v30.pdf)
