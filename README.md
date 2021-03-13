@@ -29,6 +29,8 @@ Party on!
 
 # Introducing the WebUI
 
+![hasviolet_ui.png](docs/hasviolet_ui.png)
+
 ## Overview
 During install, **HASViolet_websox.py server** is installed as a daemon under systemd. **HASviolet_websox.sh** 
 can be used to stop/start/remove/status of the server.
