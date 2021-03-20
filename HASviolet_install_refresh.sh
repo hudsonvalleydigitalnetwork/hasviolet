@@ -1,12 +1,12 @@
 #!/bin/bash
 
 ###
-### HASviolet_install_update
+### HASviolet_install_refresh
 ###
 ###
 
 ##
-##    REVISION: 20210312-1400
+##    REVISION: 20210320-2100
 ## 
 
 ##
@@ -67,7 +67,7 @@ hasviolet_ssl_crt=$hasviolet_install/cfg/hasVIOLET.crt
 ##
 
 echo " "
-echo "HASviolet Install Update"
+echo "HASviolet Install Refresh"
 echo " "
 
 cd $HOME

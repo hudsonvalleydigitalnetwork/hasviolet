@@ -6,7 +6,7 @@
 ### 
 
 ##
-##    REVISION: 20210312-1400
+##    REVISION: 20210320-2100
 ## 
 
 ##
@@ -92,13 +92,6 @@ sudo pip3 install pyLoraRFM9x
 sudo pip3 install sparkfun-qwiic
 sudo pip3 install sparkfun-qwiic-bme280
 sudo pip3 install sparkfun-qwiic-vl53l1x
-
-cd $HOME
-
-echo " "
-echo "- Clone Repository"
-echo " "
-git clone $hasviolet_github_repo
 
 echo " "
 echo "- Generating self-signed SSL certificate --  /C=US/ST=New York/L=Hudson Valley/O=Hudson Valley Digital Network/OU=HASviolet/CN=hvdn.org"
