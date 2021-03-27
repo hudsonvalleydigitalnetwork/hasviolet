@@ -239,8 +239,11 @@ def find_password(user):
 def rx_oled_scroll():
     HAShat.OLED.fill(0)
     HAShat.OLED.show()
-    HAShat.OLED.text("RSSI: " + HASit.receive_rssi, 0, 9, 1)
-    HAShat.OLED.text(HASit.receive_ascii, 0, 17, 1)
+    HAShat.OLED.text("RSSI: " + HASit.receive_rssi, 0, 0, 1)
+    HAShat.OLED.text(HASit.receive_ascii[0:20], 0, 8, 1)
+    HAShat.OLED.text(HASit.receive_ascii[20:40], 0, 16, 1)
+    HAShat.OLED.text(HASit.receive_ascii[40:60], 0, 24, 1)
+    HAShat.OLED.text(HASit.receive_ascii[60:73], 0, 32, 1)
     HAShat.OLED.show()
 
 def main():
