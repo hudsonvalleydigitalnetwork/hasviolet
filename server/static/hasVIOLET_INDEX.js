@@ -110,7 +110,8 @@ var url = "https://" + myHostname + ":8000/cfg/hasVIOLET.json";		//  JSON file l
 var getHasJson = new XMLHttpRequest();								//  Holds JSON from Radio
 
 var rxDisplay = [];													//  Holds whole RX window as 27 lines of text
-var rxDispY = 26;													//  Numbe of rowa for RX Window
+var rxDispY = 26;													//  Numbe of rows for RX Window
+var rxDispX = 70;													//  Numbe of columns for RX Window
 
 
 /* -            
@@ -466,15 +467,38 @@ function rxwinRCLR() {
 }
 
 function rxwinMSG(message) {
-  for (i = rxDispY; i > 0; i=i-1) {
-	rxDisplay[i] = rxDisplay[i-1];
-	var rxWINid = "rxWIN" + i;
-    var el_RXwin = document.getElementById(rxWINid);
-	el_RXwin.innerHTML = rxDisplay[i];
-  }
-  rxDisplay[0] = message;
-  var el_RXwin = document.getElementById("rxWIN0");
-  el_RXwin.innerHTML = message;
+	if (message.length > 70) {
+		message1 = message.slice(0,70);
+		message2 = message.slice(71,(message.length));
+		for (i = rxDispY; i > 0; i=i-1) {
+			rxDisplay[i] = rxDisplay[i-1];
+			var rxWINid = "rxWIN" + i;
+			var el_RXwin = document.getElementById(rxWINid);
+			el_RXwin.innerHTML = rxDisplay[i];
+		}
+		rxDisplay[0] = message1;
+		var el_RXwin = document.getElementById("rxWIN0");
+		el_RXwin.innerHTML = message1;
+		for (i = rxDispY; i > 0; i=i-1) {
+			rxDisplay[i] = rxDisplay[i-1];
+			var rxWINid = "rxWIN" + i;
+			var el_RXwin = document.getElementById(rxWINid);
+			el_RXwin.innerHTML = rxDisplay[i];
+		}
+		rxDisplay[0] = message2;
+		var el_RXwin = document.getElementById("rxWIN0");
+		el_RXwin.innerHTML = message2
+	} else {
+		for (i = rxDispY; i > 0; i=i-1) {
+			rxDisplay[i] = rxDisplay[i-1];
+			var rxWINid = "rxWIN" + i;
+			var el_RXwin = document.getElementById(rxWINid);
+			el_RXwin.innerHTML = rxDisplay[i];
+		}
+		rxDisplay[0] = message;
+		var el_RXwin = document.getElementById("rxWIN0");
+		el_RXwin.innerHTML = message;
+	}
 }
 
 function rxwinMSGhelp() {
