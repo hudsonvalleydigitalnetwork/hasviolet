@@ -110,8 +110,8 @@ var url = "https://" + myHostname + ":8000/cfg/hasVIOLET.json";		//  JSON file l
 var getHasJson = new XMLHttpRequest();								//  Holds JSON from Radio
 
 var rxDisplay = [];													//  Holds whole RX window as 27 lines of text
-var rxDispY = 26;													//  Numbe of rows for RX Window
-var rxDispX = 70;													//  Numbe of columns for RX Window
+var rxDispY = 27;													//  Numbe of rows for RX Window
+var rxDispX = 73;													//  Numbe of columns for RX Window
 
 
 /* -            
@@ -467,9 +467,9 @@ function rxwinRCLR() {
 }
 
 function rxwinMSG(message) {
-	if (message.length > 70) {
-		message1 = message.slice(0,70);
-		message2 = message.slice(71,(message.length));
+	if (message.length > 73) {
+		message1 = message.slice(0,73);
+		message2 = message.slice(73,(message.length));
 		for (i = rxDispY; i > 0; i=i-1) {
 			rxDisplay[i] = rxDisplay[i-1];
 			var rxWINid = "rxWIN" + i;
