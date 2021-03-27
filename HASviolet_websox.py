@@ -4,7 +4,7 @@
 #
 #   USAGE: HASviolet_websox.py 
 #
-#   REVISION: 20210312-1400
+#   REVISION: 20210327-0700
 #
 #
 
@@ -178,10 +178,8 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             HASit.transmit(message)
     
     def on_close(self):
-        if self not in wsxCLIENTS:
-            wsxCLIENTS.remove(self)
+        wsxCLIENTS.remove(self)
         print ('WS:CLIENT:CLOSED')
-        self.write_message("WS:CLIENT:CLOSED")
         gc.collect()
 
 
