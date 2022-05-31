@@ -61,6 +61,7 @@
 # HASviolet Directory tree
 HASVIOLET_REPO="https://github.com/hudsonvalleydigitalnetwork/hasviolet.git"
 HASVIOLET_HOME=$HOME/HASviolet
+HASVIOLET_TEMPLATES=$HASVIOLET_HOME/templates
 HASVIOLET_ETC=$HOME/.config/HASviolet
 HASVIOLET_CONFIG=$HASVIOLET_ETC/HASviolet.json
 HASVIOLET_SSL_KEY=$HASVIOLET_ETC/HASviolet.key
@@ -124,7 +125,12 @@ hasviolet_install(){
     echo "- Create Directories"
     echo " "
     cd $HASVIOLET_HOME
+    echo " "
+    echo "- Copy config templates into $HASVIOLET_ETC"
+    echo " "
+    cd 
     mkdir $HASVIOLET_ETC
+    sudo cp $HASVIOLET_TEMPLATES/* $HASVIOLET_ETC
     echo " "
     echo "- Generating self-signed SSL certificate --  /C=US/ST=New York/L=Hudson Valley/O=Hudson Valley Digital Network/OU=HASviolet/CN=hvdn.org"
     echo " "
