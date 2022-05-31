@@ -34,7 +34,7 @@ from HASvioletHID import HAShid
 # VARIABLES
 #
 
-HASVIOLET_CFG_JSON = "~/.config/hasVIOLET.json"
+HASVIOLET_CONFIG = "~/.config/HASviolet/etc/HASviolet.json"
 
 #
 # FUNCTIONS
@@ -87,7 +87,7 @@ arg_signal_rssi = args['signal']
 # SETUP
 #
 
-HAShat.logo('cfg/hvdn-logo.xbm')
+HAShat.logo('~/.config/HASviolet/etc/HVDN_logo.xbm')
 
 # SIGTINT aka control-C is quit
 signal.signal(signal.SIGINT, sigs_handler)

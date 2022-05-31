@@ -34,7 +34,7 @@ from HASvioletHID import HAShid
 # VARIABLES
 #
 
-HASVIOLET_CFG_JSON = "~/.config/hasVIOLET.json"
+HASVIOLET_CONFIG = "~/.config/HASviolet/etc/HASviolet.json"
 
 
 #
@@ -94,7 +94,7 @@ arg_signal_rssi = args['signal']
 # SETUP
 #
 
-HAShat.logo('cfg/hvdn-logo.xbm')
+HAShat.logo('~/.config/HASviolet/etc/HVDN_logo.xbm')
 
 width = HAShat.OLED.width
 height = HAShat.OLED.height

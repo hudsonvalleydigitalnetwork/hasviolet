@@ -11,7 +11,12 @@
 # HASviolet Directory tree
 HASVIOLET_REPO="https://github.com/hudsonvalleydigitalnetwork/hasviolet.git"
 HASVIOLET_HOME=$HOME/HASviolet
-HASVIOLET_ETC=$HOME/.config/HASviolet
+HASVIOLET_TEMPLATES=$HASVIOLET_HOME/templates
+HASVIOLET_TEMPLATES_ETC=$HASVIOLET_TEMPLATES/etc
+HASVIOLET_TEMPLATES_SRV=$HASVIOLET_TEMPLATES/server
+HASVIOLET_CFGDIR=$HOME/.config/HASviolet
+HASVIOLET_SRVDIR=$HASVIOLET_CFGDIR/server
+HASVIOLET_ETC=$HASVIOLET_CFGDIR/etc
 HASVIOLET_CONFIG=$HASVIOLET_ETC/HASviolet.json
 HASVIOLET_SSL_KEY=$HASVIOLET_ETC/HASviolet.key
 HASVIOLET_SSL_crt=$HASVIOLET_ETC/HASviolet.crt
@@ -30,8 +35,8 @@ After=multi-user.target
 [Service]
 User=pi
 PIDFile=/run/HASviolet_websox.pid
-WorkingDirectory=/home/pi/HASviolet
-ExecStart=/home/HASviolet/HASviolet_websox.py
+WorkingDirectory=$HASVIOLET_SRVDIR
+ExecStart=$HASVIOLET_HOME/HASviolet_websox.py
 ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/HASviolet_websox.pid
 TimeoutStopSec=5
 

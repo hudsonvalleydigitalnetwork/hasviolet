@@ -2,7 +2,7 @@
 #
 #   HASviolet Account
 #
-#     USAGE: hasVIOLET-account.py -s -c -u USER -p PASSWORD
+#     USAGE: HASviolet-account.py -s -c -u USER -p PASSWORD
 #
 #           -s,  --store a new user and password
 #           -c,  --check (authenticate) yuser and password
@@ -31,7 +31,7 @@ print (" ")
 # IMPORT ARGS
 #
 
-parser = argparse.ArgumentParser(description='hasVIOLET Hashgen')
+parser = argparse.ArgumentParser(description='HASviolet Hashgen')
 parser.add_argument('-s','--store', help='Store Password', action='store_true')
 parser.add_argument('-c','--check', help='Check Password', action='store_true')
 parser.add_argument('-d','--delete', help='Delete User', action='store_true')
@@ -51,8 +51,8 @@ entered_password = args['password']
 # VARIABLES
 #
 
-HASVIOLET_CFG_JSON = "~/.config/hasVIOLET.json"
-HASVIOLET_pwf = "~/.config/HASviolet.pwf"
+HASVIOLET_CONFIG = "~/.config/HASviolet/etc/HASviolet.json"
+HASVIOLET_PWF = "~/.config/HASviolet/etc/HASviolet.pwf"
 
 
 #
@@ -82,7 +82,7 @@ def verify_password(stored_password, provided_password):
 
 def find_user(user):
     userfound=""
-    f = open(HASviolet_pwf, "r")
+    f = open(HASVIOLET_PWF, "r")
     flines = f.readlines()
     for fl in flines:
         fluser = fl.split(":")
@@ -92,9 +92,9 @@ def find_user(user):
     return (userfound)
 
 def delete_user(user):
-    with open(HASviolet_pwf, "r") as f:
+    with open(HASVIOLET_PWF, "r") as f:
         lines = f.readlines()
-    with open(HASviolet_pwf, "w") as f:
+    with open(HASVIOLET_PWF, "w") as f:
         for line in lines:
             fluser = line.split(":")
             if user != fluser[0]:
@@ -103,7 +103,7 @@ def delete_user(user):
 
 def find_password(user):
     userpassword = ""
-    f = open(HASviolet_pwf, "r")
+    f = open(HASVIOLET_PWF, "r")
     flines = f.readlines()
     for fl in flines:
         fluser = fl.split(":")
@@ -132,7 +132,7 @@ if actionCheck == True:
 if actionStore == True:
     provided_hashed = hash_password(entered_password)
     save_password(user, provided_hashed)
-    print("Stored in " + HASviolet_pwf)
+    print("Stored in " + HASVIOLET_PWF)
 
 if actionDelete == True:
     if find_user(user) == "":

@@ -40,20 +40,21 @@ from HASvioletHID import HAShid
 #
 
 define("port", default=8000, help="run on the given port", type=int)
-wsxCLIENTS = []                                                          # Client Connection Tracking for Tornado
-HASviolet_RXLOCK = False                                                  # True = RX is running
-HASviolet_TXLOCK = False                                                  # True = TX is running
-HASviolet_SERVERPATH = "/home/pi/HASviolet/server/"                       # Path to files. Change when Pi
-HASviolet_CFG_JSON = "/home/pi/HASviolet/cfg/HASviolet.json"                   # Config file is in JSON format
-HASviolet_MSGS = HASviolet_SERVERPATH + "msgs/HASviolet.msgs"              # radio writes msgs received here   
-HASviolet_PWF = "/home/pi/HASviolet/cfg/HASviolet.pwf"                    # Password file  user:hashedpasswd
-HASviolet_LOGIN = HASviolet_SERVERPATH + "static/HASviolet_LOGIN.html"
-HASviolet_LOGINCSS = HASviolet_SERVERPATH + "static/HASviolet_LOGIN.css"
-HASviolet_INDEX = HASviolet_SERVERPATH + "static/HASviolet_INDEX.html"
-HASviolet_INDEXCSS = HASviolet_SERVERPATH + "static/HASviolet.css"
-HASvioletjs = HASviolet_SERVERPATH + "static/HASviolet.js"
+wsxCLIENTS = []                                                        # Client Connection Tracking for Tornado
+HASviolet_RXLOCK = False                                               # True = RX is running
+HASviolet_TXLOCK = False                                               # True = TX is running
+HASviolet_SRVDIR = "~/.config/HASviolet/server/"                       # Path to files. Change when Pi
+HASviolet_CFGDIR = "~/.config/HASviolet/etc"                           # Config file is in JSON format
+HASviolet_CFG_JSON = HASviolet_CFGDIR + "HASviolet.json"               # Config file is in JSON format
+HASviolet_MSGS = HASviolet_SRVDIR + "msgs/HASviolet.msgs"              # radio writes msgs received here   
+HASviolet_PWF = HASviolet_CFGDIR + "HASviolet.pwf"                     # Password file  user:hashedpasswd
+HASviolet_LOGIN = HASviolet_SRVDIR + "static/HASviolet_LOGIN.html"
+HASviolet_LOGINCSS = HASviolet_SRVDIR + "static/HASviolet_LOGIN.css"
+HASviolet_INDEX = HASviolet_SRVDIR + "static/HASviolet_INDEX.html"
+HASviolet_INDEXCSS = HASviolet_SRVDIR + "static/HASviolet.css"
+HASvioletjs = HASviolet_SRVDIR + "static/HASviolet.js"
 
-stored_password = ""                                                     # hashedpassword stored in Password file
+stored_password = ""                                                   # hashedpassword stored in Password file
 currmsg_ts = ""
 lastmsg_ts = ""
 
@@ -216,7 +217,7 @@ def verify_password(stored_password, provided_password):
 
 def find_user(user):
     userfound=""
-    f = open(HASvioletpwf, "r")
+    f = open(HASviolet_PWF, "r")
     flines = f.readlines()
     for fl in flines:
         fluser = fl.split(":")
@@ -227,7 +228,7 @@ def find_user(user):
 
 def find_password(user):
     userpassword = ""
-    f = open(HASvioletpwf, "r")
+    f = open(HASviolet_PWF, "r")
     flines = f.readlines()
     for fl in flines:
         fluser = fl.split(":")

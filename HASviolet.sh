@@ -62,7 +62,11 @@
 HASVIOLET_REPO="https://github.com/hudsonvalleydigitalnetwork/hasviolet.git"
 HASVIOLET_HOME=$HOME/HASviolet
 HASVIOLET_TEMPLATES=$HASVIOLET_HOME/templates
-HASVIOLET_ETC=$HOME/.config/HASviolet
+HASVIOLET_TEMPLATES_ETC=$HASVIOLET_TEMPLATES/etc
+HASVIOLET_TEMPLATES_SRV=$HASVIOLET_TEMPLATES/server
+HASVIOLET_CFGDIR=$HOME/.config/HASviolet
+HASVIOLET_SRVDIR=$HASVIOLET_CFGDIR/server
+HASVIOLET_ETC=$HASVIOLET_CFGDIR/etc
 HASVIOLET_CONFIG=$HASVIOLET_ETC/HASviolet.json
 HASVIOLET_SSL_KEY=$HASVIOLET_ETC/HASviolet.key
 HASVIOLET_SSL_crt=$HASVIOLET_ETC/HASviolet.crt
@@ -125,12 +129,17 @@ hasviolet_install(){
     echo "- Create Directories"
     echo " "
     cd $HASVIOLET_HOME
+    mkdir $HASVIOLET_CFGDIR
+    mkdir $HASVIOLET_SRVDIR
+    mkdir $HASVIOLET_ETC
     echo " "
     echo "- Copy config templates into $HASVIOLET_ETC"
     echo " "
-    cd 
-    mkdir $HASVIOLET_ETC
-    sudo cp $HASVIOLET_TEMPLATES/* $HASVIOLET_ETC
+    sudo cp $HASVIOLET_TEMPLATES_ETC/* $HASVIOLET_ETC
+    echo " "
+    echo "- Copy server templates into $HASVIOLET_SRVDIR"
+    echo " "
+    sudo cp $HASVIOLET_TEMPLATES_SRV/* $HASVIOLET_SRVDIR
     echo " "
     echo "- Generating self-signed SSL certificate --  /C=US/ST=New York/L=Hudson Valley/O=Hudson Valley Digital Network/OU=HASviolet/CN=hvdn.org"
     echo " "
@@ -166,7 +175,7 @@ case "$1" in
         echo -e "${HASVIOLET_BANNER_RESET}"
         cd ~
         rm -rf $HASVIOLET_HOME
-        rm -rf $HASVIOLET_ETC
+        rm -rf $HASVIOLET_CFGDIR
         ;;
     install )
         hasviolet_install

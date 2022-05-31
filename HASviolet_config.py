@@ -8,7 +8,7 @@
 #   OPTIONS
 #      -h, --help      show this help message and exit
 #
-#   REVISION: 20210312-1400
+#   REVISION: 20220531-1400
 #
 #
 
@@ -31,7 +31,7 @@ from HASvioletHID import HAShid
 # VARIABLES
 #
 
-HASVIOLET_CFG_JSON = "~/.config/hasVIOLET.json"
+HASVIOLET_CONFIG = "~/.config/HASviolet/etc/HASviolet.json"
 
 
 #
@@ -215,7 +215,7 @@ while True:
         print ('Displaying HASviolet.json')
         print ('========================')
         print (' ')
-        f = open(HASVIOLET_CFG_JSON, "r")
+        f = open(HASVIOLET_CONFIG, "r")
         vilete = f.read()
         print (vilete)
         f.close()
@@ -225,7 +225,7 @@ while True:
         pause()
     elif fun=="51":
         print ('Opening HASviolet.json')
-        with open(HASVIOLET_CFG_JSON) as configReadFile:
+        with open(HASVIOLET_CONFIG) as configReadFile:
             data = json.load(configReadFile)
         time.sleep(3)           
         data["RADIO"]["rfmodule"] = HASit.radio
@@ -243,7 +243,7 @@ while True:
         data["CONTACT"]["dstcall"] = HASit.dstcall
         data["CONTACT"]["dstssid"] = HASit.dstssid
         print ('Updating HASviolet.json')
-        with open(HASVIOLET_CFG_JSON, 'w') as configWriteFile:
+        with open(HASVIOLET_CONFIG, 'w') as configWriteFile:
             json.dump(data, configWriteFile, indent=3)
         time.sleep(3)
     elif fun=="99":
