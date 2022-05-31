@@ -4,7 +4,7 @@ Read the fine [wiki](https://github.com/hudsonvalleydigitalnetwork/hasviolet/wik
 
 ![HVDN_HASviolet_Git_Banner_1.jpg](docs/HVDN_HASviolet_Git_Banner_1.jpg)
 
-UPDATED: 11 March 2021
+UPDATED: 29 January 2022
 
 # Quick Start
 
@@ -16,7 +16,7 @@ The quickest way to get started with HASviolet is to
 - Clone the [repo](https://github.com/hudsonvalleydigitalnetwork/hasviolet.git)
 - cd into the repo directory and run **./HASviolet_install_fresh.sh**
 - Run **./HASviolet_config.py** to configure HASviolet
-- Read the fine [manual](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/docs/HASviolet-RPi_Guide_v34.pdf)
+- Read the fine [manual](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/docs/HASviolet-RPi_Guide_v40.pdf)
 
 
 # What is in the Repo

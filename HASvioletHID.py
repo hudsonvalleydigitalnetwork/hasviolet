@@ -30,11 +30,11 @@ from PIL import Image, ImageDraw, ImageFont
 # VARIABLES
 #
 
-hasVIOLETcfg = "cfg/hasVIOLET.json"
+HASVIOLET_CFG_JSON = "cfg/hasVIOLET.json"
 
 class HAShid:
     def __init__(self):
-        self.cfgjson = hasVIOLETcfg
+        self.cfgjson = HASVIOLET_CFG_JSON
         with open(self.cfgjson) as configFileJson:
             jsonConfig = json.load(configFileJson)
         self.myoled = jsonConfig["HID"]["oled"]

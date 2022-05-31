@@ -44,7 +44,7 @@ wsxCLIENTS = []                                                          # Clien
 hasVIOLETRXLOCK = False                                                  # True = RX is running
 hasVIOLETTXLOCK = False                                                  # True = TX is running
 hasVIOLETserverpath = "/home/pi/hasviolet/server/"                       # Path to files. Change when Pi
-hasVIOLETcfg = "/home/pi/hasviolet/cfg/hasVIOLET.json"                   # Config file is in JSON format
+HASVIOLET_CFG_JSON = "/home/pi/hasviolet/cfg/hasVIOLET.json"                   # Config file is in JSON format
 hasVIOLETmsgs = hasVIOLETserverpath + "msgs/hasVIOLET.msgs"              # radio writes msgs received here   
 hasVIOLETpwf = "/home/pi/hasviolet/cfg/hasVIOLET.pwf"                    # Password file  user:hashedpasswd
 hasVIOLETlogin = hasVIOLETserverpath + "static/hasVIOLET_LOGIN.html"
