@@ -41,17 +41,17 @@ from HASvioletHID import HAShid
 
 define("port", default=8000, help="run on the given port", type=int)
 wsxCLIENTS = []                                                          # Client Connection Tracking for Tornado
-hasVIOLETRXLOCK = False                                                  # True = RX is running
-hasVIOLETTXLOCK = False                                                  # True = TX is running
-hasVIOLETserverpath = "/home/pi/hasviolet/server/"                       # Path to files. Change when Pi
-HASVIOLET_CFG_JSON = "/home/pi/hasviolet/cfg/hasVIOLET.json"                   # Config file is in JSON format
-hasVIOLETmsgs = hasVIOLETserverpath + "msgs/hasVIOLET.msgs"              # radio writes msgs received here   
-hasVIOLETpwf = "/home/pi/hasviolet/cfg/hasVIOLET.pwf"                    # Password file  user:hashedpasswd
-hasVIOLETlogin = hasVIOLETserverpath + "static/hasVIOLET_LOGIN.html"
-hasVIOLETlogincss = hasVIOLETserverpath + "static/hasVIOLET_LOGIN.css"
-hasVIOLETindex = hasVIOLETserverpath + "static/hasVIOLET_INDEX.html"
-hasVIOLETindexcss = hasVIOLETserverpath + "static/hasVIOLET.css"
-hasVIOLETjs = hasVIOLETserverpath + "static/hasVIOLET.js"
+HASviolet_RXLOCK = False                                                  # True = RX is running
+HASviolet_TXLOCK = False                                                  # True = TX is running
+HASviolet_SERVERPATH = "/home/pi/HASviolet/server/"                       # Path to files. Change when Pi
+HASviolet_CFG_JSON = "/home/pi/HASviolet/cfg/HASviolet.json"                   # Config file is in JSON format
+HASviolet_MSGS = HASviolet_SERVERPATH + "msgs/HASviolet.msgs"              # radio writes msgs received here   
+HASviolet_PWF = "/home/pi/HASviolet/cfg/HASviolet.pwf"                    # Password file  user:hashedpasswd
+HASviolet_LOGIN = HASviolet_SERVERPATH + "static/HASviolet_LOGIN.html"
+HASviolet_LOGINCSS = HASviolet_SERVERPATH + "static/HASviolet_LOGIN.css"
+HASviolet_INDEX = HASviolet_SERVERPATH + "static/HASviolet_INDEX.html"
+HASviolet_INDEXCSS = HASviolet_SERVERPATH + "static/HASviolet.css"
+HASvioletjs = HASviolet_SERVERPATH + "static/HASviolet.js"
 
 stored_password = ""                                                     # hashedpassword stored in Password file
 currmsg_ts = ""
@@ -63,7 +63,7 @@ lastmsg_ts = ""
 
 class HASsession:
     def __init__(self):
-        self.MsgFile = hasVIOLETmsgs
+        self.MsgFile = HASvioletmsgs
         self.currMsg = ""
         self.currMsgTs = time.time()
         self.lastMsg = ""
@@ -74,16 +74,16 @@ class HASsession:
 
 class BaseHandler(tornado.web.RequestHandler):
     def get_current_user(self):
-        return self.get_secure_cookie("hasVIOLETuser")
+        return self.get_secure_cookie("HASvioletuser")
 
 class MainHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
-        self.render('server/static/hasVIOLET_INDEX.html')
+        self.render('server/static/HASviolet_INDEX.html')
 
 class LoginHandler(BaseHandler):
     def get(self):
-        self.render('server/static/hasVIOLET_LOGIN.html')
+        self.render('server/static/HASviolet_LOGIN.html')
 
     def post(self):
         fusername = self.get_argument("fusername")
@@ -93,7 +93,7 @@ class LoginHandler(BaseHandler):
         stored_password = find_password(fusername)
         verdict = verify_password(stored_password, fpassword)
         if verdict == True:
-            self.set_secure_cookie("hasVIOLETuser", str(uuid.uuid4()), secure=True, expires_days=1)
+            self.set_secure_cookie("HASvioletuser", str(uuid.uuid4()), secure=True, expires_days=1)
             self.redirect("/")
 
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
@@ -216,7 +216,7 @@ def verify_password(stored_password, provided_password):
 
 def find_user(user):
     userfound=""
-    f = open(hasVIOLETpwf, "r")
+    f = open(HASvioletpwf, "r")
     flines = f.readlines()
     for fl in flines:
         fluser = fl.split(":")
@@ -227,7 +227,7 @@ def find_user(user):
 
 def find_password(user):
     userpassword = ""
-    f = open(hasVIOLETpwf, "r")
+    f = open(HASvioletpwf, "r")
     flines = f.readlines()
     for fl in flines:
         fluser = fl.split(":")
@@ -269,8 +269,8 @@ def main():
     
     httpServer = tornado.httpserver.HTTPServer(app,
         ssl_options = {
-            "certfile": os.path.join("cfg/hasVIOLET.crt"),
-            "keyfile": os.path.join("cfg/hasVIOLET.key"),
+            "certfile": os.path.join("cfg/HASviolet.crt"),
+            "keyfile": os.path.join("cfg/HASviolet.key"),
         }
     )
 
