@@ -51,7 +51,8 @@ entered_password = args['password']
 # VARIABLES
 #
 
-hasVIOLETpwf = "cfg/hasVIOLET.pwf"
+HASVIOLET_CFG_JSON = "~/.config/hasVIOLET.json"
+HASVIOLET_pwf = "~/.config/HASviolet.pwf"
 
 
 #
@@ -67,7 +68,7 @@ def hash_password(entered_password):
 
 def save_password(user, stored_password):
     pwfLine = user + ":" + stored_password + "\n"
-    f = open(hasVIOLETpwf, "a")
+    f = open(HASviolet_pwf, "a")
     f.write(pwfLine)
     f.close()
  
@@ -81,7 +82,7 @@ def verify_password(stored_password, provided_password):
 
 def find_user(user):
     userfound=""
-    f = open(hasVIOLETpwf, "r")
+    f = open(HASviolet_pwf, "r")
     flines = f.readlines()
     for fl in flines:
         fluser = fl.split(":")
@@ -91,9 +92,9 @@ def find_user(user):
     return (userfound)
 
 def delete_user(user):
-    with open(hasVIOLETpwf, "r") as f:
+    with open(HASviolet_pwf, "r") as f:
         lines = f.readlines()
-    with open(hasVIOLETpwf, "w") as f:
+    with open(HASviolet_pwf, "w") as f:
         for line in lines:
             fluser = line.split(":")
             if user != fluser[0]:
@@ -102,7 +103,7 @@ def delete_user(user):
 
 def find_password(user):
     userpassword = ""
-    f = open(hasVIOLETpwf, "r")
+    f = open(HASviolet_pwf, "r")
     flines = f.readlines()
     for fl in flines:
         fluser = fl.split(":")
@@ -131,7 +132,7 @@ if actionCheck == True:
 if actionStore == True:
     provided_hashed = hash_password(entered_password)
     save_password(user, provided_hashed)
-    print("Stored in " + hasVIOLETpwf)
+    print("Stored in " + HASviolet_pwf)
 
 if actionDelete == True:
     if find_user(user) == "":

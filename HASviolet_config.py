@@ -31,7 +31,7 @@ from HASvioletHID import HAShid
 # VARIABLES
 #
 
-HASVIOLET_CFG_JSON = "cfg/hasVIOLET.json"
+HASVIOLET_CFG_JSON = "~/.config/hasVIOLET.json"
 
 
 #
