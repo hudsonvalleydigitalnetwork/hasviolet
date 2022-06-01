@@ -9,7 +9,7 @@
 #       destination-node is LoRa Node Number ID destination
 #       MESSAGE is sent in double quotes
 #
-#  REVISION: 20210312-1400
+#   REVISION: 20220601-0200
 # 
 #
 
@@ -30,10 +30,28 @@ from HASvioletHID import HAShid
 
 
 #
-# VARIABLES
+# STATICS
 #
 
-HASVIOLET_CONFIG = "~/.config/HASviolet/etc/HASviolet.json"
+HASviolet_RXLOCK = False                                               # True = RX is running
+HASviolet_TXLOCK = False                                               # True = TX is running
+HASviolet_CFGDIR = "~/.config/HASviolet/"                              # Config file is in JSON format
+HASviolet_SRVDIR = HASviolet_CFGDIR + "server/"                        # Path to files. Change when Pi
+HASviolet_ETC = HASviolet_CFGDIR + "etc/"                              # Config file is in JSON format
+HASviolet_CONFIG = HASviolet_CFGDIR + "HASviolet.json"                 # Config file is in JSON format
+HASviolet_PWF = HASviolet_ETC + "HASviolet.pwf"                        # Password file  user:hashedpasswd
+HASviolet_MSGS = HASviolet_SRVDIR + "msgs/HASviolet.msgs"              # radio writes msgs received here   
+HASviolet_LOGIN = HASviolet_SRVDIR + "static/HASviolet_LOGIN.html"
+HASviolet_LOGINCSS = HASviolet_SRVDIR + "static/HASviolet_LOGIN.css"
+HASviolet_INDEX = HASviolet_SRVDIR + "static/HASviolet_INDEX.html"
+HASviolet_INDEXCSS = HASviolet_SRVDIR + "static/HASviolet.css"
+HASvioletjs = HASviolet_SRVDIR + "static/HASviolet.js"
+HVDN_LOGO = HASviolet_ETC + "HVDN_logo.xbm"
+
+
+#
+# VARIABLES
+#
 
 
 #
@@ -89,7 +107,7 @@ def sigs_handler(signal_received, frame):
 # SETUP
 #
 
-HAShat.logo('~/.config/HASviolet/etc/HVDN_logo.xbm')
+HAShat.logo(HVDN_LOGO)
 
 # SIGTINT aka control-C is quit
 signal.signal(signal.SIGINT, sigs_handler)

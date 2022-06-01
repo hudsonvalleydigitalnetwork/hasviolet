@@ -8,7 +8,7 @@
 #   OPTIONS
 #      -h, --help      show this help message and exit
 #
-#   REVISION: 20220531-1400
+#   REVISION: 20220601-0200
 #
 #
 
@@ -28,10 +28,28 @@ from HASvioletHID import HAShid
 
 
 #
-# VARIABLES
+# STATICS
 #
 
-HASVIOLET_CONFIG = "~/.config/HASviolet/etc/HASviolet.json"
+HASviolet_RXLOCK = False                                               # True = RX is running
+HASviolet_TXLOCK = False                                               # True = TX is running
+HASviolet_CFGDIR = "~/.config/HASviolet/"                              # Config file is in JSON format
+HASviolet_SRVDIR = HASviolet_CFGDIR + "server/"                        # Path to files. Change when Pi
+HASviolet_ETC = HASviolet_CFGDIR + "etc/"                              # Config file is in JSON format
+HASviolet_CONFIG = HASviolet_CFGDIR + "HASviolet.json"                 # Config file is in JSON format
+HASviolet_PWF = HASviolet_ETC + "HASviolet.pwf"                        # Password file  user:hashedpasswd
+HASviolet_MSGS = HASviolet_SRVDIR + "msgs/HASviolet.msgs"              # radio writes msgs received here   
+HASviolet_LOGIN = HASviolet_SRVDIR + "static/HASviolet_LOGIN.html"
+HASviolet_LOGINCSS = HASviolet_SRVDIR + "static/HASviolet_LOGIN.css"
+HASviolet_INDEX = HASviolet_SRVDIR + "static/HASviolet_INDEX.html"
+HASviolet_INDEXCSS = HASviolet_SRVDIR + "static/HASviolet.css"
+HASvioletjs = HASviolet_SRVDIR + "static/HASviolet.js"
+HVDN_LOGO = HASviolet_ETC + "HVDN_logo.xbm"
+
+
+#
+# VARIABLES
+#
 
 
 #
@@ -177,7 +195,7 @@ def HASmenu():
 HASit = HASrf()
 
 # Backup JSON file
-os.popen('cp HASviolet.json HASviolet.json.bk1')
+#os.popen('cp HASviolet_CONFIG HASviolet_ETC/HASviolet.json.bk1')
 
 #
 # MAIN
@@ -215,7 +233,7 @@ while True:
         print ('Displaying HASviolet.json')
         print ('========================')
         print (' ')
-        f = open(HASVIOLET_CONFIG, "r")
+        f = open(HASviolet_CONFIG, "r")
         vilete = f.read()
         print (vilete)
         f.close()
@@ -225,7 +243,7 @@ while True:
         pause()
     elif fun=="51":
         print ('Opening HASviolet.json')
-        with open(HASVIOLET_CONFIG) as configReadFile:
+        with open(HASviolet_CONFIG) as configReadFile:
             data = json.load(configReadFile)
         time.sleep(3)           
         data["RADIO"]["rfmodule"] = HASit.radio

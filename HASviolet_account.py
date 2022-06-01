@@ -9,7 +9,7 @@
 #           -u,  --user
 #           -p,  --password
 #
-#     REVISION: 20210312-1400
+#     REVISION: 20220601-0200
 #
 #
 
@@ -48,11 +48,28 @@ entered_password = args['password']
 
 
 #
-# VARIABLES
+# STATICS
 #
 
-HASVIOLET_CONFIG = "~/.config/HASviolet/etc/HASviolet.json"
-HASVIOLET_PWF = "~/.config/HASviolet/etc/HASviolet.pwf"
+HASviolet_RXLOCK = False                                               # True = RX is running
+HASviolet_TXLOCK = False                                               # True = TX is running
+HASviolet_CFGDIR = "~/.config/HASviolet/"                              # Config file is in JSON format
+HASviolet_SRVDIR = HASviolet_CFGDIR + "server/"                        # Path to files. Change when Pi
+HASviolet_ETC = HASviolet_CFGDIR + "etc/"                              # Config file is in JSON format
+HASviolet_CONFIG = HASviolet_CFGDIR + "HASviolet.json"                 # Config file is in JSON format
+HASviolet_PWF = HASviolet_ETC + "HASviolet.pwf"                        # Password file  user:hashedpasswd
+HASviolet_MSGS = HASviolet_SRVDIR + "msgs/HASviolet.msgs"              # radio writes msgs received here   
+HASviolet_LOGIN = HASviolet_SRVDIR + "static/HASviolet_LOGIN.html"
+HASviolet_LOGINCSS = HASviolet_SRVDIR + "static/HASviolet_LOGIN.css"
+HASviolet_INDEX = HASviolet_SRVDIR + "static/HASviolet_INDEX.html"
+HASviolet_INDEXCSS = HASviolet_SRVDIR + "static/HASviolet.css"
+HASvioletjs = HASviolet_SRVDIR + "static/HASviolet.js"
+HVDN_LOGO = HASviolet_ETC + "HVDN_logo.xbm"
+
+
+#
+# VARIABLES
+#
 
 
 #
@@ -82,7 +99,7 @@ def verify_password(stored_password, provided_password):
 
 def find_user(user):
     userfound=""
-    f = open(HASVIOLET_PWF, "r")
+    f = open(HASviolet_PWF, "r")
     flines = f.readlines()
     for fl in flines:
         fluser = fl.split(":")
@@ -92,9 +109,9 @@ def find_user(user):
     return (userfound)
 
 def delete_user(user):
-    with open(HASVIOLET_PWF, "r") as f:
+    with open(HASviolet_PWF, "r") as f:
         lines = f.readlines()
-    with open(HASVIOLET_PWF, "w") as f:
+    with open(HASviolet_PWF, "w") as f:
         for line in lines:
             fluser = line.split(":")
             if user != fluser[0]:
@@ -103,7 +120,7 @@ def delete_user(user):
 
 def find_password(user):
     userpassword = ""
-    f = open(HASVIOLET_PWF, "r")
+    f = open(HASviolet_PWF, "r")
     flines = f.readlines()
     for fl in flines:
         fluser = fl.split(":")
@@ -132,7 +149,7 @@ if actionCheck == True:
 if actionStore == True:
     provided_hashed = hash_password(entered_password)
     save_password(user, provided_hashed)
-    print("Stored in " + HASVIOLET_PWF)
+    print("Stored in " + HASviolet_PWF)
 
 if actionDelete == True:
     if find_user(user) == "":

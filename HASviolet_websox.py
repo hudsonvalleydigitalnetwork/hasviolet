@@ -4,7 +4,7 @@
 #
 #   USAGE: HASviolet_websox.py 
 #
-#   REVISION: 20210327-0700
+#   REVISION: 20220601-0200
 #
 #
 
@@ -36,27 +36,37 @@ from HASvioletHID import HAShid
 
 
 #
-# VARIABLES
+# STATICS
 #
 
-define("port", default=8000, help="run on the given port", type=int)
-wsxCLIENTS = []                                                        # Client Connection Tracking for Tornado
 HASviolet_RXLOCK = False                                               # True = RX is running
 HASviolet_TXLOCK = False                                               # True = TX is running
-HASviolet_SRVDIR = "~/.config/HASviolet/server/"                       # Path to files. Change when Pi
-HASviolet_CFGDIR = "~/.config/HASviolet/etc"                           # Config file is in JSON format
-HASviolet_CFG_JSON = HASviolet_CFGDIR + "HASviolet.json"               # Config file is in JSON format
+HASviolet_CFGDIR = "~/.config/HASviolet/"                              # Config file is in JSON format
+HASviolet_SRVDIR = HASviolet_CFGDIR + "server/"                        # Path to files. Change when Pi
+HASviolet_ETC = HASviolet_CFGDIR + "etc/"                              # Config file is in JSON format
+HASviolet_CONFIG = HASviolet_CFGDIR + "HASviolet.json"                 # Config file is in JSON format
+HASviolet_PWF = HASviolet_ETC + "HASviolet.pwf"                        # Password file  user:hashedpasswd
 HASviolet_MSGS = HASviolet_SRVDIR + "msgs/HASviolet.msgs"              # radio writes msgs received here   
-HASviolet_PWF = HASviolet_CFGDIR + "HASviolet.pwf"                     # Password file  user:hashedpasswd
 HASviolet_LOGIN = HASviolet_SRVDIR + "static/HASviolet_LOGIN.html"
 HASviolet_LOGINCSS = HASviolet_SRVDIR + "static/HASviolet_LOGIN.css"
 HASviolet_INDEX = HASviolet_SRVDIR + "static/HASviolet_INDEX.html"
 HASviolet_INDEXCSS = HASviolet_SRVDIR + "static/HASviolet.css"
 HASvioletjs = HASviolet_SRVDIR + "static/HASviolet.js"
+HVDN_LOGO = HASviolet_ETC + "HVDN_logo.xbm"
 
+
+#
+# VARIABLES
+#
+
+define("port", default=8000, help="run on the given port", type=int)
+wsxCLIENTS = []                                                        # Client Connection Tracking for Tornado
 stored_password = ""                                                   # hashedpassword stored in Password file
 currmsg_ts = ""
 lastmsg_ts = ""
+
+
+
 
 #
 # CLASSES
@@ -64,7 +74,7 @@ lastmsg_ts = ""
 
 class HASsession:
     def __init__(self):
-        self.MsgFile = HASvioletmsgs
+        self.MsgFile = HASviolet_MSGS
         self.currMsg = ""
         self.currMsgTs = time.time()
         self.lastMsg = ""
@@ -80,11 +90,11 @@ class BaseHandler(tornado.web.RequestHandler):
 class MainHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
-        self.render('server/static/HASviolet_INDEX.html')
+        self.render(HASviolet_INDEX)
 
 class LoginHandler(BaseHandler):
     def get(self):
-        self.render('server/static/HASviolet_LOGIN.html')
+        self.render(HASviolet_LOGIN')
 
     def post(self):
         fusername = self.get_argument("fusername")
@@ -94,7 +104,7 @@ class LoginHandler(BaseHandler):
         stored_password = find_password(fusername)
         verdict = verify_password(stored_password, fpassword)
         if verdict == True:
-            self.set_secure_cookie("HASvioletuser", str(uuid.uuid4()), secure=True, expires_days=1)
+            self.set_secure_cookie("HASviolet_USER", str(uuid.uuid4()), secure=True, expires_days=1)
             self.redirect("/")
 
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
