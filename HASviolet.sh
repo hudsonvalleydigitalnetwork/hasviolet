@@ -108,7 +108,7 @@ hasviolet_update(){
     echo " "
     echo "- Generating self-signed SSL certificate --  /C=US/ST=New York/L=Hudson Valley/O=Hudson Valley Digital Network/OU=HASviolet/CN=hvdn.org"
     echo " "
-    sudo openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -subj "/C=US/ST=New York/L=Hudson Valley/O=Hudson Valley Digital Network/OU=HASviolet/CN=hvdn.org" -keyout $HASVIOLET_HOME/hasviolet_api.key -out $HASVIOLET_HOME/hasviolet_api.crt
+    sudo openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -subj "/C=US/ST=New York/L=Hudson Valley/O=Hudson Valley Digital Network/OU=HASviolet/CN=hvdn.org" -keyout $HASVIOLET_SSL_KEY -out $HASVIOLET_SSL_CRT
     sudo chown pi:pi $HASVIOLET_ETC/hasviolet_api.key >/dev/null 2>&1
     sudo chown pi:pi $HASVIOLET_ETC/hasviolet_api.crt >/dev/null 2>&1
 
@@ -167,7 +167,7 @@ hasviolet_install(){
     echo " "
     echo "- Generating self-signed SSL certificate --  /C=US/ST=New York/L=Hudson Valley/O=Hudson Valley Digital Network/OU=HASviolet/CN=hvdn.org"
     echo " "
-    sudo openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -subj "/C=US/ST=New York/L=Hudson Valley/O=Hudson Valley Digital Network/OU=HASviolet/CN=hvdn.org" -keyout $HASVIOLET_HOME/hasviolet_api.key -out $HASVIOLET_HOME/hasviolet_api.crt
+    sudo openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -subj "/C=US/ST=New York/L=Hudson Valley/O=Hudson Valley Digital Network/OU=HASviolet/CN=hvdn.org" -keyout $HASVIOLET_SSL_KEY -out $HASVIOLET_SSL_CRT
     sudo chown pi:pi $HASVIOLET_ETC/hasviolet_api.key >/dev/null 2>&1
     sudo chown pi:pi $HASVIOLET_ETC/hasviolet_api.crt >/dev/null 2>&1
 
