@@ -33,7 +33,7 @@
 
 # HASviolet Directory tree
 HASVIOLET_REPO="https://github.com/hudsonvalleydigitalnetwork/hasviolet.git"
-HASVIOLET_HOME=$HOME/HASviolet
+HASVIOLET_HOME=$HOME/hasviolet
 HASVIOLET_TEMPLATES=$HASVIOLET_HOME/templates
 HASVIOLET_TEMPLATES_ETC=$HASVIOLET_TEMPLATES/etc
 HASVIOLET_TEMPLATES_SRV=$HASVIOLET_TEMPLATES/server
