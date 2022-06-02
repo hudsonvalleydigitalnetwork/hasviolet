@@ -135,11 +135,11 @@ hasviolet_install(){
     echo " "
     echo "- Copy config templates into $HASVIOLET_ETC"
     echo " "
-    sudo cp $HASVIOLET_TEMPLATES_ETC/* $HASVIOLET_ETC
+    cp $HASVIOLET_TEMPLATES_ETC/* $HASVIOLET_ETC
     echo " "
     echo "- Copy server templates into $HASVIOLET_SRVDIR"
     echo " "
-    sudo cp $HASVIOLET_TEMPLATES_SRV/* $HASVIOLET_SRVDIR
+    cp $HASVIOLET_TEMPLATES_SRV/* $HASVIOLET_SRVDIR
     echo " "
     echo "- Generating self-signed SSL certificate --  /C=US/ST=New York/L=Hudson Valley/O=Hudson Valley Digital Network/OU=HASviolet/CN=hvdn.org"
     echo " "
