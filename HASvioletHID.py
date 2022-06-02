@@ -27,14 +27,33 @@ from digitalio import DigitalInOut, Direction, Pull
 from PIL import Image, ImageDraw, ImageFont
 
 #
+# STATICS
+#
+
+HASviolet_RXLOCK = False                                               # True = RX is running
+HASviolet_TXLOCK = False                                               # True = TX is running
+HASviolet_CFGDIR = "~/hasviolet-config/"                               # Config file is in JSON format
+HASviolet_SRVDIR = HASviolet_CFGDIR + "server/"                        # Path to files. Change when Pi
+HASviolet_ETC = HASviolet_CFGDIR + "etc/"                              # Config file is in JSON format
+HASviolet_CONFIG = HASviolet_CFGDIR + "HASviolet.json"                 # Config file is in JSON format
+HASviolet_PWF = HASviolet_ETC + "HASviolet.pwf"                        # Password file  user:hashedpasswd
+HASviolet_MSGS = HASviolet_SRVDIR + "msgs/HASviolet.msgs"              # radio writes msgs received here   
+HASviolet_LOGIN = HASviolet_SRVDIR + "static/HASviolet_LOGIN.html"
+HASviolet_LOGINCSS = HASviolet_SRVDIR + "static/HASviolet_LOGIN.css"
+HASviolet_INDEX = HASviolet_SRVDIR + "static/HASviolet_INDEX.html"
+HASviolet_INDEXCSS = HASviolet_SRVDIR + "static/HASviolet.css"
+HASvioletjs = HASviolet_SRVDIR + "static/HASviolet.js"
+HVDN_LOGO = HASviolet_ETC + "HVDN_logo.xbm"
+
+
+#
 # VARIABLES
 #
 
-HASVIOLET_CFG_JSON = "cfg/hasVIOLET.json"
 
 class HAShid:
     def __init__(self):
-        self.cfgjson = HASVIOLET_CFG_JSON
+        self.cfgjson = HASviolet_CONFIG
         with open(self.cfgjson) as configFileJson:
             jsonConfig = json.load(configFileJson)
         self.myoled = jsonConfig["HID"]["oled"]
