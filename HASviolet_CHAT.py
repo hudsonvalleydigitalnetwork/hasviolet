@@ -36,7 +36,7 @@ from HASvioletHID import HAShid
 
 HASviolet_RXLOCK = False                                               # True = RX is running
 HASviolet_TXLOCK = False                                               # True = TX is running
-HASviolet_CFGDIR = "~/.config/HASviolet/"                              # Config file is in JSON format
+HASviolet_CFGDIR = "~/hasviolet-config/"                               # Config file is in JSON format
 HASviolet_SRVDIR = HASviolet_CFGDIR + "server/"                        # Path to files. Change when Pi
 HASviolet_ETC = HASviolet_CFGDIR + "etc/"                              # Config file is in JSON format
 HASviolet_CONFIG = HASviolet_CFGDIR + "HASviolet.json"                 # Config file is in JSON format
