@@ -264,7 +264,7 @@ while True:
         data["CONTACT"]["dstcall"] = HASit.dstcall
         data["CONTACT"]["dstssid"] = HASit.dstssid
         print ('Updating HASviolet.json')
-        with open(HASVIOLET_CONFIG, 'w') as configWriteFile:
+        with open(HASviolet_CONFIG, 'w') as configWriteFile:
             json.dump(data, configWriteFile, indent=3)
         time.sleep(3)
     elif fun=="99":
