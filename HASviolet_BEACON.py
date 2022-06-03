@@ -29,6 +29,7 @@ import subprocess
 from HASvioletRF import HASrf
 from HASvioletHID import HAShid
 
+
 #
 # STATICS
 #
@@ -43,13 +44,12 @@ HASviolet_SSL_KEY = HASviolet_ETC + "HASviolet.key"                    # SSL Key
 HASviolet_SSL_CRT = HASviolet_ETC + "HASviolet.crt"                    # Cert Key
 HASviolet_PWF = HASviolet_ETC + "HASviolet.pwf"                        # Password file  user:hashedpasswd
 HASviolet_MSGS = HASviolet_SRVDIR + "msgs/HASviolet.msgs"              # radio writes msgs received here   
-HASviolet_LOGIN = HASviolet_SRVDIR + "static/HASviolet_LOGIN.html"
-HASviolet_LOGINCSS = HASviolet_SRVDIR + "static/HASviolet_LOGIN.css"
-HASviolet_INDEX = HASviolet_SRVDIR + "static/HASviolet_INDEX.html"
-HASviolet_INDEXCSS = HASviolet_SRVDIR + "static/HASviolet.css"
-HASvioletjs = HASviolet_SRVDIR + "static/HASviolet.js"
+HASviolet_LOGIN = HASviolet_SRVDIR + "HASviolet_LOGIN.html"
+HASviolet_LOGINCSS = HASviolet_SRVDIR + "HASviolet_LOGIN.css"
+HASviolet_INDEX = HASviolet_SRVDIR + "HASviolet_INDEX.html"
+HASviolet_INDEXCSS = HASviolet_SRVDIR + "HASviolet.css"
+HASvioletjs = HASviolet_SRVDIR + "HASviolet.js"
 HVDN_LOGO = HASviolet_ETC + "HVDN_logo.xbm"
-
 
 
 #
