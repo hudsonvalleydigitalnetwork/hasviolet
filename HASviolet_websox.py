@@ -41,10 +41,12 @@ from HASvioletHID import HAShid
 
 HASviolet_RXLOCK = False                                               # True = RX is running
 HASviolet_TXLOCK = False                                               # True = TX is running
-HASviolet_CFGDIR = "~/hasviolet-config/"                               # Config file is in JSON format
+HASviolet_CFGDIR = "../hasviolet-config/"                              # Config file is in JSON format
 HASviolet_SRVDIR = HASviolet_CFGDIR + "server/"                        # Path to files. Change when Pi
 HASviolet_ETC = HASviolet_CFGDIR + "etc/"                              # Config file is in JSON format
-HASviolet_CONFIG = HASviolet_CFGDIR + "HASviolet.json"                 # Config file is in JSON format
+HASviolet_CONFIG = HASviolet_ETC + "HASviolet.json"                    # Config file is in JSON format
+HASviolet_SSL_KEY = HASviolet_ETC + "HASviolet.key"                    # SSL Key
+HASviolet_SSL_CRT = HASviolet_ETC + "HASviolet.crt"                    # Cert Key
 HASviolet_PWF = HASviolet_ETC + "HASviolet.pwf"                        # Password file  user:hashedpasswd
 HASviolet_MSGS = HASviolet_SRVDIR + "msgs/HASviolet.msgs"              # radio writes msgs received here   
 HASviolet_LOGIN = HASviolet_SRVDIR + "static/HASviolet_LOGIN.html"
@@ -280,8 +282,8 @@ def main():
     
     httpServer = tornado.httpserver.HTTPServer(app,
         ssl_options = {
-            "certfile": os.path.join("cfg/HASviolet.crt"),
-            "keyfile": os.path.join("cfg/HASviolet.key"),
+            "certfile": os.path.join(HASviolet_CRT_KEY),
+            "keyfile": os.path.join(HASVIOLET_SSL_KEY),
         }
     )
 

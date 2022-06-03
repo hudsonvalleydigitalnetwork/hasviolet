@@ -32,10 +32,12 @@ from PIL import Image, ImageDraw, ImageFont
 
 HASviolet_RXLOCK = False                                               # True = RX is running
 HASviolet_TXLOCK = False                                               # True = TX is running
-HASviolet_CFGDIR = "~/hasviolet-config/"                               # Config file is in JSON format
+HASviolet_CFGDIR = "../hasviolet-config/"                              # Config file is in JSON format
 HASviolet_SRVDIR = HASviolet_CFGDIR + "server/"                        # Path to files. Change when Pi
 HASviolet_ETC = HASviolet_CFGDIR + "etc/"                              # Config file is in JSON format
-HASviolet_CONFIG = HASviolet_ETC + "HASviolet.json"                 # Config file is in JSON format
+HASviolet_CONFIG = HASviolet_ETC + "HASviolet.json"                    # Config file is in JSON format
+HASviolet_SSL_KEY = HASviolet_ETC + "HASviolet.key"                    # SSL Key
+HASviolet_SSL_CRT = HASviolet_ETC + "HASviolet.crt"                    # Cert Key
 HASviolet_PWF = HASviolet_ETC + "HASviolet.pwf"                        # Password file  user:hashedpasswd
 HASviolet_MSGS = HASviolet_SRVDIR + "msgs/HASviolet.msgs"              # radio writes msgs received here   
 HASviolet_LOGIN = HASviolet_SRVDIR + "static/HASviolet_LOGIN.html"
@@ -44,7 +46,6 @@ HASviolet_INDEX = HASviolet_SRVDIR + "static/HASviolet_INDEX.html"
 HASviolet_INDEXCSS = HASviolet_SRVDIR + "static/HASviolet.css"
 HASvioletjs = HASviolet_SRVDIR + "static/HASviolet.js"
 HVDN_LOGO = HASviolet_ETC + "HVDN_logo.xbm"
-
 
 #
 # VARIABLES
