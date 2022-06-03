@@ -31,7 +31,11 @@ HASviolet_TXLOCK = False                                               # True = 
 HASviolet_CFGDIR = "~/hasviolet-config/"                               # Config file is in JSON format
 HASviolet_SRVDIR = HASviolet_CFGDIR + "server/"                        # Path to files. Change when Pi
 HASviolet_ETC = HASviolet_CFGDIR + "etc/"                              # Config file is in JSON format
+<<<<<<< HEAD
 HASviolet_CONFIG = HASviolet_ETC + "HASviolet.json"                    # Config file is in JSON format
+=======
+HASviolet_CONFIG = HASviolet_ETC + "HASviolet.json"                 # Config file is in JSON format
+>>>>>>> 5c5b218e53cd1b55624c13dd5d0a7a4ab584d19a
 HASviolet_PWF = HASviolet_ETC + "HASviolet.pwf"                        # Password file  user:hashedpasswd
 HASviolet_MSGS = HASviolet_SRVDIR + "msgs/HASviolet.msgs"              # radio writes msgs received here   
 HASviolet_LOGIN = HASviolet_SRVDIR + "static/HASviolet_LOGIN.html"
@@ -45,7 +49,6 @@ HVDN_LOGO = HASviolet_ETC + "HVDN_logo.xbm"
 #
 # VARIABLES
 #
-
 
 
 #
