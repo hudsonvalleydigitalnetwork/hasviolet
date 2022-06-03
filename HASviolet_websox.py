@@ -96,7 +96,7 @@ class MainHandler(BaseHandler):
 
 class LoginHandler(BaseHandler):
     def get(self):
-        self.render(HASviolet_LOGIN')
+        self.render(HASviolet_LOGIN)
 
     def post(self):
         fusername = self.get_argument("fusername")
@@ -282,8 +282,8 @@ def main():
     
     httpServer = tornado.httpserver.HTTPServer(app,
         ssl_options = {
-            "certfile": os.path.join(HASviolet_CRT_KEY),
-            "keyfile": os.path.join(HASVIOLET_SSL_KEY),
+            "certfile": os.path.join(HASviolet_SSL_CRT),
+            "keyfile": os.path.join(HASviolet_SSL_KEY),
         }
     )
 
