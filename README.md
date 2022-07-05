@@ -4,7 +4,7 @@ Read the fine [wiki](https://github.com/hudsonvalleydigitalnetwork/hasviolet/wik
 
 ![HVDN_HASviolet_Git_Banner_1.jpg](docs/HVDN_HASviolet_Git_Banner_1.jpg)
 
-UPDATED: 31 May 2022
+UPDATED: 1 June 2022
 
 # Quick Start
 
