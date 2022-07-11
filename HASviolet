@@ -6,7 +6,7 @@
 ### 
 
 ###
-###  REVISION: 20220601-0200
+###  REVISION: 20220706-0300
 ### 
 
 ###
@@ -15,14 +15,9 @@
 ###        ACTION  
 ###                 install   install current release
 ###                 config    configure HASviolet
-###                 remove    remove installed TARGET
-###                 purge     remove installed TARGET and purge configs
-###                 update    check to see if new TARGET available
-###                 upgrade   upgrade TARGET to latest release
-###                 shell     provide SIGpi env variables around a TARGET
-###
-###        TARGET
-###                 A HASviolet package or script
+###                 remove    remove HASviolet
+###                 purge     remove HASviolet and purge configs
+###                 update    upgrade to new version if available (git pull)
 ###
 
 
@@ -87,42 +82,6 @@ HASVIOLET_CERTIFIED="false"
 ### FUNCTIONS
 ###
 
-hasviolet_update(){
-    echo " "
-    echo "HASviolet UPDATE"
-    echo " "
-    echo "- Create Directories"
-    echo " "
-    cd $HASVIOLET_HOME
-    mkdir $HASVIOLET_CFGDIR
-    mkdir $HASVIOLET_SRVDIR
-    mkdir $HASVIOLET_ETC
-    echo " "
-    echo "- Copy config templates into $HASVIOLET_ETC"
-    echo " "
-    cp $HASVIOLET_TEMPLATES_ETC/* $HASVIOLET_ETC
-    echo " "
-    echo "- Copy server templates into $HASVIOLET_SRVDIR"
-    echo " "
-    cp $HASVIOLET_TEMPLATES_SRV/* $HASVIOLET_SRVDIR
-    echo " "
-    echo "- Generating self-signed SSL certificate --  /C=US/ST=New York/L=Hudson Valley/O=Hudson Valley Digital Network/OU=HASviolet/CN=hvdn.org"
-    echo " "
-    sudo openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -subj "/C=US/ST=New York/L=Hudson Valley/O=Hudson Valley Digital Network/OU=HASviolet/CN=hvdn.org" -keyout $HASVIOLET_SSL_KEY -out $HASVIOLET_SSL_CRT
-    sudo chown pi:pi $HASVIOLET_ETC/hasviolet_api.key >/dev/null 2>&1
-    sudo chown pi:pi $HASVIOLET_ETC/hasviolet_api.crt >/dev/null 2>&1
-
-    echo " "
-    echo "HASviolet UPDATE complete"
-    echo " "
-}
-
-hasviolet_upgrade(){
-    echo -e "${HASVIOLET_BANNER_COLOR}"
-    echo -e "${HASVIOLET_BANNER_COLOR} ##  ERROR: Unkown action or package"
-    echo -e "${HASVIOLET_BANNER_RESET}"
-}
-
 hasviolet_install(){
     echo " "
     echo "HASviolet FRESH Install"
@@ -176,6 +135,16 @@ hasviolet_install(){
     echo " "
 }
 
+hasviolet_update(){
+    echo " "
+    echo "HASviolet Update"
+    echo " "
+    cd $HASVIOLET_HOME
+    git pull
+    cat RELEASE |more
+}
+
+
 ###
 ###  MAIN
 ###
@@ -186,6 +155,12 @@ SPKGSCRIPT="pkg_$2"
 SCFGSCRIPT="cfg_$2"
 
 case "$1" in 
+    install )
+        hasviolet_install
+        ;;
+    config )
+        source $HASVIOLET_HOME/HASviolet_config.py
+        ;;
     remove )
         echo -e "${HASVIOLET_BANNER_COLOR}"
         echo -e "${HASVIOLET_BANNER_COLOR} ##  Remove HASviolet"
@@ -201,20 +176,11 @@ case "$1" in
         rm -rf $HASVIOLET_HOME
         rm -rf $HASVIOLET_CFGDIR
         ;;
-    install )
-        hasviolet_install
-        ;;
-    config )
-        source $HASVIOLET_HOME/hasviolet_config.py
-        ;;
     update )
         hasviolet_update
         ;;
-    upgrade)
-        hasviolet_upgrade
-        ;;
-    shell )
-        source $2
+    RX )
+        source $HASVIOLET_HOME/HASviolet_RX.py -s
         ;;
     * )
         echo -e "${HASVIOLET_BANNER_COLOR}"
