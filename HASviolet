@@ -6,19 +6,25 @@
 ### 
 
 ###
-###  REVISION: 20220706-0300
+###  REVISION: 20220711-0300
 ### 
 
 ###
-###  Usage:    HASviolet [ACTION] [TARGET]
+###  Usage:    HASviolet [COMMAND] [OPTION]
 ###
-###        ACTION  
+###                 COMMAND   OPTION  
+###
 ###                 install   install current release
 ###                 config    configure HASviolet
 ###                 remove    remove HASviolet
 ###                 purge     remove HASviolet and purge configs
 ###                 update    upgrade to new version if available (git pull)
-###
+###                 websox 
+###                           install   Install Web Interface
+###                           start     Start Web Interface
+###                           stop      Stop Web Interface
+###                           status    Web Interface Status
+###                           removde   Remove and disable Web Interface
 
 
 ###
@@ -127,8 +133,8 @@ hasviolet_install(){
     echo "- Generating self-signed SSL certificate --  /C=US/ST=New York/L=Hudson Valley/O=Hudson Valley Digital Network/OU=HASviolet/CN=hvdn.org"
     echo " "
     sudo openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -subj "/C=US/ST=New York/L=Hudson Valley/O=Hudson Valley Digital Network/OU=HASviolet/CN=hvdn.org" -keyout $HASVIOLET_SSL_KEY -out $HASVIOLET_SSL_CRT
-    sudo chown pi:pi $HASVIOLET_ETC/hasviolet_api.key >/dev/null 2>&1
-    sudo chown pi:pi $HASVIOLET_ETC/hasviolet_api.crt >/dev/null 2>&1
+    sudo chown pi:pi $HASVIOLET_SSL_KEY >/dev/null 2>&1
+    sudo chown pi:pi $HASVIOLET_SSL_CRT >/dev/null 2>&1
 
     echo " "
     echo "HASviolet FRESH Install complete"
@@ -155,20 +161,20 @@ SPKGSCRIPT="pkg_$2"
 SCFGSCRIPT="cfg_$2"
 
 case "$1" in 
-    install )
+    install)
         hasviolet_install
         ;;
-    config )
+    config)
         source $HASVIOLET_HOME/HASviolet_config.py
         ;;
-    remove )
+    remove)
         echo -e "${HASVIOLET_BANNER_COLOR}"
         echo -e "${HASVIOLET_BANNER_COLOR} ##  Remove HASviolet"
         echo -e "${HASVIOLET_BANNER_RESET}"
         cd ~
         rm -rf $HASVIOLET_HOME
         ;;
-    purge )
+    purge)
         echo -e "${HASVIOLET_BANNER_COLOR}"
         echo -e "${HASVIOLET_BANNER_COLOR} ##  Purge HASviolet"
         echo -e "${HASVIOLET_BANNER_RESET}"
@@ -176,16 +182,42 @@ case "$1" in
         rm -rf $HASVIOLET_HOME
         rm -rf $HASVIOLET_CFGDIR
         ;;
-    update )
+    update)
         hasviolet_update
         ;;
-    RX )
+    RX)
         source $HASVIOLET_HOME/HASviolet_RX.py -s
         ;;
-    * )
+    *)
         echo -e "${HASVIOLET_BANNER_COLOR}"
         echo -e "${HASVIOLET_BANNER_COLOR} ##  ERROR: Unkown action or package"
         echo -e "${HASVIOLET_BANNER_RESET}"
+        ;;
+    websox)
+        case "$2" in
+            status)
+                sudo systemctl status HASviolet_websox.service
+                ;;
+            start)
+                sudo systemctl start HASviolet_websox.service
+                ;;
+            stop)
+                sudo systemctl stop HASviolet_websox.service
+                ;;
+            remove)
+                sudo systemctl stop HASviolet_websox.service
+                sudo systemctl disable HASviolet_websox.service
+                sudo rm -rf /lib/systemd/system/HASviolet_websox.service
+                ;;
+            install)
+                sudo cp $HASVIOLET_HOME/HASviolet_websox.service /lib/systemd/system/HASviolet_websox.service
+                sudo chown root:root /lib/systemd/system/HASviolet_websox.service
+                sudo chmod 644 /lib/systemd/system/HASviolet_websox.service
+                sudo systemctl daemon-reload
+                sudo systemctl enable HASviolet_websox.service
+                sudo systemctl start HASviolet_websox.service
+                ;;
+        esac
         ;;
 esac
 
