@@ -186,6 +186,9 @@ case "$KOMMAND" in
     RX)
         python $HASVIOLET_HOME/HASviolet_RX.py -s
         ;;
+    BEACON)
+        python $HASVIOLET_HOME/HASviolet_BEACON.py -c 999 -t 5
+        ;;
     websox)
         case "$KOPTION" in
             status)
