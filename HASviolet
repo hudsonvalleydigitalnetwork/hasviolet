@@ -127,9 +127,9 @@ hasviolet_install(){
     echo " "
     cp $HASVIOLET_TEMPLATES_ETC/* $HASVIOLET_ETC
     echo " "
-    echo "- Copy server templates into $HASVIOLET_SERVER"
+    echo "- Copy Web Server into $HASVIOLET_SERVER"
     echo " "
-    cp $HASVIOLET_TEMPLATES_SRV/* $HASVIOLET_SERVER
+    cp -r $HASVIOLET_TEMPLATES_SRV/* $HASVIOLET_SERVER
     echo " "
     echo "- Generating self-signed SSL certificate --  /C=US/ST=New York/L=Hudson Valley/O=Hudson Valley Digital Network/OU=HASviolet/CN=hvdn.org"
     echo " "
@@ -161,9 +161,9 @@ hasviolet_refresh(){
     echo " "
     cp $HASVIOLET_TEMPLATES_ETC/* $HASVIOLET_ETC
     echo " "
-    echo "- Copy server templates into $HASVIOLET_SERVER"
+    echo "- Copy Web Server into $HASVIOLET_SERVER"
     echo " "
-    cp $HASVIOLET_TEMPLATES_SRV/* $HASVIOLET_SERVER
+    cp -r $HASVIOLET_TEMPLATES_SRV/* $HASVIOLET_SERVER
     echo " "
     echo "- Generating self-signed SSL certificate --  /C=US/ST=New York/L=Hudson Valley/O=Hudson Valley Digital Network/OU=HASviolet/CN=hvdn.org"
     echo " "
@@ -244,7 +244,7 @@ case "$KOMMAND" in
                 sudo rm -rf /lib/systemd/system/HASviolet_websox.service
                 ;;
             install)
-                sudo cp $HASVIOLET_HOME/HASviolet_websox.service /lib/systemd/system/HASviolet_websox.service
+                sudo cp $HASVIOLET_SERVER/HASviolet_websox.service /lib/systemd/system/HASviolet_websox.service
                 sudo chown root:root /lib/systemd/system/HASviolet_websox.service
                 sudo chmod 644 /lib/systemd/system/HASviolet_websox.service
                 sudo systemctl daemon-reload

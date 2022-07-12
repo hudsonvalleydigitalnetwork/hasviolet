@@ -49,11 +49,11 @@ HASviolet_SSL_KEY = HASviolet_ETC + "HASviolet.key"                    # SSL Key
 HASviolet_SSL_CRT = HASviolet_ETC + "HASviolet.crt"                    # Cert Key
 HASviolet_PWF = HASviolet_ETC + "HASviolet.pwf"                        # Password file  user:hashedpasswd
 HASviolet_MSGS = HASviolet_SERVER + "msgs/HASviolet.msgs"              # radio writes msgs received here   
-HASviolet_LOGIN = HASviolet_SERVER + "HASviolet_LOGIN.html"
-HASviolet_LOGINCSS = HASviolet_SERVER + "HASviolet_LOGIN.css"
-HASviolet_INDEX = HASviolet_SERVER + "HASviolet_INDEX.html"
-HASviolet_INDEXCSS = HASviolet_SERVER + "HASviolet_INDEX.css"
-HASvioletjs = HASviolet_SERVER + "HASviolet_INDEX.js"
+HASviolet_LOGIN = HASviolet_SERVER + "static/HASviolet_LOGIN.html"
+HASviolet_LOGINCSS = HASviolet_SERVER + "static/HASviolet_LOGIN.css"
+HASviolet_INDEX = HASviolet_SERVER + "static/HASviolet_INDEX.html"
+HASviolet_INDEXCSS = HASviolet_SERVER + "static/HASviolet_INDEX.css"
+HASvioletjs = HASviolet_SERVER + "js/HASviolet_INDEX.js"
 HVDN_LOGO = HASviolet_ETC + "HVDN_logo.xbm"
 
 
@@ -270,11 +270,11 @@ def main():
             ('/wss', WebSocketHandler),
             ('/', MainHandler),
             ('/login', LoginHandler),
-            ('/css/(.*)', tornado.web.StaticFileHandler, {'path': 'server/static/'}),
-            ('/js/(.*)', tornado.web.StaticFileHandler, {'path': 'server/static/'}),
+            ('/css/(.*)', tornado.web.StaticFileHandler, {'path': 'static/'}),
+            ('/js/(.*)', tornado.web.StaticFileHandler, {'path': 'js/'}),
             ('/cfg/(.*)', tornado.web.StaticFileHandler, {'path': 'cfg/'}),
-            ('/msgs/(.*)', tornado.web.StaticFileHandler, {'path': 'server/msgs/'}),
-            ('/(.*)', tornado.web.StaticFileHandler, {'path': 'server/static/'})
+            ('/msgs/(.*)', tornado.web.StaticFileHandler, {'path': 'msgs/'}),
+            ('/(.*)', tornado.web.StaticFileHandler, {'path': 'static/'})
         ], **settings
     )
     

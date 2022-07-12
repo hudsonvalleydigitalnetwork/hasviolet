@@ -35,8 +35,8 @@ After=multi-user.target
 [Service]
 User=pi
 PIDFile=/run/HASviolet_websox.pid
-WorkingDirectory=$HASVIOLET_SRVDIR
-ExecStart=$HASVIOLET_HOME/HASviolet_websox.py
+WorkingDirectory=$HASVIOLET_SERVER
+ExecStart=$HASVIOLET_SERVER/HASviolet_websox.py
 ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/HASviolet_websox.pid
 TimeoutStopSec=5
 
