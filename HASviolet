@@ -120,23 +120,17 @@ hasviolet_install(){
     echo " "
     cd $HASVIOLET_HOME
     mkdir $HASVIOLET_LOCAL
-    mkdir $HASVIOLET_SERVER
     mkdir $HASVIOLET_ETC
     echo " "
     echo "- Copy config templates into $HASVIOLET_ETC"
     echo " "
     cp $HASVIOLET_TEMPLATES_ETC/* $HASVIOLET_ETC
     echo " "
-    echo "- Copy Web Server into $HASVIOLET_SERVER"
-    echo " "
-    cp -r $HASVIOLET_TEMPLATES_SRV/* $HASVIOLET_SERVER
-    echo " "
     echo "- Generating self-signed SSL certificate --  /C=US/ST=New York/L=Hudson Valley/O=Hudson Valley Digital Network/OU=HASviolet/CN=hvdn.org"
     echo " "
     sudo openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -subj "/C=US/ST=New York/L=Hudson Valley/O=Hudson Valley Digital Network/OU=HASviolet/CN=hvdn.org" -keyout $HASVIOLET_SSL_KEY -out $HASVIOLET_SSL_CRT
     sudo chown pi:pi $HASVIOLET_SSL_KEY >/dev/null 2>&1
     sudo chown pi:pi $HASVIOLET_SSL_CRT >/dev/null 2>&1
-
     echo " "
     echo "HASviolet Install complete"
     echo " "
@@ -144,26 +138,20 @@ hasviolet_install(){
 
 hasviolet_refresh(){
     echo " "
-    echo "- Remove Config Directories"
+    echo "- Remove Config Directory"
     echo " "
     cd $HOME
-    sudo rm -rf $HASVIOLET_LOCAL
+    sudo rm -rf $HASVIOLET_ETC
    
     echo " "
-    echo "- Create Directories"
+    echo "- Create Config Directory"
     echo " "
     cd $HOME
-    mkdir $HASVIOLET_LOCAL
-    mkdir $HASVIOLET_SERVER
     mkdir $HASVIOLET_ETC
     echo " "
     echo "- Copy config templates into $HASVIOLET_ETC"
     echo " "
     cp $HASVIOLET_TEMPLATES_ETC/* $HASVIOLET_ETC
-    echo " "
-    echo "- Copy Web Server into $HASVIOLET_SERVER"
-    echo " "
-    cp -r $HASVIOLET_TEMPLATES_SRV/* $HASVIOLET_SERVER
     echo " "
     echo "- Generating self-signed SSL certificate --  /C=US/ST=New York/L=Hudson Valley/O=Hudson Valley Digital Network/OU=HASviolet/CN=hvdn.org"
     echo " "
@@ -244,6 +232,15 @@ case "$KOMMAND" in
                 sudo rm -rf /lib/systemd/system/HASviolet_websox.service
                 ;;
             install)
+                # Make $HOME/hasviolet-local/server
+                mkdir $HASVIOLET_SERVER
+                # Copy Web Server files into $HASVIOLET_SERVER
+                cp -r $HASVIOLET_TEMPLATES_SRV/* $HASVIOLET_SERVER
+                cp $HASVIOLET_HOME/HASrf95.py $HASVIOLET_SERVER
+                cp $HASVIOLET_HOME/HASvioletHID.py $HASVIOLET_SERVER
+                cp $HASVIOLET_HOME/font5x8.bin $HASVIOLET_SERVER
+                cp $HASVIOLET_HOME/HASvioletRF.py $HASVIOLET_SERVER
+                # Copy and install Web Server service
                 sudo cp $HASVIOLET_SERVER/HASviolet_websox.service /lib/systemd/system/HASviolet_websox.service
                 sudo chown root:root /lib/systemd/system/HASviolet_websox.service
                 sudo chmod 644 /lib/systemd/system/HASviolet_websox.service
