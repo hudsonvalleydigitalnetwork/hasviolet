@@ -105,7 +105,7 @@ class LoginHandler(BaseHandler):
         verdict = verify_password(stored_password, fpassword)
         if verdict == True:
             self.set_secure_cookie("HASviolet_USER", str(uuid.uuid4()), secure=True, expires_days=1)
-            self.redirect("/")
+            self.redirect("HASviolet_INDEX.html")
 
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
 
