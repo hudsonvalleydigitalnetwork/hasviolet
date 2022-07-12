@@ -6,7 +6,7 @@
 ### 
 
 ###
-###  REVISION: 20220711-0500
+###  REVISION: 20220712-0300
 ### 
 
 ###
@@ -16,6 +16,7 @@
 ###
 ###                 install   install current release
 ###                 config    configure HASviolet
+###                 refresh   reset HASviolet back to install (remove/new configs)
 ###                 remove    remove HASviolet
 ###                 purge     remove HASviolet and purge configs
 ###                 update    upgrade to new version if available (git pull)
@@ -65,9 +66,9 @@ HASVIOLET_HOME=$HOME/hasviolet
 HASVIOLET_TEMPLATES=$HASVIOLET_HOME/templates
 HASVIOLET_TEMPLATES_ETC=$HASVIOLET_TEMPLATES/etc
 HASVIOLET_TEMPLATES_SRV=$HASVIOLET_TEMPLATES/server
-HASVIOLET_CFGDIR=$HOME/hasviolet-config
-HASVIOLET_SRVDIR=$HASVIOLET_CFGDIR/server
-HASVIOLET_ETC=$HASVIOLET_CFGDIR/etc
+HASVIOLET_LOCAL=$HOME/hasviolet-local
+HASVIOLET_SERVER=$HASVIOLET_LOCAL/server
+HASVIOLET_ETC=$HASVIOLET_LOCAL/etc
 HASVIOLET_CONFIG=$HASVIOLET_ETC/HASviolet.json
 HASVIOLET_SSL_KEY=$HASVIOLET_ETC/HASviolet.key
 HASVIOLET_SSL_CRT=$HASVIOLET_ETC/HASviolet.crt
@@ -118,17 +119,51 @@ hasviolet_install(){
     echo "- Create Directories"
     echo " "
     cd $HASVIOLET_HOME
-    mkdir $HASVIOLET_CFGDIR
-    mkdir $HASVIOLET_SRVDIR
+    mkdir $HASVIOLET_LOCAL
+    mkdir $HASVIOLET_SERVER
     mkdir $HASVIOLET_ETC
     echo " "
     echo "- Copy config templates into $HASVIOLET_ETC"
     echo " "
     cp $HASVIOLET_TEMPLATES_ETC/* $HASVIOLET_ETC
     echo " "
-    echo "- Copy server templates into $HASVIOLET_SRVDIR"
+    echo "- Copy server templates into $HASVIOLET_SERVER"
     echo " "
-    cp $HASVIOLET_TEMPLATES_SRV/* $HASVIOLET_SRVDIR
+    cp $HASVIOLET_TEMPLATES_SRV/* $HASVIOLET_SERVER
+    echo " "
+    echo "- Generating self-signed SSL certificate --  /C=US/ST=New York/L=Hudson Valley/O=Hudson Valley Digital Network/OU=HASviolet/CN=hvdn.org"
+    echo " "
+    sudo openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -subj "/C=US/ST=New York/L=Hudson Valley/O=Hudson Valley Digital Network/OU=HASviolet/CN=hvdn.org" -keyout $HASVIOLET_SSL_KEY -out $HASVIOLET_SSL_CRT
+    sudo chown pi:pi $HASVIOLET_SSL_KEY >/dev/null 2>&1
+    sudo chown pi:pi $HASVIOLET_SSL_CRT >/dev/null 2>&1
+
+    echo " "
+    echo "HASviolet Install complete"
+    echo " "
+}
+
+hasviolet_refresh(){
+    echo " "
+    echo "- Remove Config Directories"
+    echo " "
+    cd $HOME
+    sudo rm -rf $HASVIOLET_LOCAL
+   
+    echo " "
+    echo "- Create Directories"
+    echo " "
+    cd $HOME
+    mkdir $HASVIOLET_LOCAL
+    mkdir $HASVIOLET_SERVER
+    mkdir $HASVIOLET_ETC
+    echo " "
+    echo "- Copy config templates into $HASVIOLET_ETC"
+    echo " "
+    cp $HASVIOLET_TEMPLATES_ETC/* $HASVIOLET_ETC
+    echo " "
+    echo "- Copy server templates into $HASVIOLET_SERVER"
+    echo " "
+    cp $HASVIOLET_TEMPLATES_SRV/* $HASVIOLET_SERVER
     echo " "
     echo "- Generating self-signed SSL certificate --  /C=US/ST=New York/L=Hudson Valley/O=Hudson Valley Digital Network/OU=HASviolet/CN=hvdn.org"
     echo " "
@@ -178,7 +213,7 @@ case "$KOMMAND" in
         echo -e "${HASVIOLET_BANNER_RESET}"
         cd ~
         rm -rf $HASVIOLET_HOME
-        rm -rf $HASVIOLET_CFGDIR
+        rm -rf $HASVIOLET_LOCAL
         ;;
     update)
         hasviolet_update

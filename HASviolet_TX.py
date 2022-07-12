@@ -35,19 +35,19 @@ from HASvioletHID import HAShid
 
 HASviolet_RXLOCK = False                                               # True = RX is running
 HASviolet_TXLOCK = False                                               # True = TX is running
-HASviolet_CFGDIR = "../hasviolet-config/"                              # Config file is in JSON format
-HASviolet_SRVDIR = HASviolet_CFGDIR + "server/"                        # Path to files. Change when Pi
-HASviolet_ETC = HASviolet_CFGDIR + "etc/"                              # Config file is in JSON format
+HASviolet_LOCAL = "/home/pi/hasviolet-local/"                          # Config file is in JSON format
+HASviolet_SERVER = HASviolet_LOCAL + "server/"                         # Path to files. Change when Pi
+HASviolet_ETC = HASviolet_LOCAL + "etc/"                               # Config file is in JSON format
 HASviolet_CONFIG = HASviolet_ETC + "HASviolet.json"                    # Config file is in JSON format
 HASviolet_SSL_KEY = HASviolet_ETC + "HASviolet.key"                    # SSL Key
 HASviolet_SSL_CRT = HASviolet_ETC + "HASviolet.crt"                    # Cert Key
 HASviolet_PWF = HASviolet_ETC + "HASviolet.pwf"                        # Password file  user:hashedpasswd
-HASviolet_MSGS = HASviolet_SRVDIR + "msgs/HASviolet.msgs"              # radio writes msgs received here   
-HASviolet_LOGIN = HASviolet_SRVDIR + "HASviolet_LOGIN.html"
-HASviolet_LOGINCSS = HASviolet_SRVDIR + "HASviolet_LOGIN.css"
-HASviolet_INDEX = HASviolet_SRVDIR + "HASviolet_INDEX.html"
-HASviolet_INDEXCSS = HASviolet_SRVDIR + "HASviolet.css"
-HASvioletjs = HASviolet_SRVDIR + "HASviolet.js"
+HASviolet_MSGS = HASviolet_SERVER + "msgs/HASviolet.msgs"              # radio writes msgs received here   
+HASviolet_LOGIN = HASviolet_SERVER + "HASviolet_LOGIN.html"
+HASviolet_LOGINCSS = HASviolet_SERVER + "HASviolet_LOGIN.css"
+HASviolet_INDEX = HASviolet_SERVER + "HASviolet_INDEX.html"
+HASviolet_INDEXCSS = HASviolet_SERVER + "HASviolet.css"
+HASvioletjs = HASviolet_SERVER + "HASviolet.js"
 HVDN_LOGO = HASviolet_ETC + "HVDN_logo.xbm"
 
 
