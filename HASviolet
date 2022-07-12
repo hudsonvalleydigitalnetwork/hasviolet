@@ -218,6 +218,9 @@ case "$KOMMAND" in
     update)
         hasviolet_update
         ;;
+    refresh)
+        hasviolet_refresh
+        ;;
     RX)
         python $HASVIOLET_HOME/HASviolet_RX.py -s
         ;;
