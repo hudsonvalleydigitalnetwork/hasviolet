@@ -52,8 +52,8 @@ HASviolet_MSGS = HASviolet_SERVER + "msgs/HASviolet.msgs"              # radio w
 HASviolet_LOGIN = HASviolet_SERVER + "HASviolet_LOGIN.html"
 HASviolet_LOGINCSS = HASviolet_SERVER + "HASviolet_LOGIN.css"
 HASviolet_INDEX = HASviolet_SERVER + "HASviolet_INDEX.html"
-HASviolet_INDEXCSS = HASviolet_SERVER + "HASviolet.css"
-HASvioletjs = HASviolet_SERVER + "HASviolet.js"
+HASviolet_INDEXCSS = HASviolet_SERVER + "HASviolet_INDEX.css"
+HASvioletjs = HASviolet_SERVER + "HASviolet_INDEX.js"
 HVDN_LOGO = HASviolet_ETC + "HVDN_logo.xbm"
 
 
