@@ -4,7 +4,7 @@ Read the fine [wiki](https://github.com/hudsonvalleydigitalnetwork/hasviolet/wik
 
 ![HVDN_HASviolet_Git_Banner_1.jpg](docs/HVDN_HASviolet_Git_Banner_1.jpg)
 
-UPDATED: 1 June 2022
+UPDATED: 15 July 2022
 
 # Quick Start
 
@@ -14,8 +14,8 @@ The quickest way to get started with HASviolet is to
 - Install [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/) on a microSD card using [Raspberry Pi Imager](https://www.raspberrypi.org/software/)
 - Log in as Pi
 - Clone the [repo](https://github.com/hudsonvalleydigitalnetwork/hasviolet.git)
-- cd into the repo directory and run **./HASviolet_install_fresh.sh**
-- Run **./HASviolet_config.py** to configure HASviolet
+- cd into the repo directory and run **./HASviolet install**
+- After install run **HASviolet config** to configure HASviolet
 - Read the fine [manual](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/docs/HASviolet-RPi_Guide_v40.pdf)
 
 
@@ -36,20 +36,14 @@ Party on!
 ![hasviolet_ui.png](docs/hasviolet_ui.png)
 
 ## Overview
-During install, **HASViolet_websox.py server** is installed as a daemon under systemd. **HASviolet_websox.sh** 
-can be used to stop/start/remove/status of the server.
-
-On start, HASviolet_websox.py performs the following in order;
-- loads SSL keys **cfg/hasVIOLET.crt** and **cfg/hasVIOLET.key**
-- loads JSON file **cfg/hasVIOLET.json** 
-- listen for (browser) client connections on port 8000.
+A WebUI is available. To install it run **HASViolet websox install**. A web SSL daemon listening on port 8000 is installed under systemd. **HASviolet websox stop**, **HASviolet websox start**, **HASviolet websox remove** can be used to stop/start/remove the server respectively.
 
 When a new client connects the following occur in order;
-- Client is served **server/static/hasVIOLET_LOGIN.html** made pretty with **server/static/hasVIOLET_LOGIN.css**
-- Client is required to authenticate using ID/password in **cfg/hasVIOLET.pwf** file
-- Once authenticated, the client is redirected to the Dashboard **server/static/hasVIOLET_INDEX.html** made pretty with **server/static/hasVIOLET.css**.
-- After the page is made pretty, **static/hasVIOLET_INDEX.html** tells the browser to load javascript from **server/static/hasVIOLET.js** 
-- Javascript instructs the client to the server and load **cfg/hasVIOLET.json**
+- Client is served **HASviolet_LOGIN.html** made pretty with **HASviolet_LOGIN.css**
+- Client is required to authenticate using ID/password in **HASviolet.pwf** file
+- Once authenticated, the client is redirected to the Dashboard **HASviolet_INDEX.html** made pretty with **HASviolet_INDEX.css**.
+- After the page is made pretty, **HASviolet_INDEX.html** tells the browser to load javascript from **HASviolet.js** 
+- Javascript instructs the client to the server and load **HASviolet.json**
 
 ## Server flow
 
@@ -62,13 +56,13 @@ When HASviolet sees a LoRa packet, it captures the message and sends a WebSocket
 
 ## Details
 
-### SSL Certificate and Key (hasVIOLET.crt and hasVIOLET.key)
-The framework uses SSLv3/TLS only. A untrusted self-signed certificate and server key are provided **cfg/hasVIOLET.crt** and **cfg/hasVIOLET.key**, respectively. But it is HIGHLY RECOMMENDED these be replaced with your own trusted credentials. Know until you have done that you will see (harmless) iostream errors from the websocket server like the following.
+### SSL Certificate and Key (HASviolet.crt and HASviolet.key)
+The framework uses SSLv3/TLS only. A untrusted self-signed certificate and server key are provided **HASviolet.crt** and **HASviolet.key**, respectively. But it is HIGHLY RECOMMENDED these be replaced with your own trusted credentials. Know until you have done that you will see (harmless) iostream errors from the websocket server like the following.
 
 [SSL: SSLV3_ALERT_CERTIFICATE_UNKNOWN] sslv3 alert certificate unknown (_ssl.c:852)
 
 ### User Authentication
-**cfg/hasVIOLET.pwf** is a password file that stores ID and password pairs. An account management program is included called **hasVIOLET_account.py** to generate your own ID and password pairs into the password file. Passwords are stored as hashes to protect them. The password file is pre-populated with three ID:Password pairs provided as examples only and should be immediately replaced using the account program.
+**HASviolet.pwf** is a password file that stores ID and password pairs. An account management program is included called **HASviolet_account.py** to generate your own ID and password pairs into the password file. Passwords are stored as hashes to protect them. The password file is pre-populated with three ID:Password pairs provided as examples only and should be immediately replaced using the account program.
 
 ### FAVICON.ICO
 An annoying thing all browsers do is look for a **FAVICON.ICO** file. The file is a small image icon  that some sites host and is displayed in your browser tab with  the title of the web page. I created one cause I go tired of seeing an error in the Browser inspect console while I was building the app.  If you want to create your own FAVICON.ICO, easiest way is from the following website that generates them.
@@ -76,13 +70,13 @@ An annoying thing all browsers do is look for a **FAVICON.ICO** file. The file i
  https://www.favicon.cc/
 
 
-### Index CSS code (hasVIOLET_INDEX.css)
+### Index CSS code (HASviolet_INDEX.css)
 
 The CSS code is what makes the WebUI shine. It is commented into sections that reference the grid containers they serve. The Tuner-Container CSS is the most complex out of all the sections. To best grasp CSS use start with reviewing Buttson CSS and Controls CSS sections. They serve the radio-controls, cmd-controls, and msg-control containers.
 
-### Login CSS code (hasVIOLET_LOGIN.css)
+### Login CSS code (HASviolet_LOGIN.css)
 
-The CSS code for **server/static/hasVIOLET_LOGIN.html**
+The CSS code for **HASviolet_LOGIN.html**
 
 ### JS Code
 This code is loaded and run by the browser. To see it in action on the browser, after loading the web page (in Chrome) right click on empty page space and select **Inspect** then click on the **Console tab** The code generates alot of console.log infor here.
