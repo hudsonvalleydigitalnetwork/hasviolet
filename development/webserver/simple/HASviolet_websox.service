@@ -1,32 +1,9 @@
 #
-# HASviolet-websox.service 
+# HASviolet-websox.service
 #
-#   REVISION: 20220601-0200
+#   REVISION: 20220713-0200
 #
 
-##
-## INIT VARIABLES AND DIRECTORIES
-##
-
-# HASviolet Directory tree
-HASVIOLET_REPO="https://github.com/hudsonvalleydigitalnetwork/hasviolet.git"
-HASVIOLET_HOME=$HOME/hasviolet
-HASVIOLET_TEMPLATES=$HASVIOLET_HOME/templates
-HASVIOLET_TEMPLATES_ETC=$HASVIOLET_TEMPLATES/etc
-HASVIOLET_TEMPLATES_SRV=$HASVIOLET_TEMPLATES/server
-HASVIOLET_LOCAL=$HOME/hasviolet-local
-HASVIOLET_SERVER=$HASVIOLET_LOCAL/server
-HASVIOLET_ETC=$HASVIOLET_LOCAL/etc
-HASVIOLET_CONFIG=$HASVIOLET_ETC/HASviolet.json
-HASVIOLET_SSL_KEY=$HASVIOLET_ETC/HASviolet.key
-HASVIOLET_SSL_CRT=$HASVIOLET_ETC/HASviolet.crt
-HASVIOLET_BANNER_COLOR="\e[0;104m\e[K"   # blue
-HASVIOLET_BANNER_RESET="\e[0m"
-
-
-##
-## SCRIPT
-##
 
 [Unit]
 Description=HASviolet_Websox Server
@@ -35,10 +12,11 @@ After=multi-user.target
 [Service]
 User=pi
 PIDFile=/run/HASviolet_websox.pid
-WorkingDirectory=$HASVIOLET_SERVER
-ExecStart=$HASVIOLET_SERVER/HASviolet_websox.py
+WorkingDirectory=/home/pi/hasviolet-local/server
+ExecStart=/home/pi/hasviolet-local/server/HASviolet_websox.py
 ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/HASviolet_websox.pid
 TimeoutStopSec=5
 
 [Install]
 WantedBy=multi-user.target
+
