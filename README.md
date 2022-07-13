@@ -18,19 +18,6 @@ The quickest way to get started with HASviolet is to
 - After install run **HASviolet config** to configure HASviolet
 - Read the fine [manual](https://github.com/hudsonvalleydigitalnetwork/hasviolet/blob/master/docs/HASviolet-RPi_Guide_v40.pdf)
 
-
-# What is in the Repo
-
-The root folder includes all apps and libraries. The following folders contain;
-
-- **apps** Executables from previous releases yet to be ported
-- **cfg** config files
-- **development** code under development that could do dangerous things
-- **docs** Home of RTFM
-- **server/static** all files used by running WebGUI service
-
-Party on!
-
 # Introducing the WebUI
 
 ![hasviolet_ui.png](docs/hasviolet_ui.png)
