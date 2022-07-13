@@ -2,9 +2,8 @@
 #
 #   hasVIOLET Client Javascript
 #
-#     SIMPLE: Just Modemconfig and messaging
 #
-#     REVISION: 20210713-0300
+#     REVISION: 20210312-1400
 #
 #
 */
@@ -506,10 +505,13 @@ function rxwinMSGhelp() {
 	rxDisplay [26] = "-"
 	rxDisplay [25] = "................ hasVIOLET WebUI Instructions .............."
 	rxDisplay [24] = "-"
-	rxDisplay [23] = "......................... KEYPAD ..........................."
+	rxDisplay [23] = "......... KEYPAD .......... .......... RF CONTROLS ........."
 	rxDisplay [22] = "-"
-	rxDisplay [21] = "- Each number corresponds to a LoRa Modem Config "
-  	rxDisplay [17] = "-"
+	rxDisplay [21] = "- FUN = Disabled ---------- -- RADIO = Radio on/off (toggle) "
+  	rxDisplay [20] = "- RST = Reset Keypad ------ ----- PA = RF Power (LOW, MED, HIGH) "
+  	rxDisplay [19] = "- CLR = Clear Display ----- --- MODE = LORA, FSK, AFSK, etc"
+  	rxDisplay [18] = "- ENT = Update Radio Freq - ---- BECN = Beacon msg on/off (toggle)"
+	rxDisplay [17] = "-"
 	rxDisplay [16] = "..................... MESSAGE CONTROLS ....................."
 	rxDisplay [15] = "-"
   	rxDisplay [14] = "- CALL = myCall Macro ----- ---- LOG = Log on/off (toggle)"
