@@ -3,13 +3,13 @@
 # HASviolet TX rf95
 #
 #
-#  Usage: HASviolet_TX.py destination-node "message"
+#   USAGE: HASviolet_TX.py destination-node "message"
 #
-#  OPTIONS
-#       destination-node is LoRa Node Number ID destination
-#       MESSAGE is sent in double quotes
+#   OPTIONS
+#        destination-node is LoRa Node Number ID destination
+#        MESSAGE is sent in double quotes
 #
-#   REVISION: 20220601-0200
+#   R EVISION: 20220714-0200
 # 
 #
 
@@ -77,11 +77,6 @@ args = vars(parser.parse_args())
 #
 # VARIABLES
 #
-
-# hasvrecipient - Address of receiving node
-# hasvname - mycall + "-" + ssid
-# hasvheader - hasname + ">" + hasvrecipient
-# hasvpayload - header + message
 
 hasvrecipient = args['destination']
 message = args['message']
