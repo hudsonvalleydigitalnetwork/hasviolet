@@ -10,7 +10,7 @@
 #           -t NUmber of seconds before repeat MESSAGE
 #             MESSAGE is sent in double quotes
 #
-#   REVISION: 20220601-0200
+#   REVISION: 20220714-0200
 #
 #
 
@@ -63,6 +63,7 @@ HVDN_LOGO = HASviolet_ETC + "HVDN_logo.xbm"
 
 HASit = HASrf()
 HAShat = HAShid()
+
 
 #
 # IMPORT ARGS
