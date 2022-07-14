@@ -16,7 +16,7 @@ The quickest way to get started with HASviolet is to
 - Clone the [repo](https://github.com/hudsonvalleydigitalnetwork/hasviolet.git)
 - cd into the repo directory and run **./HASviolet install**
 - After install run **HASviolet config** to configure HASviolet
-- Read the User Guide on the [wiki](https://github.com/hudsonvalleydigitalnetwork/hasviolet/wiki/User-Guide-(v0.50))
+- Read the [User Guide](https://github.com/hudsonvalleydigitalnetwork/hasviolet/wiki/User-Guide-(v0.50)) on the [wiki](https://github.com/hudsonvalleydigitalnetwork/hasviolet/wiki)
 
 # Introducing the WebUI
 
