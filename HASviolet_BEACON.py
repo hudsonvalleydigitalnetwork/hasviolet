@@ -129,7 +129,8 @@ reprinse=0
 
 
 while bcount > reprinse:
-    reprinse = reprinse + 1
+    if bcount != 99999:
+        reprinse = reprinse + 1
     # Send message
     HASit.transmit(hasvpayload)             # rf95 library
     #HASit.ontransmit(hasvpayload)          # pyLoraRFM9x Library
