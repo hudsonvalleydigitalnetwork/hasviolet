@@ -6,7 +6,7 @@
 ### 
 
 ###
-###  REVISION: 20220712-0300
+###  REVISION: 20220714-0300
 ### 
 
 ###
@@ -211,6 +211,9 @@ case "$KOMMAND" in
         ;;
     RX)
         python $HASVIOLET_HOME/HASviolet_RX.py -s
+        ;;
+    CHAT)
+        python $HASVIOLET_HOME/HASviolet_CHAT.py
         ;;
     TX)
         FIRSTARG=$1
