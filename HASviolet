@@ -216,11 +216,19 @@ case "$KOMMAND" in
         FIRSTARG=$1
         shift 1
         ALLARGS=$@
-        python $HASVIOLET_HOME/HASviolet_TX.py -d $FIRSTARG -m "$ALLARGS"
+        python $HASVIOLET_HOME/HASviolet_TX2.py -d -c 1 -t 1 $FIRSTARG -m "$ALLARGS"
         ;;
     BEACON)
         # Beacon forever every 5 seconds
-        python $HASVIOLET_HOME/HASviolet_BEACON.py -c 99999 -t 5
+        if [ -z $2 ]; then
+            python $HASVIOLET_HOME/HASviolet_TX2.py -c 99999 -t 5
+        else
+            shift 1
+            FIRSTARG=$1
+            shift 1
+            ALLARGS=$@
+            python $HASVIOLET_HOME/HASviolet_TX2.py -c 99999 -t 5 -d $FIRSTARG -m "$ALLARGS"
+        fi
         ;;
     websox)
         case "$KOPTION" in

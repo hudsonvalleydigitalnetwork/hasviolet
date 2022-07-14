@@ -3,14 +3,15 @@
 # HASviolet TX rf95
 #
 #
-#   USAGE: HASviolet_TX.py destination-node "message"
+#   USAGE: HASviolet-beacon.py -c COUNT -t DELAY "message"
 #
 #   OPTIONS
-#        destination-node is LoRa Node Number ID destination
-#        MESSAGE is sent in double quotes
+#           -c Number of times to repeat MESSAGE
+#           -t NUmber of seconds before repeat MESSAGE
+#             MESSAGE is sent in double quotes
 #
-#   R EVISION: 20220714-0200
-# 
+#   REVISION: 20220714-0200
+#
 #
 
 
@@ -69,10 +70,16 @@ HAShat = HAShid()
 #
 
 parser = argparse.ArgumentParser(description='HASviolet TX')
+parser.add_argument('-c','--count', type=int, help='number of times to repeat the message', required=True)
+parser.add_argument('-t','--time', type=int, help='number of seconds between repeating message', required=True)
 parser.add_argument('-d','--destination', help='Destination', default='BEACON-99')
-parser.add_argument('-m','--message', help='Message in quotes', required=True)
+parser.add_argument('-m','--message', help='Message to send in quotes. Default from INI file', default=HASit.mybeacon)
+
 args = vars(parser.parse_args())
 
+bcount = args['count']
+message = args['message']
+timedelay = args['time']
 
 #
 # VARIABLES
@@ -91,14 +98,14 @@ hasvpayload = hasvheader + " | " + message
 def sigs_handler(signal_received, frame):
     # Handle any cleanup here
     print('SIGINT or CTRL-C detected. Exiting gracefully')
-    HASit.cleanup()                 # rf95 library
-    #HASit.cleanup_pyl()            # pyLora library
+    HASit.cleanup()
     HAShat.OLED.text('Goodbye...', 0, 10, 1)
     HAShat.OLED.show()
     time.sleep(2)
     HAShat.OLED.fill(0)
     HAShat.OLED.show()
     exit(0)
+
 
 #
 # SETUP
@@ -110,31 +117,31 @@ HAShat.logo(HVDN_LOGO)
 signal.signal(signal.SIGINT, sigs_handler)
 
 # RF and LoRa Config init
-HASit.startradio()                      # rf95 library
-#HASit.startradio_pyl()                 # pyLoraRFM9x Library
+HASit.startradio()                       # rf95 library
+#HASit.startradio_pyl()                  # pyLoraRFM9x Library
 
 if HASit.modemconfig == "CUSTOM":
     HASit.custommodemconfig()
-
 
 #
 # MAIN
 #
 
-# Send message
-HASit.transmit(hasvpayload)             # rf95 library
-#HASit.ontransmit(hasvpayload)          # pyLoraRFM9x Library
+reprinse=0
 
-# Display local and OLED
-print(hasvpayload)
 
-# Display local and OLED
+while bcount > reprinse:
+    if bcount != 99999:
+        reprinse = reprinse + 1
+    # Send message
+    HASit.transmit(hasvpayload)             # rf95 library
+    #HASit.ontransmit(hasvpayload)          # pyLoraRFM9x Library
+    print(hasvpayload)
+    HAShat.OLED.fill(0)
+    HAShat.OLED.text(hasvheader, 0, 1, 1)
+    HAShat.OLED.text(message, 0, 9, 1)
+    HAShat.OLED.show()
+    time.sleep(timedelay)
 HAShat.OLED.fill(0)
-HAShat.OLED.text(hasvheader, 0, 1, 1)
-HAShat.OLED.text(message, 0, 9, 1)
 HAShat.OLED.show()
-time.sleep(2)
-HAShat.OLED.fill(0)
-HAShat.OLED.show()
-HASit.cleanup()                         # rf95 library
-#HASit.cleanup_pyl()                    # pyLora library
+HASit.cleanup()
