@@ -212,8 +212,15 @@ case "$KOMMAND" in
     RX)
         python $HASVIOLET_HOME/HASviolet_RX.py -s
         ;;
+    TX)
+        FIRSTARG=$1
+        shift 1
+        ALLARGS=$@
+        python $HASVIOLET_HOME/HASviolet_TX.py -d $FIRSTARG -m "$ALLARGS"
+        ;;
     BEACON)
-        python $HASVIOLET_HOME/HASviolet_BEACON.py -c 999 -t 5
+        # Beacon forever every 5 seconds
+        python $HASVIOLET_HOME/HASviolet_BEACON.py -c 99999 -t 5
         ;;
     websox)
         case "$KOPTION" in
