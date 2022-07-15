@@ -219,7 +219,7 @@ case "$KOMMAND" in
         FIRSTARG=$1
         shift 1
         ALLARGS=$@
-        python $HASVIOLET_HOME/HASviolet_TX2.py -d -c 1 -t 1 $FIRSTARG -m "$ALLARGS"
+        python $HASVIOLET_HOME/HASviolet_TX.py -c 1 -t 1 -d $FIRSTARG -m "$ALLARGS"
         ;;
     BEACON)
         # Beacon forever every 5 seconds
