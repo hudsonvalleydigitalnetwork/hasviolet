@@ -1,6 +1,6 @@
 /*
 #
-#   hasVIOLET Client Javascript
+#   HASviolet Client Javascript
 #
 #     SIMPLE: Just Modemconfig and messaging
 #
@@ -14,7 +14,7 @@
 /* -
 */
 
-/* Object to hold imported hasVIOLET.json */
+/* Object to hold imported HASviolet.json */
 var myRadio = {
 	RADIO: {
 		channel: 1,
@@ -107,7 +107,7 @@ var previous_entry = "";
 var current_entry = "";
 var myHostname = location.hostname;
 var wsURI = "wss://" + myHostname + ":8000/wss";					//  TEST Websocket URI 
-var url = "https://" + myHostname + ":8000/cfg/hasVIOLET.json";		//  JSON file location
+var url = "https://" + myHostname + ":8000/cfg/HASviolet.json";		//  JSON file location
 var getHasJson = new XMLHttpRequest();								//  Holds JSON from Radio
 
 var rxDisplay = [];													//  Holds whole RX window as 27 lines of text
@@ -390,7 +390,7 @@ function btnSEND() {
 		msgPARTICLE = msgSUBPARSED.split("-");
 		myRadio.CONTACT.mycall = msgPARTICLE[0];
 		myRadio.CONTACT.myssid = msgPARTICLE[1];
-		message = "CALL = " + myRadio.CONTACT.myssid + "-" + myRadio.CONTACT.myssid;
+		message = "CALL = " + myRadio.CONTACT.mycall + "-" + myRadio.CONTACT.myssid;
 		rxwinMSG(message);
 		console.log("CMD: set: CALL =" + myRadio.CONTACT.myssid + "-" + myRadio.CONTACT.myssid);
 		previous_operation = "myCALL";
@@ -504,7 +504,7 @@ function rxwinMSG(message) {
 
 function rxwinMSGhelp() {
 	rxDisplay [26] = "-"
-	rxDisplay [25] = "................ hasVIOLET WebUI Instructions .............."
+	rxDisplay [25] = "................ HASviolet WebUI Instructions .............."
 	rxDisplay [24] = "-"
 	rxDisplay [23] = "......................... KEYPAD ..........................."
 	rxDisplay [22] = "-"
@@ -553,7 +553,7 @@ function msgENTRY() {
 /* -
 */
 
-// Get hasVIOLET.json on page load
+// Get HASviolet.json on page load
 getHasJson.open('GET', url, true);
 getHasJson.send(null);
 getHasJson.onload = function() {
@@ -561,7 +561,7 @@ getHasJson.onload = function() {
 		myRadio = JSON.parse(getHasJson.responseText)
 	}
 }
-console.log("INIT: hasVIOLET.JSON loaded");
+console.log("INIT: HASviolet.JSON loaded");
 // Channel assignments
 myChannels = Object.keys(myRadio.CHANNELS);
 console.log("INIT:     CH 0,1,2: ", myRadio.CHANNELS[0].channelname, myRadio.CHANNELS[1].channelname, myRadio.CHANNELS[2].channelname);
