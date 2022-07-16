@@ -390,7 +390,7 @@ function btnSEND() {
 		msgPARTICLE = msgSUBPARSED.split("-");
 		myRadio.CONTACT.mycall = msgPARTICLE[0];
 		myRadio.CONTACT.myssid = msgPARTICLE[1];
-		message = "CALL = " + myRadio.CONTACT.myssid + "-" + myRadio.CONTACT.myssid;
+		message = "CALL = " + myRadio.CONTACT.mycall + "-" + myRadio.CONTACT.myssid;
 		rxwinMSG(message);
 		console.log("CMD: set: CALL =" + myRadio.CONTACT.myssid + "-" + myRadio.CONTACT.myssid);
 		previous_operation = "myCALL";
