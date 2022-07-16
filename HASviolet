@@ -216,6 +216,7 @@ case "$KOMMAND" in
         python $HASVIOLET_HOME/HASviolet_CHAT.py
         ;;
     TX)
+        shift 1
         FIRSTARG=$1
         shift 1
         ALLARGS=$@
