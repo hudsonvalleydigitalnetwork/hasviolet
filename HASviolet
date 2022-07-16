@@ -248,12 +248,16 @@ case "$KOMMAND" in
                 sudo systemctl stop HASviolet_websox.service
                 sudo systemctl disable HASviolet_websox.service
                 sudo rm -rf /lib/systemd/system/HASviolet_websox.service
+                sudo rm -rf $HASVIOLET_SERVER
                 ;;
             install)
                 # Make $HOME/hasviolet-local/server
                 mkdir $HASVIOLET_SERVER
                 # Copy Web Server files into $HASVIOLET_SERVER
                 cp -r $HASVIOLET_TEMPLATES_SRV/* $HASVIOLET_SERVER
+                # Creat Web Server CFG dir and copy config into it
+                mkdir $HASVIOLET_SERVER/cfg
+                cp $HASVIOLET_CONFIG $HASVIOLET_SERVER/cfg
                 cp $HASVIOLET_HOME/HASrf95.py $HASVIOLET_SERVER
                 cp $HASVIOLET_HOME/HASvioletHID.py $HASVIOLET_SERVER
                 cp $HASVIOLET_HOME/font5x8.bin $HASVIOLET_SERVER
