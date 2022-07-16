@@ -8,7 +8,7 @@
 #   OPTIONS
 #      -h, --help      show this help message and exit
 #
-#   REVISION: 20210312-1400
+#   REVISION: 20220601-0200
 #
 #
 
@@ -28,10 +28,30 @@ from HASvioletHID import HAShid
 
 
 #
-# VARIABLES
+# STATICS
 #
 
-hasVIOLETcfg = "cfg/hasVIOLET.json"
+HASviolet_RXLOCK = False                                               # True = RX is running
+HASviolet_TXLOCK = False                                               # True = TX is running
+HASviolet_LOCAL = "/home/pi/hasviolet-local/"                          # Config file is in JSON format
+HASviolet_SERVER = HASviolet_LOCAL + "server/"                         # Path to files. Change when Pi
+HASviolet_ETC = HASviolet_LOCAL + "etc/"                               # Config file is in JSON format
+HASviolet_CONFIG = HASviolet_ETC + "HASviolet.json"                    # Config file is in JSON format
+HASviolet_SSL_KEY = HASviolet_ETC + "HASviolet.key"                    # SSL Key
+HASviolet_SSL_CRT = HASviolet_ETC + "HASviolet.crt"                    # Cert Key
+HASviolet_PWF = HASviolet_ETC + "HASviolet.pwf"                        # Password file  user:hashedpasswd
+HASviolet_MSGS = HASviolet_SERVER + "msgs/HASviolet.msgs"              # radio writes msgs received here   
+HASviolet_LOGIN = HASviolet_SERVER + "HASviolet_LOGIN.html"
+HASviolet_LOGINCSS = HASviolet_SERVER + "HASviolet_LOGIN.css"
+HASviolet_INDEX = HASviolet_SERVER + "HASviolet_INDEX.html"
+HASviolet_INDEXCSS = HASviolet_SERVER + "HASviolet.css"
+HASvioletjs = HASviolet_SERVER + "HASviolet.js"
+HVDN_LOGO = HASviolet_ETC + "HVDN_logo.xbm"
+
+
+#
+# VARIABLES
+#
 
 
 #
@@ -177,7 +197,7 @@ def HASmenu():
 HASit = HASrf()
 
 # Backup JSON file
-os.popen('cp HASviolet.json HASviolet.json.bk1')
+#os.popen('cp HASviolet_CONFIG HASviolet_ETC/HASviolet.json.bk1')
 
 #
 # MAIN
@@ -215,7 +235,7 @@ while True:
         print ('Displaying HASviolet.json')
         print ('========================')
         print (' ')
-        f = open(hasVIOLETcfg, "r")
+        f = open(HASviolet_CONFIG, "r")
         vilete = f.read()
         print (vilete)
         f.close()
@@ -225,7 +245,7 @@ while True:
         pause()
     elif fun=="51":
         print ('Opening HASviolet.json')
-        with open(hasVIOLETcfg) as configReadFile:
+        with open(HASviolet_CONFIG) as configReadFile:
             data = json.load(configReadFile)
         time.sleep(3)           
         data["RADIO"]["rfmodule"] = HASit.radio
@@ -243,7 +263,7 @@ while True:
         data["CONTACT"]["dstcall"] = HASit.dstcall
         data["CONTACT"]["dstssid"] = HASit.dstssid
         print ('Updating HASviolet.json')
-        with open(hasVIOLETcfg, 'w') as configWriteFile:
+        with open(HASviolet_CONFIG, 'w') as configWriteFile:
             json.dump(data, configWriteFile, indent=3)
         time.sleep(3)
     elif fun=="99":

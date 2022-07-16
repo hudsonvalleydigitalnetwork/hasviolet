@@ -1,0 +1,21 @@
+#
+# HASviolet-websox.service
+#
+#   REVISION: 20220713-0200
+#
+
+
+[Unit]
+Description=HASviolet_Websox Server
+After=multi-user.target
+
+[Service]
+User=pi
+PIDFile=/run/HASviolet_websox.pid
+WorkingDirectory=/home/pi/hasviolet-local/server
+ExecStart=/home/pi/hasviolet-local/server/HASviolet_websox.py
+ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/HASviolet_websox.pid
+TimeoutStopSec=5
+
+[Install]
+WantedBy=multi-user.target

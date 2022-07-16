@@ -2,14 +2,14 @@
 #
 #   HASviolet Account
 #
-#     USAGE: hasVIOLET-account.py -s -c -u USER -p PASSWORD
+#     USAGE: HASviolet-account.py -s -c -u USER -p PASSWORD
 #
 #           -s,  --store a new user and password
 #           -c,  --check (authenticate) yuser and password
 #           -u,  --user
 #           -p,  --password
 #
-#     REVISION: 20210312-1400
+#     REVISION: 20220601-0200
 #
 #
 
@@ -31,7 +31,7 @@ print (" ")
 # IMPORT ARGS
 #
 
-parser = argparse.ArgumentParser(description='hasVIOLET Hashgen')
+parser = argparse.ArgumentParser(description='HASviolet Hashgen')
 parser.add_argument('-s','--store', help='Store Password', action='store_true')
 parser.add_argument('-c','--check', help='Check Password', action='store_true')
 parser.add_argument('-d','--delete', help='Delete User', action='store_true')
@@ -48,10 +48,30 @@ entered_password = args['password']
 
 
 #
-# VARIABLES
+# STATICS
 #
 
-hasVIOLETpwf = "cfg/hasVIOLET.pwf"
+HASviolet_RXLOCK = False                                               # True = RX is running
+HASviolet_TXLOCK = False                                               # True = TX is running
+HASviolet_LOCAL = "/home/pi/hasviolet-local/"                          # Config file is in JSON format
+HASviolet_SERVER = HASviolet_LOCAL + "server/"                         # Path to files. Change when Pi
+HASviolet_ETC = HASviolet_LOCAL + "etc/"                               # Config file is in JSON format
+HASviolet_CONFIG = HASviolet_ETC + "HASviolet.json"                    # Config file is in JSON format
+HASviolet_SSL_KEY = HASviolet_ETC + "HASviolet.key"                    # SSL Key
+HASviolet_SSL_CRT = HASviolet_ETC + "HASviolet.crt"                    # Cert Key
+HASviolet_PWF = HASviolet_ETC + "HASviolet.pwf"                        # Password file  user:hashedpasswd
+HASviolet_MSGS = HASviolet_SERVER + "msgs/HASviolet.msgs"              # radio writes msgs received here   
+HASviolet_LOGIN = HASviolet_SERVER + "HASviolet_LOGIN.html"
+HASviolet_LOGINCSS = HASviolet_SERVER + "HASviolet_LOGIN.css"
+HASviolet_INDEX = HASviolet_SERVER + "HASviolet_INDEX.html"
+HASviolet_INDEXCSS = HASviolet_SERVER + "HASviolet.css"
+HASvioletjs = HASviolet_SERVER + "HASviolet.js"
+HVDN_LOGO = HASviolet_ETC + "HVDN_logo.xbm"
+
+
+#
+# VARIABLES
+#
 
 
 #
@@ -67,7 +87,7 @@ def hash_password(entered_password):
 
 def save_password(user, stored_password):
     pwfLine = user + ":" + stored_password + "\n"
-    f = open(hasVIOLETpwf, "a")
+    f = open(HASviolet_pwf, "a")
     f.write(pwfLine)
     f.close()
  
@@ -81,7 +101,7 @@ def verify_password(stored_password, provided_password):
 
 def find_user(user):
     userfound=""
-    f = open(hasVIOLETpwf, "r")
+    f = open(HASviolet_PWF, "r")
     flines = f.readlines()
     for fl in flines:
         fluser = fl.split(":")
@@ -91,9 +111,9 @@ def find_user(user):
     return (userfound)
 
 def delete_user(user):
-    with open(hasVIOLETpwf, "r") as f:
+    with open(HASviolet_PWF, "r") as f:
         lines = f.readlines()
-    with open(hasVIOLETpwf, "w") as f:
+    with open(HASviolet_PWF, "w") as f:
         for line in lines:
             fluser = line.split(":")
             if user != fluser[0]:
@@ -102,7 +122,7 @@ def delete_user(user):
 
 def find_password(user):
     userpassword = ""
-    f = open(hasVIOLETpwf, "r")
+    f = open(HASviolet_PWF, "r")
     flines = f.readlines()
     for fl in flines:
         fluser = fl.split(":")
@@ -131,7 +151,7 @@ if actionCheck == True:
 if actionStore == True:
     provided_hashed = hash_password(entered_password)
     save_password(user, provided_hashed)
-    print("Stored in " + hasVIOLETpwf)
+    print("Stored in " + HASviolet_PWF)
 
 if actionDelete == True:
     if find_user(user) == "":

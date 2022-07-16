@@ -1,0 +1,112 @@
+<html>
+  <head>
+    <!--- REVISION: 20210713-0300 - SIMPLE-->
+    <meta charset="utf-8" />
+    <link href="/css/HASviolet_INDEX.css" rel="stylesheet" type="text/css" />
+    <title>HASviolet</title>
+  </head>
+
+  <body>
+    <div class="grid-container">
+
+      <!--- tuner-module --->
+
+      <div class="tuner-main">
+        <div class="tuner-display">
+	  <div id="tuner-setting"><span>WAIT</span></div>
+          <div class="subdisplay-spreadfactor" id="spreadfactor-setting">SF 12</div>
+          <div class="subdisplay-codingrate4" id="codingrate4-setting">CR 48</div>
+          <div class="subdisplay-bandwidth" id="bandwidth-setting">BW 125</div>
+          <div class="subdisplay-channelname" id="channelname-setting">CH 0</div>
+        </div>
+
+      <div class="tuner-dash">
+          <div class="btnBLACK"><div id="btn1" onclick="btnNUM(1)">1</div></div>
+          <div class="btnBLACK"><div id="btn2" onclick="btnNUM(2)">2</div></div>
+          <div class="btnBLACK"><div id="btn3" onclick="btnNUM(3)">3</div></div>
+          <div class="btnBLACK"><div id="btn4" onclick="btnNUM(4)">4</div></div>
+          <div class="btnBLACK"><div id="btn5" onclick="btnNUM(5)">5</div></div>
+          <div class="btnBLACK"><div id="btn6" onclick="btnNUM(6)">6</div></div>
+          <div class="btnBLACK"><div id="btn7" onclick="btnNUM(7)">7</div></div>
+          <div class="btnBLACK"><div id="btn8" onclick="btnNUM(8)">8</div></div>
+          <div class="btnBLACK"><div id="btn9" onclick="btnNUM(9)">9</div></div>
+          <div class="btnBLACK"><div id="btnBLACK"></div></div>
+          <div class="btnBLACK"><div id="btn0" onclick="btnNUM(0)">0</div></div>
+          <div class="btnBLACK"><div id="btnBLACK"></div></div>
+        </div>
+      </div>
+
+    <!--- command-control-module- --->
+
+    <div class="cmd-controls-container">
+      <div class="controls-keypad">
+        <div class="keypad-btn-grey"><div id="btnM1" onclick="btnM1()">M1</div></div>
+        <div class="keypad-btn-grey"><div id="btnM2" onclick="btnM2()">M2</div></div>
+        <div class="keypad-btn-grey"><div id="btnM3" onclick="btnM3()">M3</div></div>
+        <div class="keypad-btn-grey"><div id="btnM4" onclick="btnM4()">M4</div></div>
+      </div>
+  </div>
+
+      <!--- receiver-module --->
+
+      <div class="rx-container">
+        <!--- <textarea class="rx-window" id="msgDISPLAYED" rows="19" columns="75"></textarea> -->
+        <output class="rx-window" id="rxWIN26">0---------1---------2---------3---------4---------5---------6---------7-----</output><br>
+        <output class="rx-window" id="rxWIN25">-</output><br>
+        <output class="rx-window" id="rxWIN24">-</output><br>
+        <output class="rx-window" id="rxWIN23">-</output><br>
+        <output class="rx-window" id="rxWIN22">-</output><br>
+        <output class="rx-window" id="rxWIN21">-</output><br>
+        <output class="rx-window" id="rxWIN20">-</output><br>
+        <output class="rx-window" id="rxWIN19">-</output><br>
+        <output class="rx-window" id="rxWIN18">-</output><br>
+        <output class="rx-window" id="rxWIN17">-</output><br>
+        <output class="rx-window" id="rxWIN16">1</output><br>
+        <output class="rx-window" id="rxWIN15">-</output><br>
+        <output class="rx-window" id="rxWIN14">-</output><br>
+        <output class="rx-window" id="rxWIN13">-</output><br>
+        <output class="rx-window" id="rxWIN12">-</output><br>
+        <output class="rx-window" id="rxWIN11">-</output><br>
+        <output class="rx-window" id="rxWIN10">-</output><br>
+        <output class="rx-window" id="rxWIN9">-</output><br>
+        <output class="rx-window" id="rxWIN8">-</output><br>
+        <output class="rx-window" id="rxWIN7">2</output><br>
+        <output class="rx-window" id="rxWIN6">-</output><br>
+        <output class="rx-window" id="rxWIN5">-</output><br>
+        <output class="rx-window" id="rxWIN4">-</output><br>
+        <output class="rx-window" id="rxWIN3">-</output><br>
+        <output class="rx-window" id="rxWIN2">-</output><br>
+        <output class="rx-window" id="rxWIN1">-</output><br>
+        <output class="rx-window" id="rxWIN0">X</output><br>
+      </div>   
+
+       <!--- message-control-module --->
+
+      <div class="msg-controls-container">
+        <div class="controls-keypad">
+          <div class="keypad-btn-brown"><div id="btnCALL" onclick="btnCALL()">CALL</div></div>
+          <div class="keypad-btn-brown"><div id="btnDEST" onclick="btnDEST()">DEST</div></div>
+          <div class="keypad-btn-brown"><div id="btnHEAD" onclick="btnHEAD()">HEAD</div></div>
+          <div class="keypad-btn-brown"><div id="btnHELP" onclick="btnHELP()">HELP</div></div>
+          <div class="keypad-btn-brown"><div id="btnLOG" onclick="btnLOG()">LOG</div></div>
+          <div class="keypad-btn-brown"><div id="btnRCLR" onclick="btnRCLR()">RCLR</div></div>
+          <div class="keypad-btn-brown"><div id="btnMCLR" onclick="btnMCLR()">MCLR</div></div>
+          <div class="keypad-btn-orange"><div id="btnSEND" onclick="btnSEND()">SEND</div></div>
+        </div>
+    </div>
+
+      <!--- transmit-module --->
+
+      <div class="tx-container">
+        <textarea class="tx-window" id="msgENTRY" rows="2" columns="75"></textarea>
+      </div>
+
+    </div>
+
+  <!--- Javascript for each module --->
+
+    <script type="text/javascript" src="/js/HASviolet_INDEX.js"></script
+
+   </body>
+
+</html>
