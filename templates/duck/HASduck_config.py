@@ -60,7 +60,7 @@ HVDN_LOGO = "HVDN_logo.xbm"
 
 class Duckwalk:
     def __init__(self):
-        self.cfgjson = HASduck_DUCK_CONFIG
+        self.cfgjson = HASviolet_DUCK_CONFIG
         with open(self.cfgjson) as configFileJson:
             jsonConfig = json.load(configFileJson)
         self.message = jsonConfig["0"]["message"]
