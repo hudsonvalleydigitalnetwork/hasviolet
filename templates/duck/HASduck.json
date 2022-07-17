@@ -1,0 +1,26 @@
+{
+    "0": {
+	"message": "Quack Quack Quack",
+	"interval": 10,
+        "trigger": "none",
+        "trigger_value": "0",
+        "action": "reset",
+	"duration": 3600
+	},
+    "1": {
+	"message": "Quack Quack Quack",
+	"interval": 10,
+        "trigger": "none",
+        "trigger_value": "0",
+        "action": "reset",
+		"duration": 3600
+    },
+    "2": {
+        "message": "Quack Quack Quack",
+	"interval": 10,
+        "trigger": "none",
+        "trigger_value": "0",
+        "action": "reset",
+	"duration": 3600
+    }
+}
