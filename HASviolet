@@ -283,6 +283,8 @@ case "$KOMMAND" in
             config)
                 python $HASVIOLET_DUCK/HASviolet_config.py
                 ;;
+            esac
+            ;;
     websox)
         case "$KOPTION" in
             status)
