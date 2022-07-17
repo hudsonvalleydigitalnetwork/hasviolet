@@ -265,9 +265,7 @@ case "$KOMMAND" in
                 mkdir $HASVIOLET_DUCK
                 # Copy Duck files into $HASVIOLET_DUCK
                 cp -r $HASVIOLET_TEMPLATES_DUCK/* $HASVIOLET_DUCK
-                # Copy Duck config and supporting libraries
-                cp $HASVIOLET_CONFIG $HASVIOLET_DUCK
-                cp $HASVIOLET_DUCK_CONFIG $HASVIOLET_DUCK
+                # Copy Duck supporting libraries
                 cp $HASVIOLET_HOME/HASrf95.py $HASVIOLET_DUCK
                 cp $HASVIOLET_HOME/HASvioletHID.py $HASVIOLET_DUCK
                 cp $HASVIOLET_HOME/font5x8.bin $HASVIOLET_DUCK
@@ -281,7 +279,7 @@ case "$KOMMAND" in
                 sudo systemctl start HASviolet_duck.service
                 ;;
             config)
-                python $HASVIOLET_DUCK/HASviolet_config.py
+                python $HASVIOLET_DUCK/HASduck_config.py
                 ;;
             esac
             ;;
