@@ -1,0 +1,21 @@
+#
+# HASviolet-duck.service
+#
+#   REVISION: 20220717-0200
+#
+
+
+[Unit]
+Description=HASviolet_Duck Service
+After=multi-user.target
+
+[Service]
+User=pi
+PIDFile=/run/HASviolet_duck.pid
+WorkingDirectory=/home/pi/hasviolet-local/duck
+ExecStart=/home/pi/hasviolet-local/server/HASviolet_duck.py
+ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/HASviolet_duck.pid
+TimeoutStopSec=5
+
+[Install]
+WantedBy=multi-user.target

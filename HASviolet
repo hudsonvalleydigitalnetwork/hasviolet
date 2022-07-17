@@ -6,7 +6,7 @@
 ### 
 
 ###
-###  REVISION: 20220714-0300
+###  REVISION: 20220717-0300
 ### 
 
 ###
@@ -20,6 +20,12 @@
 ###                 remove    remove HASviolet
 ###                 purge     remove HASviolet and purge configs
 ###                 update    upgrade to new version if available (git pull)
+###                 duck 
+###                           install   Install Duck
+###                           start     Start Duck
+###                           stop      Stop Duck
+###                           status    Duck Status
+###                           removde   Remove Duck
 ###                 websox 
 ###                           install   Install Web Interface
 ###                           start     Start Web Interface
@@ -66,10 +72,13 @@ HASVIOLET_HOME=$HOME/hasviolet
 HASVIOLET_TEMPLATES=$HASVIOLET_HOME/templates
 HASVIOLET_TEMPLATES_ETC=$HASVIOLET_TEMPLATES/etc
 HASVIOLET_TEMPLATES_SRV=$HASVIOLET_TEMPLATES/server
+HASVIOLET_TEMPLATES_DUCK=$HASVIOLET_TEMPLATES/duck
 HASVIOLET_LOCAL=$HOME/hasviolet-local
 HASVIOLET_SERVER=$HASVIOLET_LOCAL/server
+HASVIOLET_DUCK=$HASVIOLET_LOCAL/duck
 HASVIOLET_ETC=$HASVIOLET_LOCAL/etc
 HASVIOLET_CONFIG=$HASVIOLET_ETC/HASviolet.json
+HASVIOLET_DUCK_CONFIG=$HASVIOLET_ETC/HASduck.json
 HASVIOLET_SSL_KEY=$HASVIOLET_ETC/HASviolet.key
 HASVIOLET_SSL_CRT=$HASVIOLET_ETC/HASviolet.crt
 HASVIOLET_BANNER_COLOR="\e[0;104m\e[K"   # blue
@@ -234,6 +243,46 @@ case "$KOMMAND" in
             python $HASVIOLET_HOME/HASviolet_TX.py -c 99999 -t 5 -d $FIRSTARG -m "$ALLARGS"
         fi
         ;;
+    duck)
+        case "$KOPTION" in
+            status)
+                sudo systemctl status HASviolet_duck.service
+                ;;
+            start)
+                sudo systemctl start HASviolet_duck.service
+                ;;
+            stop)
+                sudo systemctl stop HASviolet_duck.service
+                ;;
+            remove)
+                sudo systemctl stop HASviolet_duck.service
+                sudo systemctl disable HASviolet_duck.service
+                sudo rm -rf /lib/systemd/system/HASviolet_duck.service
+                sudo rm -rf $HASVIOLET_DUCK
+                ;;
+            install)
+                # Make $HOME/hasviolet-local/duck
+                mkdir $HASVIOLET_DUCK
+                # Copy Duck files into $HASVIOLET_DUCK
+                cp -r $HASVIOLET_TEMPLATES_DUCK/* $HASVIOLET_DUCK
+                # Copy Duck config and supporting libraries
+                cp $HASVIOLET_CONFIG $HASVIOLET_DUCK
+                cp $HASVIOLET_DUCK_CONFIG $HASVIOLET_DUCK
+                cp $HASVIOLET_HOME/HASrf95.py $HASVIOLET_DUCK
+                cp $HASVIOLET_HOME/HASvioletHID.py $HASVIOLET_DUCK
+                cp $HASVIOLET_HOME/font5x8.bin $HASVIOLET_DUCK
+                cp $HASVIOLET_HOME/HASvioletRF.py $HASVIOLET_DUCK
+                # Copy and install Duck service
+                sudo cp $HASVIOLET_DUCK/HASviolet_duck.service /lib/systemd/system/HASviolet_duck.service
+                sudo chown root:root /lib/systemd/system/HASviolet_duck.service
+                sudo chmod 644 /lib/systemd/system/HASviolet_duck.service
+                sudo systemctl daemon-reload
+                sudo systemctl enable HASviolet_duck.service
+                sudo systemctl start HASviolet_duck.service
+                ;;
+            config)
+                python $HASVIOLET_DUCK/HASviolet_config.py
+                ;;
     websox)
         case "$KOPTION" in
             status)
