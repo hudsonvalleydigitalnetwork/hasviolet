@@ -30,8 +30,10 @@ HASviolet_RXLOCK = False                                               # True = 
 HASviolet_TXLOCK = False                                               # True = TX is running
 HASviolet_LOCAL = "/home/pi/hasviolet-local/"                          # Config file is in JSON format
 HASviolet_SERVER = HASviolet_LOCAL + "server/"                         # Path to files. Change when Pi
+HASviolet_DUCK = HASviolet_LOCAL + "duck/"                             # Path to files. Change when Pi
 HASviolet_ETC = HASviolet_LOCAL + "etc/"                               # Config file is in JSON format
 HASviolet_CONFIG = HASviolet_ETC + "HASviolet.json"                    # Config file is in JSON format
+HASviolet_DUCK_CONFIG = HASviolet_DUCK + "HASduck.json"                # Config file is in JSON format
 HASviolet_SSL_KEY = HASviolet_ETC + "HASviolet.key"                    # SSL Key
 HASviolet_SSL_CRT = HASviolet_ETC + "HASviolet.crt"                    # Cert Key
 HASviolet_PWF = HASviolet_ETC + "HASviolet.pwf"                        # Password file  user:hashedpasswd
@@ -49,8 +51,6 @@ HVDN_LOGO = HASviolet_ETC + "HVDN_logo.xbm"
 #
 
 HASduck_VER="HASduck v1.0"
-HASviolet_CONFIG = "HASviolet.json"
-HASduck_CONFIG = "HASduck.json" 
 HVDN_LOGO = "HVDN_logo.xbm" 
 
 
@@ -60,7 +60,7 @@ HVDN_LOGO = "HVDN_logo.xbm"
 
 class Duckwalk:
     def __init__(self):
-        self.cfgjson = HASduck_CONFIG
+        self.cfgjson = HASduck_DUCK_CONFIG
         with open(self.cfgjson) as configFileJson:
             jsonConfig = json.load(configFileJson)
         self.message = jsonConfig["0"]["message"]
